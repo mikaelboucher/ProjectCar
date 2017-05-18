@@ -1,0 +1,31 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "tslint app/**/*.ts app/*.ts --force -t verbose",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@angular/common": "^4.1.2",
+    "@angular/compiler": "^4.1.2",
+    "@angular/core": "^4.1.2",
+    "@angular/forms": "^4.1.2",
+    "@angular/http": "^4.1.2",
+    "@angular/platform-browser": "^4.1.2",
+    "@angular/platform-browser-dynamic": "^4.1.2",
+    "@angular/router": "^4.1.2",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.4.0",
+    "systemjs": "^0.20.12",
+    "zone.js": "^0.8.10"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "tslint": "^5.2.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "typescript": "^2.3.2"
+  }
+}
