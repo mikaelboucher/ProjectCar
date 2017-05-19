@@ -5,6 +5,7 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
+	"start": "tsc && lite-server",
     "lint": "tslint app/**/*.ts app/*.ts --force -t verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
