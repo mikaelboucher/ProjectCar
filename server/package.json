@@ -6,8 +6,10 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-  "start": "tsc && node out/www.js",
-  "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node out/www.js",
+    "build": "tsc",
+    "build:all": "npm run build && (cd ../client && npm run build)",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
