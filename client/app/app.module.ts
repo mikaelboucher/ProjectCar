@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
+import { ModalModule } from 'ngx-bootstrap';
+
 import { AppComponent } from './components/app.component';
 import { PrincipalComponent } from './components/principal.component';
 import { BottomComponent } from './components/bottom.component';
@@ -14,18 +16,20 @@ import { CenterPrimary } from './components/centercomponents/centerprimary.compo
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
 
 @NgModule({
-    imports: [ BrowserModule, HttpModule],
+    imports: [ BrowserModule, HttpModule, ModalModule.forRoot() ],
 
-    declarations: [ AppComponent,
-    PrincipalComponent,
-    BottomComponent,
-    TopComponent,
-    RightComponent,
-    LeftComponent,
-    CenterComponent,
-    CenterOptions,
-    CenterPrimary,
-    CenterSecondary ],
+    declarations: [
+        AppComponent,
+        PrincipalComponent,
+        BottomComponent,
+        TopComponent,
+        RightComponent,
+        LeftComponent,
+        CenterComponent,
+        CenterOptions,
+        CenterPrimary,
+        CenterSecondary
+    ],
 
     bootstrap: [ AppComponent ],
     providers: []

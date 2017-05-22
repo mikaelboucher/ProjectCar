@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{abd2b889-c4bd-481b-a23c-07470ce9f41b}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -35,22 +35,45 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Folder Include="app" />
+    <Folder Include="app\components\" />
+    <Folder Include="app\components\centercomponents\" />
+    <Folder Include="app\css\" />
+    <Folder Include="app\html\" />
+    <Folder Include="app\html\center\" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\app.component.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="app\app.module.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="app\components\app.component.ts" />
+    <TypeScriptCompile Include="app\components\bottom.component.ts" />
+    <TypeScriptCompile Include="app\components\center.component.ts" />
+    <TypeScriptCompile Include="app\components\centercomponents\centeroptions.component.ts" />
+    <TypeScriptCompile Include="app\components\centercomponents\centerprimary.component.ts" />
+    <TypeScriptCompile Include="app\components\centercomponents\centersecondary.component.ts" />
+    <TypeScriptCompile Include="app\components\left.component.ts" />
+    <TypeScriptCompile Include="app\components\principal.component.ts" />
+    <TypeScriptCompile Include="app\components\right.component.ts" />
+    <TypeScriptCompile Include="app\components\top.component.ts" />
     <TypeScriptCompile Include="app\main.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\css\principal.css" />
+    <Content Include="app\html\app.component.html" />
+    <Content Include="app\html\bottom.html" />
+    <Content Include="app\html\center.html" />
+    <Content Include="app\html\center\centeroptions.html" />
+    <Content Include="app\html\center\centerprimary.html" />
+    <Content Include="app\html\center\centersecondary.html" />
+    <Content Include="app\html\left.html" />
+    <Content Include="app\html\principal.html" />
+    <Content Include="app\html\right.html" />
+    <Content Include="app\html\top.html" />
     <Content Include="index.html">
       <SubType>Code</SubType>
     </Content>
