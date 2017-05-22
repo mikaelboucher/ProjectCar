@@ -4,7 +4,6 @@
 }
 
 .bottom{
-
     background-color: black;
     text-align: center;
     width: 100%;
@@ -13,25 +12,25 @@
 .top{
     background-color: white;
     text-align: center;
-
+    height: 100%;
 }
 
 .left{
     background-color: darkred;
     text-align: center;
-    height: 100vh;
+    height: 95vh;
 }
 
 .center{
     background-color: darkgoldenrod;
     text-align: center;
-    height: 100vh;
+    height: 95vh;
 }
 
 .right{
     background-color: darkred;
     text-align: center;
-    height: 100vh;
+    height: 95vh;
 }
 
 /*.fill {
