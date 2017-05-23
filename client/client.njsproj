@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\css\principal.css" />
+    <Content Include="app\css\top.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\html\app.component.html" />
     <Content Include="app\html\bottom.html" />
     <Content Include="app\html\center.html" />
