@@ -1,8 +1,7 @@
 .classfield {
       background-repeat: no-repeat;
       background-position: 50%;
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-
+      background-size : cover;
+      min-height : 180px;
+      margin : 0px;
 }

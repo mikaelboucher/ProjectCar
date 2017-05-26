@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { Classfield } from '../../../objects/classfield'
 
 @Component({
@@ -7,12 +7,16 @@ import { Classfield } from '../../../objects/classfield'
     styleUrls : ['./app/css/center/singleclassfield.css']
 })
 
-
-
 export class SingleClassfield {
+   @Input() classfield: Classfield;
+   @Output() mouseOver = new EventEmitter();
 
-   @Input()
-   classfield: Classfield;
+   @HostListener('mouseover') onMouseEnter() {
+       this.mouseOver.emit(true);
+   }
 
+   @HostListener('mouseleave') onmouseleave() {
+       this.mouseOver.emit(false);
+   }
 
  }
