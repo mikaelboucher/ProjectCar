@@ -14,6 +14,8 @@ import { CenterComponent } from './components/center.component';
 import { CenterOptions } from './components/centercomponents/centeroptions.component';
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
+import { Classfields } from './components/centercomponents/primarycomponents/classfields.component';
+import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, ModalModule.forRoot() ],
@@ -28,7 +30,9 @@ import { CenterSecondary } from './components/centercomponents/centersecondary.c
         CenterComponent,
         CenterOptions,
         CenterPrimary,
-        CenterSecondary
+        CenterSecondary,
+        Classfields,
+        SingleClassfield
     ],
 
     bootstrap: [ AppComponent ],
