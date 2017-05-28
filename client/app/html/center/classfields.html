@@ -1,19 +1,5 @@
 <div *ngFor="let classfield of classfieldsList; let i = index">
-    <div *ngIf="classfieldMouseOver == classfield">
-        <div class="col-md-6 paddingMouseOver paddding"> 
-            <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event)"></single-classfield>
-        </div>
-    </div>
-    <div *ngIf="classfieldMouseOver != classfield">
-        <div *ngIf="classfieldMouseOver && memeLigne(i)">
-            <div class="col-md-2 paddding"> 
-                <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event, i)"></single-classfield>
-            </div>
-        </div>
-        <div *ngIf="!classfieldMouseOver || !memeLigne(i)">
-            <div class="col-md-3 paddding"> 
-                <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event, i)"></single-classfield>
-            </div>
-        </div>
+    <div class="default">
+        <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event)"></single-classfield>
     </div>
 </div>
