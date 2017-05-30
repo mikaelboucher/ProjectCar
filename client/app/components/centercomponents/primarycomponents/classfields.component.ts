@@ -27,7 +27,6 @@ export class Classfields {
         if (enter){
             this.classfieldMouseOver = classfield;
             this.indexMouseOver = index;
-            console.log(this.indexMouseOver);
         }else{
             this.classfieldMouseOver = undefined;
             this.indexMouseOver = undefined;
@@ -49,5 +48,9 @@ export class Classfields {
             estMemeLigne = Math.trunc(index/NB_BOUTON_LIGNE) === Math.trunc(this.indexMouseOver/NB_BOUTON_LIGNE);
         }
         return estMemeLigne;
+    }
+
+    extremite(index : number) : boolean{
+        return index % NB_BOUTON_LIGNE === 0 && this.memeLigne(index) && this.indexMouseOver !== index;
     }
  }

@@ -1,5 +1,5 @@
 <div *ngFor="let classfield of classfieldsList; let i = index">
-    <div [ngClass]="{'videGauche' : limite(i, true), 'videDroit' : limite(i), 'mouseOver' : estMouse(i) ,'default' : !limite(i, true) && !limite(i)}">
+    <div [ngClass]="{'videGauche' : limite(i, true), 'videDroit' : limite(i), 'mouseOver' : estMouse(i), 'extremite' : extremite(i), 'normal' : !limite(i, true) && !limite(i) }">
         <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event, i)"></single-classfield>
     </div>
 </div>

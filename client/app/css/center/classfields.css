@@ -1,13 +1,21 @@
 .default{
+    padding-bottom: 10%;
+}
+
+.normal{
     float: left;
     min-height: 1px; 
     width: 20%;
+    padding-bottom: 10%;
 }
 
 .mouseOver{
     float: left;
     min-height: 1px; 
     width: 40%;
+    animation-name: grossir;
+    animation-duration: 1.5s;
+    padding-bottom: 10%;
 }
 
 .videGauche{
@@ -15,6 +23,9 @@
     min-height: 1px; 
     padding-left: 45px;
     width: 25%;
+    animation-name: gauchePaddingGrow;
+    animation-duration: 1.5s;
+    padding-bottom: 10%;
 }
 
 .videDroit{
@@ -22,4 +33,27 @@
     min-height: 1px; 
     padding-right: 45px;
     width: 25%;
+    animation-name: droitPaddingGrow;
+    animation-duration: 1.5s;
+    padding-bottom: 10%;
+}
+
+@keyframes grossir {
+    from {width: 25%;}
+    to {width: 40%;}
+}
+
+@keyframes noPadding {
+    from {padding-left: 45px;}
+    to {padding-left: 0px;}
+}
+
+@keyframes droitPaddingGrow {
+    from {padding-right: 0px;}
+    to {padding-right: 45px;}
+}
+
+@keyframes gauchePaddingGrow {
+    from {padding-left: 0px;}
+    to {padding-left: 45px;}
 }
