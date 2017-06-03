@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap';
@@ -18,7 +19,7 @@ import { Classfields } from './components/centercomponents/primarycomponents/cla
 import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
 
 @NgModule({
-    imports: [ BrowserModule, HttpModule, ModalModule.forRoot() ],
+    imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
 
     declarations: [
         AppComponent,

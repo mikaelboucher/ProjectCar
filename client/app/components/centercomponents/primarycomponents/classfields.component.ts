@@ -1,56 +1,110 @@
 import { Component } from '@angular/core';
+import { trigger, state, style,
+    animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield'
 
 const NB_BOUTON_LIGNE = 4;
 
+const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
+const TAILLE = ["default", "maximise", "minimise"];
+const DEFAULT_BORDURE = "defaultBordure";
+const MOUSEOVER_BORDURE = "mouseOverBordure";
+
 @Component({
     selector: "classfields-component",
     templateUrl: './app/html/center/classfields.html',
-    styleUrls : ['./app/css/center/classfields.css']
+    styleUrls : ['./app/css/center/classfields.css'],
+    animations: [
+        trigger('classfieldState', [
+            state(STATES[0], style({
+                transform: 'translateX(0%) scale(1)'
+            })),
+            state(STATES[1],   style({
+                transform: 'translateX(0%) scale(1.2)'
+            })),
+            state(STATES[2],   style({
+                transform: 'translateX(-25%) scale(1)'
+            })),
+            state(STATES[3],   style({
+                transform: 'translateX(25%) scale(1)'
+            })),
+            transition('normal => mouseOver, mouseOver => normal', animate('500ms ease-in')),
+            transition('normal => leftMove, leftMove => normal', animate('500ms ease-in')),
+            transition('normal => rightMove, rightMove => normal', animate('500ms ease-in')),
+        ]),
+        trigger('classfieldTaille', [
+            state(TAILLE[0], style({
+                width : '25%'
+            })),
+            state(TAILLE[1],   style({
+                width : '46%'
+            })),
+            state(TAILLE[2],   style({
+                width : '18%'
+            })),
+            transition('default => maximise, maximise => default', animate('500ms ease-in')),
+            transition('default => minimise, minimise => default', animate('500ms ease-in'))
+        ])
+  ]
 })
 
 export class Classfields {
-    classfieldsList: Classfield[] = [];
-    classfieldMouseOver : Classfield;
-    indexMouseOver : number;
+    paquetsClassfield : Classfield[][] = [];
 
     constructor(){
-        this.classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        this.classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        this.classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        this.classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        this.classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        this.classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        let classfieldsList : Classfield[] = [];
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        this.initPaquets(classfieldsList);
     }
     
-    mouseOver(classfield : Classfield, enter : boolean, index? : number){
+    initPaquets(classfieldsList : Classfield[]){
+        let nbPaquet = 0;
+        classfieldsList.forEach( (classfied, cpt) => {
+            if (cpt % NB_BOUTON_LIGNE === 0){
+                this.paquetsClassfield[nbPaquet] = [];
+                nbPaquet++;
+            }
+            this.paquetsClassfield[nbPaquet - 1][cpt % NB_BOUTON_LIGNE] = classfied;
+        });
+    }
+
+    mouseOver(classfield : Classfield, enter : boolean, index : number){
         if (enter){
-            this.classfieldMouseOver = classfield;
-            this.indexMouseOver = index;
+            this.gestionStateIn(index, classfield);
         }else{
-            this.classfieldMouseOver = undefined;
-            this.indexMouseOver = undefined;
+            this.gestionStateOut(index);
         }
     }
 
-    estMouse(index : number){
-        return index === this.indexMouseOver;
+    gestionStateIn(index : number, classfiedCible : Classfield){
+        let trouve = false;
+        this.paquetsClassfield[index].forEach((classfield, nbClassfield)=> {
+            if (trouve){
+                classfield.changeState(STATES[3]);
+                classfield.setTaille(TAILLE[2]);
+            }else{
+                trouve = classfiedCible == classfield;
+                if (trouve){
+                    classfield.changeState(STATES[1]);
+                    classfield.setTaille(TAILLE[1]);
+                }else{
+                    classfield.changeState(STATES[2]);
+                    classfield.setTaille(TAILLE[2]);
+                }
+            }
+        });
     }
 
-    limite(index : number, gauche? : boolean) : boolean{
-        let posEsperer = (gauche ? 0 : 3)
-        return index % NB_BOUTON_LIGNE === posEsperer && !this.memeLigne(index);
+    gestionStateOut(index : number){
+        this.paquetsClassfield[index].forEach( (classfield, nbClassfield) => {
+            classfield.setTaille(TAILLE[0]);
+            classfield.changeState(STATES[0]);
+        });
     }
-
-    memeLigne(index : number) : boolean{
-        let estMemeLigne = false;
-        if (this.indexMouseOver || this.indexMouseOver === 0){
-            estMemeLigne = Math.trunc(index/NB_BOUTON_LIGNE) === Math.trunc(this.indexMouseOver/NB_BOUTON_LIGNE);
-        }
-        return estMemeLigne;
-    }
-
-    extremite(index : number) : boolean{
-        return index % NB_BOUTON_LIGNE === 0 && this.memeLigne(index) && this.indexMouseOver !== index;
-    }
+    
  }
