@@ -36,7 +36,7 @@ export class Classfield {
         return this.state;
     }
 
-    changeState(state : string){
+    setState(state : string){
         this.state = state;
     }
 
