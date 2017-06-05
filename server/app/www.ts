@@ -4,6 +4,8 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
+import * as routesTwitter from './twitter';
+let socketIO = require('socket.io');
 
 class Application {
     private static _instance: Application = null;
@@ -76,6 +78,9 @@ app.expressApp.set("port", appPort);
 
 let server = http.createServer(app.expressApp);
 server.listen(appPort);
+
+let io = socketIO(server);
+routesTwitter.routes(io);
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
