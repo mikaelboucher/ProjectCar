@@ -3,7 +3,7 @@ import { trigger, state, style,
     animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield'
 
-const NB_BOUTON_LIGNE = 4;
+const NB_ALIGN_BUTTON = 4;
 
 @Component({
     selector: "classfields-component",
@@ -12,7 +12,7 @@ const NB_BOUTON_LIGNE = 4;
 })
 
 export class Classfields {
-    paquetsClassfield : Classfield[][] = [];
+    groupClassfields : Classfield[][] = [];
 
     constructor(){
         let classfieldsList : Classfield[] = [];
@@ -40,17 +40,17 @@ export class Classfields {
         classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
         classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
         classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        this.initPaquets(classfieldsList);
+        this.initGroups(classfieldsList);
     }
     
-    initPaquets(classfieldsList : Classfield[]){
-        let nbPaquet = 0;
+    initGroups(classfieldsList : Classfield[]){
+        let nbGroups = 0;
         classfieldsList.forEach( (classfied, cpt) => {
-            if (cpt % NB_BOUTON_LIGNE === 0){
-                this.paquetsClassfield[nbPaquet] = [];
-                nbPaquet++;
+            if (cpt % NB_ALIGN_BUTTON === 0){
+                this.groupClassfields[nbGroups] = [];
+                nbGroups++;
             }
-            this.paquetsClassfield[nbPaquet - 1][cpt % NB_BOUTON_LIGNE] = classfied;
+            this.groupClassfields[nbGroups - 1][cpt % NB_ALIGN_BUTTON] = classfied;
         });
     }
     

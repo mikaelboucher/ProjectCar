@@ -4,9 +4,7 @@ import { trigger, state, style,
 import { Classfield } from '../../../objects/classfield'
 
 const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
-const TAILLE = ["default", "maximise", "minimise"];
-const DEFAULT_BORDURE = "defaultBordure";
-const MOUSEOVER_BORDURE = "mouseOverBordure";
+const SIZES = ["default", "maximise", "minimise"];
 
 @Component({
     selector: "listes-classfieds",
@@ -30,14 +28,14 @@ const MOUSEOVER_BORDURE = "mouseOverBordure";
             transition('normal <=> leftMove', animate('500ms ease-in')),
             transition('normal <=> rightMove', animate('500ms ease-in')),
         ]),
-        trigger('classfieldTaille', [
-            state(TAILLE[0], style({
+        trigger('classfieldSize', [
+            state(SIZES[0], style({
                 width : '25%'
             })),
-            state(TAILLE[1],   style({
+            state(SIZES[1],   style({
                 width : '31%'
             })),
-            state(TAILLE[2],   style({
+            state(SIZES[2],   style({
                 width : '23%'
             })),
             transition('default <=> maximise', animate('500ms ease-in')),
@@ -51,34 +49,34 @@ export class ListeClassfields {
 
     mouseOver(classfield : Classfield, enter : boolean){
         if (enter){
-            this.gestionStateIn(classfield);
+            this.manageStateIn(classfield);
         }else{
-            this.gestionStateOut();
+            this.manageStateOut();
         }
     }
 
-    gestionStateIn(classfiedCible : Classfield){
-        let trouve = false;
+    manageStateIn(classfiedCible : Classfield){
+        let find = false;
         this.classfields.forEach((classfield, nbClassfield)=> {
-            if (trouve){
+            if (find){
                 classfield.setState(STATES[3]);
-                classfield.setTaille(TAILLE[2]);
+                classfield.setSize(SIZES[2]);
             }else{
-                trouve = classfiedCible == classfield;
-                if (trouve){
+                find = classfiedCible == classfield;
+                if (find){
                     classfield.setState(STATES[1]);
-                    classfield.setTaille(TAILLE[1]);
+                    classfield.setSize(SIZES[1]);
                 }else{
                     classfield.setState(STATES[2]);
-                    classfield.setTaille(TAILLE[2]);
+                    classfield.setSize(SIZES[2]);
                 }
             }
         });
     }
 
-    gestionStateOut(){
+    manageStateOut(){
         this.classfields.forEach( (classfield, nbClassfield) => {
-            classfield.setTaille(TAILLE[0]);
+            classfield.setSize(SIZES[0]);
             classfield.setState(STATES[0]);
         });
     }

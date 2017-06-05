@@ -1,19 +1,19 @@
 import { Currency } from './currency'
 
 const DEFAULT_STATE = "normal";
-const DEFAULT_TAILLE = "default";
+const DEFAULT_SIZE = "default";
 
 export class Classfield {
 
     imageList: string[];
     private state : string;
-    private taille : string;
+    private size : string;
 
     constructor(private title: string, private description: string, private price: number, private currency: Currency) {
         this.imageList = [];
         this.imageList.push("http://www.larevueautomobile.com/images/Bugatti/Veyron-Centenaire/Exterieur/Bugatti_Veyron_Centenaire_002.jpg");
         this.state = DEFAULT_STATE;
-        this.taille = DEFAULT_TAILLE;
+        this.size = DEFAULT_SIZE;
     }
 
     getTitle() {
@@ -40,12 +40,12 @@ export class Classfield {
         this.state = state;
     }
 
-    getTaille(){
-        return this.taille;
+    getSize(){
+        return this.size;
     }
 
-    setTaille(taille : string){
-        this.taille = taille;
+    setSize(size : string){
+        this.size = size;
     }
 
 }
