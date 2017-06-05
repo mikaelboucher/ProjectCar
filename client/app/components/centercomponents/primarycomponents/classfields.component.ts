@@ -22,6 +22,24 @@ export class Classfields {
         classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
         classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
         classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
         this.initPaquets(classfieldsList);
     }
     

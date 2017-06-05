@@ -21,27 +21,27 @@ const MOUSEOVER_BORDURE = "mouseOverBordure";
                 transform: 'translateX(0%) scale(1.2)'
             })),
             state(STATES[2],   style({
-                transform: 'translateX(-25%) scale(1)'
+                transform: 'translateX(-15.5%) scale(1)'
             })),
             state(STATES[3],   style({
-                transform: 'translateX(25%) scale(1)'
+                transform: 'translateX(15.5%) scale(1)'
             })),
-            transition('normal => mouseOver, mouseOver => normal', animate('500ms ease-in')),
-            transition('normal => leftMove, leftMove => normal', animate('500ms ease-in')),
-            transition('normal => rightMove, rightMove => normal', animate('500ms ease-in')),
+            transition('normal <=> mouseOver', animate('500ms ease-in')),
+            transition('normal <=> leftMove', animate('500ms ease-in')),
+            transition('normal <=> rightMove', animate('500ms ease-in')),
         ]),
         trigger('classfieldTaille', [
             state(TAILLE[0], style({
                 width : '25%'
             })),
             state(TAILLE[1],   style({
-                width : '46%'
+                width : '31%'
             })),
             state(TAILLE[2],   style({
-                width : '18%'
+                width : '23%'
             })),
-            transition('default => maximise, maximise => default', animate('500ms ease-in')),
-            transition('default => minimise, minimise => default', animate('500ms ease-in'))
+            transition('default <=> maximise', animate('500ms ease-in')),
+            transition('default <=> minimise', animate('500ms ease-in'))
         ])
   ]
 })
