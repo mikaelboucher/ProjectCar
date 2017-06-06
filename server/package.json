@@ -6,7 +6,9 @@
   "author": "",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "nodemon out/www.js",
+    "start": "tsc && node out/www.js",
+    "build": "tsc",
+    "build:all": "npm run build && (cd ../client && npm run build)",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

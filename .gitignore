@@ -1,0 +1,8 @@
+.vs/
+.vscode/
+
+npm-debug.log
+cadriciel/client/node_modules/
+cadriciel/client/out/
+cadriciel/server/node_modules/
+cadriciel/server/out/

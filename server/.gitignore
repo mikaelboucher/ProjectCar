@@ -1,7 +1,8 @@
 [Bb]in/
 [Oo]bj/
 .vscode/
-*.njsproj
 
 node_modules/
 out/
+
+npm-debug.log
