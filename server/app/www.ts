@@ -4,6 +4,8 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
+import * as routes from './routes';
+import { Database } from './database';
 
 class Application {
     private static _instance: Application = null;
@@ -19,7 +21,9 @@ class Application {
     constructor(private _app: express.Application) {
         this.config();
         this.routes();
+        this.routes();
     }
+
 
     get expressApp(): express.Application {
         return this._app
@@ -33,12 +37,13 @@ class Application {
     }
 
     private routes() {
-        let router = express.Router();
+        //let router = express.Router();
+        let router = routes.getRoute();
 
         this._app.use(express.static(path.join(__dirname, "../../client")));
 
         //TODO
-        this._app.use(router);
+        this._app.use('/api',router);
 
         // Gestion des erreurs
         this._app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -66,7 +71,7 @@ class Application {
                 message: err.message,
                 error: {}
             });
-        }); 
+        });
     }
 }
 
@@ -79,7 +84,7 @@ server.listen(appPort);
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
-    
+
     switch (err.code) {
         case "EACCESS":
             console.error(`Port ${appPort} requires elevated privileges`);
