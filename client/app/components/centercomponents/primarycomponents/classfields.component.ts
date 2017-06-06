@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { trigger, state, style,
+    animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield'
 
-const NB_BOUTON_LIGNE = 4;
+const NB_ALIGN_BUTTON = 4;
 
 @Component({
     selector: "classfields-component",
@@ -10,31 +12,46 @@ const NB_BOUTON_LIGNE = 4;
 })
 
 export class Classfields {
-    classfieldsList: Classfield[] = [];
-    classfieldMouseOver : Classfield;
-    indexMouseOver : number;
+    groupClassfields : Classfield[][] = [];
 
     constructor(){
-        this.classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        this.classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        this.classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        this.classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        this.classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        this.classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        let classfieldsList : Classfield[] = [];
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
+        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
+        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
+        this.initGroups(classfieldsList);
     }
     
-    mouseOver(classfield : Classfield, enter : boolean, index? : number){
-        if (enter){
-            this.classfieldMouseOver = classfield;
-            this.indexMouseOver = index;
-        }else{
-            this.classfieldMouseOver = undefined;
-            this.indexMouseOver = undefined;
-        }
+    initGroups(classfieldsList : Classfield[]){
+        let nbGroups = 0;
+        classfieldsList.forEach( (classfied, cpt) => {
+            if (cpt % NB_ALIGN_BUTTON === 0){
+                this.groupClassfields[nbGroups] = [];
+                nbGroups++;
+            }
+            this.groupClassfields[nbGroups - 1][cpt % NB_ALIGN_BUTTON] = classfied;
+        });
     }
-
-    memeLigne(index : number) : boolean{
-        console.log(Math.floor(this.indexMouseOver/4) + " - "+ Math.floor(index/4))
-        return Math.floor(this.indexMouseOver/4) === Math.floor(index/4);
-    }
+    
  }

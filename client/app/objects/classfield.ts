@@ -1,12 +1,19 @@
 import { Currency } from './currency'
 
+const DEFAULT_STATE = "normal";
+const DEFAULT_SIZE = "default";
+
 export class Classfield {
 
     imageList: string[];
+    private state : string;
+    private size : string;
 
     constructor(private title: string, private description: string, private price: number, private currency: Currency) {
         this.imageList = [];
-        this.imageList.push("http://singervehicledesign.com/wp-content/uploads/2015/07/12-singer-911-montana-540x320.jpg");
+        this.imageList.push("http://www.larevueautomobile.com/images/Bugatti/Veyron-Centenaire/Exterieur/Bugatti_Veyron_Centenaire_002.jpg");
+        this.state = DEFAULT_STATE;
+        this.size = DEFAULT_SIZE;
     }
 
     getTitle() {
@@ -25,5 +32,20 @@ export class Classfield {
         return this.currency;
     }
 
+    getState(){
+        return this.state;
+    }
+
+    setState(state : string){
+        this.state = state;
+    }
+
+    getSize(){
+        return this.size;
+    }
+
+    setSize(size : string){
+        this.size = size;
+    }
 
 }

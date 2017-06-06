@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap';
@@ -16,9 +17,10 @@ import { CenterPrimary } from './components/centercomponents/centerprimary.compo
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
 import { Classfields } from './components/centercomponents/primarycomponents/classfields.component';
 import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
+import { ListeClassfields } from './components/centercomponents/primarycomponents/listeclassfields.component';
 
 @NgModule({
-    imports: [ BrowserModule, HttpModule, ModalModule.forRoot() ],
+    imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
 
     declarations: [
         AppComponent,
@@ -32,7 +34,8 @@ import { SingleClassfield } from './components/centercomponents/primarycomponent
         CenterPrimary,
         CenterSecondary,
         Classfields,
-        SingleClassfield
+        SingleClassfield,
+        ListeClassfields
     ],
 
     bootstrap: [ AppComponent ],
