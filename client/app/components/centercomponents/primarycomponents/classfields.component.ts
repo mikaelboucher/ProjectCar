@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { trigger, state, style,
-    animate, transition } from '@angular/animations';
+import { QueryService } from '../../../services/queryService';
 import { Classfield } from '../../../objects/classfield'
 
 const NB_ALIGN_BUTTON = 4;
@@ -8,39 +7,17 @@ const NB_ALIGN_BUTTON = 4;
 @Component({
     selector: "classfields-component",
     templateUrl: './app/html/center/classfields.html',
-    styleUrls : ['./app/css/center/classfields.css']
+    styleUrls : ['./app/css/center/classfields.css'],
+    providers : [QueryService]
 })
 
 export class Classfields {
     groupClassfields : Classfield[][] = [];
 
-    constructor(){
-        let classfieldsList : Classfield[] = [];
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        classfieldsList.push(new Classfield("yo", "yo", 123, undefined));
-        classfieldsList.push(new Classfield("yoo1", "yosd", 124, undefined));
-        classfieldsList.push(new Classfield("yooy", "yo", 125, undefined));
-        this.initGroups(classfieldsList);
+    constructor(private queryService : QueryService){
+        this.queryService.getCars().then( classfields => {
+            this.initGroups(classfields);
+        });
     }
     
     initGroups(classfieldsList : Classfield[]){
@@ -54,4 +31,4 @@ export class Classfields {
         });
     }
     
- }
+}

@@ -4,7 +4,7 @@ import { TemporaryList } from './temporaryList'
 let router = express.Router();
 
 router.get('/porsches', (requete, reponse) =>{
-    reponse.send(TemporaryList.getList());
+    reponse.json(TemporaryList.getList());
 });
 
 router.post('/porsches', (req: any, res: any, next: any) => {
