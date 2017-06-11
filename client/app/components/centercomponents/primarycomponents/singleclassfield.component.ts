@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
 import { Classfield } from '../../../objects/classfield'
+
+const MAX_CHARACTER = 120;
 
 @Component({
     selector: "single-classfield",
@@ -7,10 +9,11 @@ import { Classfield } from '../../../objects/classfield'
     styleUrls : ['./app/css/center/singleclassfield.css']
 })
 
-export class SingleClassfield {
+export class SingleClassfield implements OnChanges{
    @Input() classfield: Classfield;
    @Output() mouseOver = new EventEmitter();
    isMouseOver : boolean;
+   shortDescription : string;
 
    @HostListener('mouseover') onMouseEnter() {
        this.isMouseOver = true;
@@ -20,6 +23,17 @@ export class SingleClassfield {
    @HostListener('mouseleave') onmouseleave() {
        this.isMouseOver = false;
        this.mouseOver.emit(false);
+   }
+
+   ngOnChanges(){
+       if (this.classfield){
+           this.shrinkClassfield();
+       }
+   }
+
+   shrinkClassfield(){
+       this.shortDescription = this.classfield.getDescription().slice(0, MAX_CHARACTER);
+       this.shortDescription += '...';
    }
 
  }
