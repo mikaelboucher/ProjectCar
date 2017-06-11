@@ -5,15 +5,16 @@ const MONGO_INFO = {
 export module Database{
     let mongoClient = require('mongodb').MongoClient;
 
-    export function findCars(){
+    export async function findCars(properties: any) : Promise<any> {
         mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
         console.log(err);
         let col = db.collection("porsche");
-        col.find({}).toArray((err: any, items: any) => {
+        return col.find({}).toArray((err: any, items: any) => {
             console.log("erreur est :" + err);
             console.log(items);
             console.log(items[0].porsche);
         });
+
     });
 }
 
@@ -24,6 +25,7 @@ export module Database{
 			col.insert(obj).catch( (err : any) => console.log(err));
         });
     }
+
 }
 
 
