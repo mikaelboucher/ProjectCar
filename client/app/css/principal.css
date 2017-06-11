@@ -17,25 +17,27 @@
 }
 
 .left{
-    background-color: darkred;
+    /*background-color: darkred;*/
     text-align: center;
     height: 100%;
 }
 
 .center{
     background-color: darkgoldenrod;
+    background-image: url('../../../../assets/background2.jpg');
     text-align: center;
     height: 100%;
 }
 
 .right{
-    background-color: darkred;
+    /*background-color: darkred;*/
     text-align: center;
     height: 100%;
 }
 
 .fill{
-    background-color: darkred;
+    background-image: url('../../../../assets/background1.jpg');
+    background-color : darkred;
 }
 
 .info{

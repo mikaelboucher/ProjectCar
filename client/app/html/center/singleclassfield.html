@@ -1,1 +1,16 @@
-<div class="classfield" [ngStyle]="{'background-image': 'url(' + classfield.imageList[0] + ')'}"></div>
+<div class="classfield" [ngStyle]="{'background-image': 'url(' + classfield.imageList[0] + ')'}">
+    <div *ngIf="isMouseOver">
+
+    </div>
+
+    <div *ngIf="!isMouseOver">
+        <div class="bottom-info">
+            <span class="title">
+                {{classfield.getTitle()}}
+            </span>
+            <span class="price">
+                {{classfield.getPrice()}} $
+            </span>
+        </div>
+    </div> 
+</div>

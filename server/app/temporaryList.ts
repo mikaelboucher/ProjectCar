@@ -106,6 +106,13 @@ export module TemporaryList{
             price: 1250000,
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi at quam luctus laoreet. Duis et interdum enim. Phasellus sed justo pretium orci iaculis facilisis. Praesent sed malesuada enim. Nunc in sapien ac dui gravida mattis non ut mauris. Suspendisse gravida nisi sem, at varius leo consectetur vel. Morbi dictum turpis vitae lorem ultricies ultrices. Maecenas fermentum felis sed neque commodo euismod. Donec non justo pulvinar, facilisis est sit amet, posuere arcu. Vestibulum vel magna tempor, pellentesque turpis id, lacinia nibh. Vivamus mauris nibh, venenatis accumsan risus porta, egestas tempor nibh. Aliquam eget ex posuere, rutrum ante et, cursus lectus. Vivamus vulputate, nulla a accumsan aliquet, lectus mauris iaculis odio, consectetur accumsan leo velit a leo. Ut neque sem, elementum sit amet tortor a, pretium eleifend enim."
 
+        },
+        {
+            title: "test grandeur",
+            thumbnail: "http://bestride.com/wp-content/uploads/2016/03/2016-Porsche-911-R-Front-160x90.jpg",
+            price: 1250000,
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec mi at quam luctus laoreet. Duis et interdum enim. Phasellus sed justo pretium orci iaculis facilisis. Praesent sed malesuada enim. Nunc in sapien ac dui gravida mattis non ut mauris. Suspendisse gravida nisi sem, at varius leo consectetur vel. Morbi dictum turpis vitae lorem ultricies ultrices. Maecenas fermentum felis sed neque commodo euismod. Donec non justo pulvinar, facilisis est sit amet, posuere arcu. Vestibulum vel magna tempor, pellentesque turpis id, lacinia nibh. Vivamus mauris nibh, venenatis accumsan risus porta, egestas tempor nibh. Aliquam eget ex posuere, rutrum ante et, cursus lectus. Vivamus vulputate, nulla a accumsan aliquet, lectus mauris iaculis odio, consectetur accumsan leo velit a leo. Ut neque sem, elementum sit amet tortor a, pretium eleifend enim."
+
         }
     ];
 

@@ -10,12 +10,15 @@ import { Classfield } from '../../../objects/classfield'
 export class SingleClassfield {
    @Input() classfield: Classfield;
    @Output() mouseOver = new EventEmitter();
+   isMouseOver : boolean;
 
    @HostListener('mouseover') onMouseEnter() {
+       this.isMouseOver = true;
        this.mouseOver.emit(true);
    }
 
    @HostListener('mouseleave') onmouseleave() {
+       this.isMouseOver = false;
        this.mouseOver.emit(false);
    }
 
