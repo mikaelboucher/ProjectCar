@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
 import { Classfield } from '../../../objects/classfield'
 
-const MAX_CHARACTER = 145;
+const MAX_CHARACTER = 120;
 const DOTDOTDOT = 3;
 
 @Component({

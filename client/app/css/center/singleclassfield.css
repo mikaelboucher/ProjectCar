@@ -28,7 +28,8 @@
 }
 
 .price{
-    float : right;
+    position : fixed;
+    right: 0; 
 }
 
 .description{

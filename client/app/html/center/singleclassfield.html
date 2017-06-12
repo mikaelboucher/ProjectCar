@@ -2,14 +2,12 @@
     <div class="basic">
         <div *ngIf="isMouseOver">
             <div class="mouseOver">
-                <div> 
-                    <span class="title">
-                        {{classfield.getTitle()}}
-                    </span>
-                    <span class="price">
-                        {{classfield.getPrice()}} $
-                    </span>
-                </div>
+                <span class="title">
+                    {{classfield.getTitle()}}
+                </span>
+                <span class="price">
+                    {{classfield.getPrice()}} $
+                </span>
                 <div class="description">
                     {{shortDescription}}
                 </div>
