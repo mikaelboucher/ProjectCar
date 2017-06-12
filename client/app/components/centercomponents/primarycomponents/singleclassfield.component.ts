@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
 import { Classfield } from '../../../objects/classfield'
 
-const MAX_CHARACTER = 120;
+const MAX_CHARACTER = 145;
+const DOTDOTDOT = 3;
 
 @Component({
     selector: "single-classfield",
@@ -32,8 +33,12 @@ export class SingleClassfield implements OnChanges{
    }
 
    shrinkClassfield(){
-       this.shortDescription = this.classfield.getDescription().slice(0, MAX_CHARACTER);
-       this.shortDescription += '...';
+       let text = this.classfield.getDescription();
+       if (text.length > MAX_CHARACTER + DOTDOTDOT){
+           text = text.slice(0, MAX_CHARACTER);
+           text += '...';
+       }
+       this.shortDescription = text;
    }
 
  }
