@@ -3,13 +3,13 @@ import { Database } from './database'
 import { TemporaryList } from './temporaryList'
 let router = express.Router();
 
-router.get('/porsches', (requete, reponse) =>{
-    reponse.send(TemporaryList.getList());
+router.get('/porsches', (req, res) =>{
+    res.send(TemporaryList.getList());
 });
 
-router.get('/findcar', (requete, reponse) => {
-    Database.findCars(requete.body).then(cars => {
-
+router.get('/findcar', (req, response) => {
+    Database.findCars(req.body).then(cars => {
+        response.json(cars)
     });
 
 });
