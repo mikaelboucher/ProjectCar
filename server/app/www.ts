@@ -80,7 +80,7 @@ let server = http.createServer(app.expressApp);
 server.listen(appPort);
 
 let io = socketIO(server);
-routesTwitter.routes(io);
+routesTwitter.routes(io); //passer io possiblement as nécessaire dans le futur... Revoir liste d'arguments
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
