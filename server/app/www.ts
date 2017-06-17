@@ -4,7 +4,7 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
-import * as routesTwitter from './twitter';
+import * as twitter from './twitter';
 let socketIO = require('socket.io');
 
 class Application {
@@ -79,8 +79,11 @@ app.expressApp.set("port", appPort);
 let server = http.createServer(app.expressApp);
 server.listen(appPort);
 
-let io = socketIO(server);
-routesTwitter.routes(io); //passer io possiblement as nécessaire dans le futur... Revoir liste d'arguments
+let io = socketIO(server);  //Pas utilise pour l'instant
+
+// twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
+// twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
+twitter.launchTwitterStream();
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
