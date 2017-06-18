@@ -4,8 +4,13 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
+
+import * as twitter from './twitter';
+let socketIO = require('socket.io');
+
 import * as routes from './routes';
 import { Database } from './database';
+
 
 class Application {
     private static _instance: Application = null;
@@ -81,6 +86,12 @@ app.expressApp.set("port", appPort);
 
 let server = http.createServer(app.expressApp);
 server.listen(appPort);
+
+let io = socketIO(server);  //Pas utilise pour l'instant
+
+// twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
+// twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
+twitter.launchTwitterStream();
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
