@@ -6,7 +6,6 @@ const DEFAULT_SIZE = "default";
 const TEST_IMAGE = "http://www.larevueautomobile.com/images/Bugatti/Veyron-Centenaire/Exterieur/Bugatti_Veyron_Centenaire_002.jpg";
 
 export class Classfield {
-
     imageList: string[];
     private state : string;
     private size : string;
@@ -44,6 +43,7 @@ export class Classfield {
     }
 
     getSize(){
+        //return Classfield.animationData.valueState(this.size);
         return this.size;
     }
 

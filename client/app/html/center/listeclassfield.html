@@ -1,6 +1,6 @@
-<div class="border">
+<div class="border" (window:resize)="onResize($event)">
     <div *ngFor="let classfield of classfields; let j = index">
-        <div class="classfield" [@classfieldState]="classfield.getState()" [@classfieldSize]="classfield.getSize()">
+        <div class="classfield" [@classfieldState]="classfield.getState()" [@classfieldSize]="classfield.getSize()" [style.width]="animationData.getWidth(classfield.getSize())">
             <single-classfield [classfield]="classfield" (mouseOver)="mouseOver(classfield, $event)"></single-classfield>
         </div>
     </div>
