@@ -24,24 +24,20 @@ export class Member {
 
         let accountAlreadyAdded = (this.followedTwitterAccounts.indexOf(twitterAccountNumber) !== -1);
 
-        if (accountAlreadyAdded){
-            return;
-        }
-        else{
+        if (!accountAlreadyAdded){
             this.followedTwitterAccounts.push(twitterAccountNumber);
         }
+
     }
 
     addTwitterHashtag(hashtag : string){
 
         let hashtagAlreadyAdded = (this.trackedTwitterHashtags.indexOf(hashtag) !== -1);
 
-        if (hashtagAlreadyAdded){
-            return;
-        }
-        else{
+        if (!hashtagAlreadyAdded){
             this.trackedTwitterHashtags.push(hashtag);
         }
+
     }
 
 }
