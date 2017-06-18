@@ -34,6 +34,7 @@ class Application {
         this._app.use(bodyParser.json());
         this._app.use(bodyParser.urlencoded({ extended: true }));
         this._app.use(cookieParser());
+        this._app.use('/data', express.static('data'));
     }
 
     private routes() {
