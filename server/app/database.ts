@@ -30,7 +30,7 @@ export module Database{
     function createQuery(properties: any): any{
         let query = {};
          query['$and']=[];
-         for(var prop in properties){
+         for(let prop in properties){
              console.log(`${prop}`);
              let attribute = {}
              attribute[`${prop}`] = properties[`${prop}`];
