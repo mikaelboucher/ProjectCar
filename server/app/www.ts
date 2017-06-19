@@ -91,7 +91,10 @@ let io = socketIO(server);  //Pas utilise pour l'instant
 
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
-twitter.launchTwitterStream();
+let twitterStreamOn: boolean = false;
+if (twitterStreamOn){
+    twitter.launchTwitterStream();
+}
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
