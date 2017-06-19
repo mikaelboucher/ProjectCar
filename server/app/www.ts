@@ -26,7 +26,6 @@ class Application {
     constructor(private _app: express.Application) {
         this.config();
         this.routes();
-        this.routes();
     }
 
 
