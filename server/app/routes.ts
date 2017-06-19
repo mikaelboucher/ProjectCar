@@ -13,6 +13,9 @@ router.get('/findcar', (req, response) => {
         response.json(cars)
     });
 
+router.get('/porsches', (requete, reponse) =>{
+    reponse.json(TemporaryList.getList());
+
 });
 
 router.post('/porsches', (req: any, res: any, next: any) => {

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
-import { Classfield } from '../../../objects/classfield'
+import { Classfield } from '../../../objects/classfield';
+import { AnimationData } from '../../../utils/animationdata';
 
 const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
 const SIZES = ["default", "maximise", "minimise"];
@@ -30,22 +31,25 @@ const SIZES = ["default", "maximise", "minimise"];
         ]),
         trigger('classfieldSize', [
             state(SIZES[0], style({
-                width : '25%'
+                'width' : '25%'
             })),
             state(SIZES[1],   style({
-                width : '31%'
+                'width' : '31%'
             })),
             state(SIZES[2],   style({
-                width : '23%'
+                'width' : '23%'
             })),
             transition('default <=> maximise', animate('500ms ease-in')),
-            transition('default <=> minimise', animate('500ms ease-in'))
+            transition('default <=> minimise', animate('500ms ease-in')),
         ])
   ]
 })
 
 export class ListeClassfields {
     @Input() classfields : Classfield[];
+    animationData = new AnimationData();
+
+    constructor(){}
 
     mouseOver(classfield : Classfield, enter : boolean){
         if (enter){
@@ -79,6 +83,10 @@ export class ListeClassfields {
             classfield.setSize(SIZES[0]);
             classfield.setState(STATES[0]);
         });
+    }
+
+    onResize(event : any){
+        this.animationData.changeWidthSelection(event.target.innerWidth);
     }
     
  }

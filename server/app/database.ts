@@ -10,10 +10,12 @@ export module Database{
         //console.log(err);
         let query = createQuery(properties);
         let col = db.collection("porsche");
+
         return col.find({}).toArray((err: any, items: any) => {
-            //console.log("erreur est :" + err);
-            //console.log(items);
-            //console.log(items[0].porsche);
+            console.log("erreur est :" + err);
+            console.log(items);
+            console.log(items[0].porsche);
+
         });
 
     });
@@ -73,7 +75,65 @@ var q = {}; // declare the query object
  */
     
 
+
 }
+
+
+/*
+
+var q = {}; // declare the query object
+  q['$and']=[]; // filter the search by any criteria given by the user
+  if((req.body.learninglanguages).length > 0){ // if the criteria has a value or values
+    q["$and"].push({ learningLanguages: {$in: req.body.learninglanguages.split(",") }}); // add to the query object
+  }
+
+*/
+
+
+/*
+
+
+function onGeneratedRow(columnsResult)
+{
+    var jsonData = {};
+    columnsResult.forEach(function(column)
+    {
+        var columnName = column.metadata.colName;
+        jsonData[columnName] = column.value;
+    });
+    viewData.employees.push(jsonData);
+ }
+
+
+*/
+
+
+/*
+
+contenu d<une recherche
+
+make
+model[]
+yearMax
+yearMin
+generations[]
+mileageMax
+milageMin
+modified
+trim[]
+chassisType[]
+layout[]
+engine[]
+colour[]
+serialized[]
+porscheCertificate
+VIN
+transmission[]
+
+
+
+
+*/
 
 
 
