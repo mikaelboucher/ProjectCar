@@ -135,7 +135,6 @@ server.on("listening", () => {
 
 let io = socketIO(server); 
 
-console.log("Test");
   io.on('connection', function(socket : any) {
     socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
                                         //des comptes/mot-clés suivis par membre
