@@ -14,10 +14,21 @@ export class SocketService{
         socket.emit('requestTweets');
     }
 
-    tweet(){
+    launchTweetListener(){
+        console.log("Tweet listener is ON");
         socket.on("tweet", function(tweet : any) { 
-            console.log("Tweet listener is ON");
-            console.log(tweet);
+            console.log("Tweets received : " + tweet);
         });
+        socket.on("streamTweet", function(tweet : string) { 
+            console.log("Stream tweet received : " + tweet);
+        });
+    }
+
+    launchAllListeners(){
+        this.launchTweetListener();
+    }
+
+    requireTweets(){
+        socket.emit("requireTweets");
     }
 }

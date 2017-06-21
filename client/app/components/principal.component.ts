@@ -9,9 +9,9 @@ import { SocketService } from '../services/socket.service';
 })
 export class PrincipalComponent { 
     constructor(private socketService : SocketService){
-       console.log("test");
-       this.socketService.tweet();
        this.socketService.connect();
+       this.socketService.launchAllListeners();
+       this.socketService.requireTweets();
    }
 
 }

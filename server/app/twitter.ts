@@ -104,7 +104,7 @@ Purpose :
     2. Get tweets from API
 *****************************************************************/
 
-export function launchTwitterStream(){
+export function launchTwitterStream(io : any){
 
   /* Obtenir le user_timeline lors de la premiere connection */
   /* Possible d'ajouter des user_id et screen_name en les séparant par virgules */ 
@@ -115,15 +115,19 @@ export function launchTwitterStream(){
   /* track : Keywords to track */
   /* follow : User_ID */
 
-  /*
+  
   let stream = client.stream('statuses/filter', {follow : MIKAEL_TWITTER_ID}); 
   
   stream.on('data', function(event : any) {   // surement string... modifier plus tard
     console.log(event && event.text);         //event.extended_entities.media pour photos
+    let tweet : string;
+    tweet = (event && event.text);
+    io.on('connection', (socket : any) => {
+      socket.emit("streamTweet", tweet)
+    });
   });
   
   stream.on('error', function(error : any) { // surement string... modifier plus tard
     throw error;
   });
-  */
 }

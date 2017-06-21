@@ -12,6 +12,7 @@
     "test": "mocha -r ts-node/register ./tests/**/*-spec.ts"
   },
   "dependencies": {
+    "@types/socket.io": "^1.4.29",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.6",
