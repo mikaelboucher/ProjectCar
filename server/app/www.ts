@@ -87,7 +87,14 @@ app.expressApp.set("port", appPort);
 let server = http.createServer(app.expressApp);
 server.listen(appPort);
 
-let io = socketIO(server);  //Pas utilise pour l'instant
+let io = socketIO(server); 
+
+io.on('connection', function(socket : any) {
+    socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
+                                        //des comptes/mot-clés suivis par membre
+    console.log("REQUIRE TWEETS");
+    });
+});
 
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
