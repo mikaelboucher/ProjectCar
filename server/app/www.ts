@@ -42,12 +42,9 @@ class Application {
     }
 
     private routes() {
-        //let router = express.Router();
         let router = routes.getRoute();
 
         this._app.use(express.static(path.join(__dirname, "../../client")));
-
-        //TODO
         this._app.use('/api',router);
 
         // Gestion des erreurs
@@ -84,10 +81,16 @@ const appPort = 3002;
 const app = Application.instance;
 app.expressApp.set("port", appPort);
 
-let server = http.createServer(app.expressApp);
-server.listen(appPort);
+let server = http.createServer(app.expressApp).listen(appPort);
 
-let io = socketIO(server);  //Pas utilise pour l'instant
+/*
+io.on('connection', function(socket : any) {
+    socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
+                                        //des comptes/mot-clés suivis par membre
+    console.log("REQUIRE TWEETS");
+    });
+});
+*/
 
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
@@ -129,3 +132,13 @@ server.on("listening", () => {
 
     console.log(`╚═════════════════════════════════════════`);
 });
+
+let io = socketIO(server); 
+
+console.log("Test");
+  io.on('connection', function(socket : any) {
+    socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
+                                        //des comptes/mot-clés suivis par membre
+    console.log("REQUIRE TWEETS");
+    });
+  });
