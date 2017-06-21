@@ -56,7 +56,7 @@ export class ListeClassfields {
     }
 
     onResize(event : any){
-        this.animationData.changeWidthSelection(event.target.innerWidth);
+        
     }
     
  }
