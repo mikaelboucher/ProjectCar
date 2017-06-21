@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Member } from '../app/objects/member';
+import { Member } from '../objects/member';
 import 'mocha';
 
 describe('Class Member', () => {

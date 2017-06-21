@@ -115,6 +115,7 @@ export function launchTwitterStream(){
   /* track : Keywords to track */
   /* follow : User_ID */
 
+  /*
   let stream = client.stream('statuses/filter', {follow : MIKAEL_TWITTER_ID}); 
   
   stream.on('data', function(event : any) {   // surement string... modifier plus tard
@@ -124,4 +125,5 @@ export function launchTwitterStream(){
   stream.on('error', function(error : any) { // surement string... modifier plus tard
     throw error;
   });
+  */
 }
