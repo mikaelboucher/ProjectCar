@@ -8,6 +8,7 @@ let prop = TemporaryList.getList()[0];
 
 router.get('/findcar', (req, response) => {
     Database.findCars(prop).then(cars => {
+        console.log(cars);
         response.json(cars)
     });
 });

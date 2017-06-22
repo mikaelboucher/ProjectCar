@@ -10,11 +10,18 @@ export module Database{
         //console.log(err);
         let query = createQuery(properties);
         let col = db.collection("porsche");
-
-        return col.find({}).toArray((err: any, items: any) => {
-            console.log("erreur est :" + err);
-            console.log(items);
-            console.log(items[0].porsche);
+        console.log(properties);
+        console.log(".............................................")
+        console.log(query);
+        console.log("............................................")
+        console.log({title: "ma porsche"})
+        console.log(".....................................................")
+        return col.find(query).toArray((err: any, items: any) => {
+            //console.log("erreur est :" + err);
+            //console.log(items);
+            //console.log(items[0].porsche);
+            console.log(err)
+            console.log(items)
 
         });
 
@@ -33,12 +40,12 @@ export module Database{
         let query = {};
          query['$and']=[];
          for(let prop in properties){
-             console.log(`${prop}`);
+             //console.log(`${prop}`);
              let attribute = {}
              attribute[`${prop}`] = properties[`${prop}`];
-             query["$and"].push(attribute);
+             query['$and'].push(attribute);
          }
-         console.log(query);
+         //console.log(query);
         return query;
     }
 
@@ -73,7 +80,7 @@ var q = {}; // declare the query object
 
 
  */
-    
+
 
 
 }
