@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield';
 import { AnimationData } from '../../../utils/animationdata';
-import { ClassfieldState, ClassfieldSize } from '../../../utils/animation/classfieldAnimation';
+import { ClassfieldState } from '../../../utils/animation/classfieldAnimation';
+import { AnimationService } from '../../../services/animationService'
 
 const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
 const SIZES = ["default", "maximise", "minimise"];
@@ -12,14 +13,20 @@ const SIZES = ["default", "maximise", "minimise"];
     selector: "listes-classfieds",
     templateUrl: './app/html/center/listeclassfield.html',
     styleUrls : ['./app/css/center/listeclassfield.css'],
-    animations: [ ClassfieldState, ClassfieldSize ]
+    providers : [ AnimationService ],
+    animations: [ ClassfieldState ]
 })
 
-export class ListeClassfields {
+export class ListeClassfields implements AfterViewInit{
     @Input() classfields : Classfield[];
+    @ViewChildren('oneclassfield') elementClassfield : any;
     animationData = new AnimationData();
 
-    constructor(){}
+    constructor(private animmationService : AnimationService){}
+
+    ngAfterViewInit(){
+        this.elementClassfield = this.elementClassfield.toArray();
+    }
 
     mouseOver(classfield : Classfield, enter : boolean){
         if (enter){
@@ -35,15 +42,24 @@ export class ListeClassfields {
             if (find){
                 classfield.setState(STATES[3]);
                 classfield.setSize(SIZES[2]);
+                this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
+                nbClassfield, classfield.getWidth(), 22);
+                classfield.setWidth(34);
             }else{
                 find = classfiedCible == classfield;
+                let width;
                 if (find){
                     classfield.setState(STATES[1]);
                     classfield.setSize(SIZES[1]);
+                    width = 34;
                 }else{
                     classfield.setState(STATES[2]);
                     classfield.setSize(SIZES[2]);
+                    width = 22;
                 }
+                this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
+                nbClassfield, classfield.getWidth(), width);
+                classfield.setWidth(width);
             }
         });
     }
@@ -52,6 +68,9 @@ export class ListeClassfields {
         this.classfields.forEach( (classfield, nbClassfield) => {
             classfield.setSize(SIZES[0]);
             classfield.setState(STATES[0]);
+            this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
+            nbClassfield, classfield.getWidth(), 25);
+            classfield.setWidth(25);
         });
     }
 
