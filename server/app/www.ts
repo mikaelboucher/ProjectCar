@@ -81,8 +81,10 @@ class Application {
 }
 
 const app = Application.instance;
+
 app.expressApp.set("port", APP_PORT);
 let server = http.createServer(app.expressApp).listen(APP_PORT);
+
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
@@ -119,6 +121,7 @@ server.on("listening", () => {
 });
 
 
+
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
 
@@ -128,3 +131,4 @@ routeSocket.routes(io);
 if (twitterStreamOn){
     twitter.launchTwitterStream(io);
 }
+
