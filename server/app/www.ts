@@ -4,13 +4,17 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
+import * as socketIo from 'socket.io';
 
 import * as twitter from './twitter';
-let socketIO = require('socket.io');
 
 import * as routes from './routes';
+import * as routeSocket from './indexSocket';
 import { Database } from './database';
 
+const APP_PORT = 3002;
+
+let twitterStreamOn: boolean = false;   //protection pour ne pas se connecter au stream inutilememt
 
 class Application {
     private static _instance: Application = null;
@@ -27,7 +31,6 @@ class Application {
         this.config();
         this.routes();
     }
-
 
     get expressApp(): express.Application {
         return this._app
@@ -77,38 +80,22 @@ class Application {
     }
 }
 
-const appPort = 3002;
 const app = Application.instance;
-app.expressApp.set("port", appPort);
 
-let server = http.createServer(app.expressApp).listen(appPort);
+app.expressApp.set("port", APP_PORT);
+let server = http.createServer(app.expressApp).listen(APP_PORT);
 
-/*
-io.on('connection', function(socket : any) {
-    socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
-                                        //des comptes/mot-clés suivis par membre
-    console.log("REQUIRE TWEETS");
-    });
-});
-*/
-
-// twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
-// twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
-let twitterStreamOn: boolean = false;
-if (twitterStreamOn){
-    twitter.launchTwitterStream();
-}
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
 
     switch (err.code) {
         case "EACCESS":
-            console.error(`Port ${appPort} requires elevated privileges`);
+            console.error(`Port ${APP_PORT} requires elevated privileges`);
             process.exit(1);
             break;
         case "EADDRINUSE":
-            console.error(`Port ${appPort} is already in use`);
+            console.error(`Port ${APP_PORT} is already in use`);
             process.exit(1);
             break;
         default:
@@ -119,25 +106,29 @@ server.on("error", (err: NodeJS.ErrnoException) => {
 server.on("listening", () => {
     let publicIps: string[] = require("dev-ip")();
 
-    console.log(`Listening on port ${appPort}`);
+    console.log(`Listening on port ${APP_PORT}`);
     console.log(`╔═════════════════════════════════════════`);
     console.log(`║ Available URLs`);
     console.log(`║     Local:`);
-    console.log(`║         http://localhost:${appPort}`)
+    console.log(`║         http://localhost:${APP_PORT}`)
     console.log(`║     Public:`);
 
     for (let ip of publicIps) {
-        console.log(`║         http://${ip}:${appPort}`);
+        console.log(`║         http://${ip}:${APP_PORT}`);
     }
 
     console.log(`╚═════════════════════════════════════════`);
 });
 
-let io = socketIO(server); 
 
-  io.on('connection', function(socket : any) {
-    socket.on('requestTweets', ()=>{     //userID a etre utilisé pour trouver la liste
-                                        //des comptes/mot-clés suivis par membre
-    console.log("REQUIRE TWEETS");
-    });
-  });
+
+// twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
+// twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
+
+let io = socketIo(server); 
+routeSocket.routes(io);
+
+if (twitterStreamOn){
+    twitter.launchTwitterStream(io);
+}
+
