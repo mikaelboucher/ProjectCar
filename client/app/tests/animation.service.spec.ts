@@ -2,6 +2,7 @@ import { AnimationService } from '../services/animation.service';
 import { TestBed, async, inject } from '@angular/core/testing';
 
 import { expect } from 'chai';
+import 'mocha';
 
 describe('animation.Service', () => {
 

@@ -9,7 +9,7 @@
     "build": "tsc",
     "build:all": "npm run build && (cd ../server && npm run build)",
     "lint": "tslint app/**/*.ts app/*.ts --force -t verbose",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register ./tests/**/*-spec.ts"
   },
   "dependencies": {
     "@angular/animations": "^4.2.3",
