@@ -10,7 +10,7 @@ export class Classfield {
     imageList: string[];
     private state : string;
     private size : string;
-    private width : number;
+    private focus : boolean;
 
     constructor(private title: string, private description: string, private price: number,
     private thumbnail : string, private currency?: Currency) {
@@ -18,7 +18,7 @@ export class Classfield {
         this.imageList.push(this.thumbnail);
         this.state = DEFAULT_STATE;
         this.size = DEFAULT_SIZE;
-        this.width = DEFAULT_WIDTH;
+        this.focus = false;
     }
 
     getTitle() {
@@ -53,11 +53,11 @@ export class Classfield {
         this.size = size;
     }
 
-    setWidth(width : number){
-        this.width = width;
+    getFocus() : boolean{
+        return this.focus;
     }
 
-    getWidth(){
-        return this.width;
+    toggleFocus(){
+        this.focus = !this.focus;
     }
 }

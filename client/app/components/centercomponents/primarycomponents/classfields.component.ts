@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QueryService } from '../../../services/queryService';
+import { QueryService } from '../../../services/query.service';
 import { Classfield } from '../../../objects/classfield'
 
 const NB_ALIGN_BUTTON = 4;

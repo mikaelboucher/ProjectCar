@@ -1,12 +1,6 @@
-/**const DEFAULT_SIZE = [25, 100/3];
-const MAXIMISE_SIZE = [34, 37];
-const MINIMISE_SIZE = [22, 30];**/
-
-const SIZES = {
-    default : [25, 100/3],
-    maximise : [34, 37],
-    minimise : [22, 30]
-}
+const DEFAULT_SCALE = 1;
+const FOCUS_SCALE = [1.4]
+const TRANSLATE = [22];
 
 const WIDTHS = [
     {width : 900, division : 4},
@@ -22,34 +16,15 @@ export class AnimationData{
         this.actualState = 0;
     }
 
-    getWidth(state : string){
-        return (<any>SIZES)[state][this.actualState];
+    get focusSize() : number{
+        return FOCUS_SCALE[this.actualState];
+    }
+
+    get defaultSize() : number{
+        return DEFAULT_SCALE;
+    }
+
+    public translate(left : boolean, grow : boolean) : number{
+        return (left ? -1 : 1) * (grow ? 1 : -1) * TRANSLATE[this.actualState];
     }
 }
-
-/**export class AnimationData{
-    private states = {
-        default : {
-            value : 'default',
-            params : { size : DEFAULT_SIZE[0] }
-        },
-        maximise : {
-            value : 'maximise',
-            params : { size : MAXIMISE_SIZE[0] }
-        },
-        minimise : {
-            value : 'minimise',
-            params : { size : MINIMISE_SIZE[0] }
-        }
-    };
-    private position : number;
-
-    constructor(){
-        this.position = 0;
-    }
-
-    getSize(state : string){
-        return (<any>this.states)[state];
-    }
-
-}**/

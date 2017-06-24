@@ -2,9 +2,8 @@ import { Component, Input, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield';
-import { AnimationData } from '../../../utils/animationdata';
 import { ClassfieldState } from '../../../utils/animation/classfieldAnimation';
-import { AnimationService } from '../../../services/animationService'
+import { AnimationService } from '../../../services/animation.service'
 
 const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
 const SIZES = ["default", "maximise", "minimise"];
@@ -20,7 +19,7 @@ const SIZES = ["default", "maximise", "minimise"];
 export class ListeClassfields implements AfterViewInit{
     @Input() classfields : Classfield[];
     @ViewChildren('oneclassfield') elementClassfield : any;
-    animationData = new AnimationData();
+    private focusMouseOver : number;
 
     constructor(private animmationService : AnimationService){}
 
@@ -28,50 +27,42 @@ export class ListeClassfields implements AfterViewInit{
         this.elementClassfield = this.elementClassfield.toArray();
     }
 
-    mouseOver(classfield : Classfield, enter : boolean){
+    mouseOver(classfield : Classfield, position : number, enter : boolean){
         if (enter){
-            this.manageStateIn(classfield);
+            this.manageStateIn(classfield, position);
         }else{
             this.manageStateOut();
         }
     }
 
-    manageStateIn(classfiedCible : Classfield){
-        let find = false;
-        this.classfields.forEach((classfield, nbClassfield)=> {
-            if (find){
-                classfield.setState(STATES[3]);
-                classfield.setSize(SIZES[2]);
-                this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
-                nbClassfield, classfield.getWidth(), 22);
-                classfield.setWidth(34);
-            }else{
-                find = classfiedCible == classfield;
-                let width;
-                if (find){
-                    classfield.setState(STATES[1]);
-                    classfield.setSize(SIZES[1]);
-                    width = 34;
-                }else{
-                    classfield.setState(STATES[2]);
-                    classfield.setSize(SIZES[2]);
-                    width = 22;
-                }
-                this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
-                nbClassfield, classfield.getWidth(), width);
-                classfield.setWidth(width);
+    manageStateIn(classfiedCible : Classfield, posFocus : number){
+        if (posFocus !== this.focusMouseOver){
+            if (this.focusMouseOver){
+             this.animmationService.transform({element : this.elementClassfield[this.focusMouseOver],
+                    position : this.focusMouseOver, focus : true }, false, false);
             }
-        });
+            this.classfields.forEach((classfield, nbClassfield)=> {
+                let focus = nbClassfield === posFocus;
+                let left = nbClassfield < posFocus;
+                if (nbClassfield !== this.focusMouseOver){
+                    this.animmationService.transform({element : this.elementClassfield[nbClassfield],
+                        position : nbClassfield, focus : focus }, true , left);
+                }
+            });
+            this.focusMouseOver = posFocus;
+        }
     }
 
     manageStateOut(){
         this.classfields.forEach( (classfield, nbClassfield) => {
-            classfield.setSize(SIZES[0]);
-            classfield.setState(STATES[0]);
-            this.animmationService.changeWidth(this.elementClassfield[nbClassfield],
-            nbClassfield, classfield.getWidth(), 25);
-            classfield.setWidth(25);
+            let focus = nbClassfield === this.focusMouseOver;
+            let left = nbClassfield < this.focusMouseOver;
+            if (nbClassfield !== this.focusMouseOver){
+                this.animmationService.transform({element : this.elementClassfield[nbClassfield],
+                    position : nbClassfield, focus : focus }, false , left);
+            }
         });
+        this.focusMouseOver = undefined;
     }
 
     onResize(event : any){
