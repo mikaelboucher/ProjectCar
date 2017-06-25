@@ -37,12 +37,12 @@ export module Database{
         });
     }
 
-        export async function findPorscheImages(classifiedNumber: any) : Promise<any> {
+        export async function findPorscheImages(classifiedNumber: number) : Promise<any> {
             mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
 
             let col = db.collection("porscheimages");
-
-            return col.find({classifiedId : classifiedNumber}).toArray((err: any, items: any) => {
+            console.log(classifiedNumber);
+            return col.find({classifiedId: classifiedNumber}).toArray((err: any, items: any) => {
                 console.log(err)
                 console.log(items)
 

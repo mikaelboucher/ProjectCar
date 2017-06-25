@@ -22,17 +22,24 @@ router.get('/classfied', (req, res) => {
 
 });
 
-router.get('/classifiedsimages/:classifiedId', (req, res) => {
-    Database.findPorscheImages(req.params.classifiedId).then( images => {
+router.get('/porscheimages/:classifiedId', (req, res) => {
+    let query = req.params.classifiedId as number;
+    Database.findPorscheImages(query).then( images => {
         res.json(images);
     })
 });
 
-router.get('/classifiedsthumbnail/:classfiedId', (req, res) => {
+router.get('/porschethumbnail/:classfiedId', (req, res) => {
     Database.findPorscheThumbnail(req.params.classifiedId).then( thumbnail => {
         res.json(thumbnail)
     });
 })
+
+router.post('/porscheimages', (req, res) => {
+    Database.addPorscheImage(req.body);
+    res.end();
+});
+
 
 router.post('/porsches', (req: any, res: any, next: any) => {
     console.log(req.body);
