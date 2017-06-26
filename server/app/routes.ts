@@ -2,15 +2,23 @@ import * as express from 'express';
 import { Database } from './database'
 import { TemporaryList } from './temporaryList'
 let router = express.Router();
-let prop = TemporaryList.getList()[0];
+let prop = TemporaryList.getList();
 
 
 
-router.get('/findcar', (req, response) => {
-    Database.findCars(prop).then(cars => {
+router.get('/findcar', (req, res) => {
+    Database.findCars({title: "Porsche 959", price: 100000}).then(cars => {
         console.log(cars);
-        response.json(cars)
+        res.json(cars)
     });
+});
+
+router.get('/users', (req, res) => {
+
+});
+
+router.post('/users', (req, res) =>{
+
 });
 
 router.get('/porsches', (req, res) =>{
@@ -18,8 +26,20 @@ router.get('/porsches', (req, res) =>{
 
 });
 
-router.get('/classfied', (req, res) => {
+router.post('/porsches', (req: any, res: any, next: any) => {
+    console.log(req.body);
+    Database.addCar(req.body);
+    res.end();
+});
 
+router.get('/classified', (req, res) => {
+    Database.findClassified(req).then( classfields => {
+        res.json(classfields)
+    });
+});
+
+router.post('/classified', (req, res) =>{
+    Database.addClassified(req.body)
 });
 
 router.get('/porscheimages/:classifiedId', (req, res) => {
@@ -35,15 +55,9 @@ router.get('/porschethumbnail/:classfiedId', (req, res) => {
     });
 })
 
+
 router.post('/porscheimages', (req, res) => {
     Database.addPorscheImage(req.body);
-    res.end();
-});
-
-
-router.post('/porsches', (req: any, res: any, next: any) => {
-    console.log(req.body);
-    Database.addCar(req.body);
     res.end();
 });
 
@@ -52,3 +66,6 @@ router.post('/porsches', (req: any, res: any, next: any) => {
 export function getRoute(){
     return router;
 };
+
+
+//goacfamily
