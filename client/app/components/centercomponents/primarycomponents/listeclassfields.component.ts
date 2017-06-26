@@ -37,32 +37,33 @@ export class ListeClassfields implements AfterViewInit{
 
     manageStateIn(classfiedCible : Classfield, posFocus : number){
         if (posFocus !== this.focusMouseOver){
-            if (this.focusMouseOver){
-             this.animmationService.transform({element : this.elementClassfield[this.focusMouseOver],
-                    position : this.focusMouseOver, focus : true }, false, false);
-            }
-            this.classfields.forEach((classfield, nbClassfield)=> {
-                let focus = nbClassfield === posFocus;
-                let left = nbClassfield < posFocus;
-                if (nbClassfield !== this.focusMouseOver){
+            if (this.focusMouseOver || this.focusMouseOver === 0){
+                let focus = {new : posFocus, old : this.focusMouseOver};
+                this.animmationService.changeFocus(this.elementClassfield, focus);
+            }else{
+                this.classfields.forEach((classfield, nbClassfield)=> {
+                    let focus = nbClassfield === posFocus;
+                    let left = nbClassfield < posFocus;
                     this.animmationService.transform({element : this.elementClassfield[nbClassfield],
-                        position : nbClassfield, focus : focus }, true , left);
-                }
-            });
-            this.focusMouseOver = posFocus;
+                        position : nbClassfield}, focus , true , left);
+                });
+            }
         }
+        this.focusMouseOver = posFocus;
+        console.log('focusMouseOver => ' + this.focusMouseOver);
     }
 
     manageStateOut(){
         this.classfields.forEach( (classfield, nbClassfield) => {
             let focus = nbClassfield === this.focusMouseOver;
-            let left = nbClassfield < this.focusMouseOver;
-            if (nbClassfield !== this.focusMouseOver){
-                this.animmationService.transform({element : this.elementClassfield[nbClassfield],
-                    position : nbClassfield, focus : focus }, false , left);
-            }
+            let left = nbClassfield < this.focusMouseOver && !focus;
+            this.animmationService.transform({element : this.elementClassfield[nbClassfield],
+                position : nbClassfield }, focus , false , left);
         });
-        this.focusMouseOver = undefined;
+        let oldFocus = this.focusMouseOver;
+        setTimeout( () => this.focusMouseOver =
+        (this.focusMouseOver === oldFocus ? undefined : this.focusMouseOver),
+            500);
     }
 
     onResize(event : any){

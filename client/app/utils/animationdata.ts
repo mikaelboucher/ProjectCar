@@ -24,7 +24,7 @@ export class AnimationData{
         return DEFAULT_SCALE;
     }
 
-    public translate(left : boolean, grow : boolean) : number{
-        return (left ? -1 : 1) * (grow ? 1 : -1) * TRANSLATE[this.actualState];
+    public translate(left : boolean) : number{
+        return (left ? -1 : 1) * TRANSLATE[this.actualState];
     }
 }

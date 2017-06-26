@@ -9,7 +9,7 @@
     "build": "tsc",
     "build:all": "npm run build && (cd ../server && npm run build)",
     "lint": "tslint app/**/*.ts app/*.ts --force -t verbose",
-    "test": "mocha -r ts-node/register ./tests/**/*-spec.ts"
+    "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\""
   },
   "dependencies": {
     "@angular/animations": "^4.2.3",
