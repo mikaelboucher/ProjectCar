@@ -55,7 +55,7 @@ export module Database{
     }
 
     export function findPorscheImages(classifiedNumber: any) : any {
-            mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
+            return mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
 
             let col = db.collection("porscheimages");
             console.log(classifiedNumber);
