@@ -44,7 +44,9 @@ router.post('/classified', (req, res) =>{
 
 router.get('/porscheimages/:classifiedId', (req, res) => {
     let query = req.params.classifiedId as number;
-    Database.findPorscheImages(query).then( images => {
+    Database.findPorscheImages(query).then( (images: any) => {
+        console.log("lololololohahahahaha esti");
+        //console.log(images);
         res.json(images);
     })
 });
