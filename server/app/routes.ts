@@ -39,7 +39,9 @@ router.get('/classified', (req, res) => {
 });
 
 router.post('/classified', (req, res) =>{
-    Database.addClassified(req.body)
+    Database.addClassified(req.body).then( () =>{
+        res.end();
+    })
 });
 
 router.get('/porscheimages/:classifiedId', (req, res) => {

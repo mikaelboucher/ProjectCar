@@ -38,40 +38,42 @@ export module Database{
             });
     }
 
-    export function addClassified(properties: any) : Promise<any>{
-            return mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) =>{
-                if(err){
-                    console.log(err);
-                }
+    export async function addClassified(properties: any) : Promise<any>{
+            return new Promise<any>((resolve, reject) =>{
+                mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) =>{
+                    if(err){
+                        console.log(err);
+                    }
+                    let col = db.collection("porscheclassifieds");
+                    col.insert(properties).then((obj: any) => {
+                        console.log("dans le then")
+                        console.log("yay")
+                        resolve(obj)
 
-            let col = db.collection("porscheclassifieds");
-            col.insert(properties).catch( (err: any) => {
-                if(err){
-                    console.log(err);
-                }
-            })
 
-            })
+                    }).catch((err: any) => {
+                        console.log("dans le catch")
+                        console.log(err)});
+                });
+            });
     }
 
-    export function findPorscheImages(classifiedNumber: any) : any {
-            return mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
-
-            let col = db.collection("porscheimages");
-            console.log(classifiedNumber);
-            let number: number = classifiedNumber;
-            console.log(number);
-            console.log("erreur 1")
-            console.log(err)
-            col.find({classifiedId: 1337}).toArray((err: any, items: any) => {
-                console.log("erreur 2")
-                console.log(err)
-                console.log(items)
-                return items;
-
+    export async function findPorscheImages(classifiedNumber: any) : Promise<any> {
+            return new Promise<any>((resolve, reject) => {
+                mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
+                    let col = db.collection("porscheimages");
+                    col.find({classifiedId: parseInt(classifiedNumber)}).toArray((err: any, items: any) => {
+                        if (err) {
+                            console.log(err)
+                            reject();
+                        }
+                        else {
+                            console.log(items)
+                            resolve(items);
+                        }
+                    });
+                });
             });
-
-        });
     }
 
     export function findPorscheThumbnail(classifiedNumber: any) : Promise<any> {
