@@ -2,7 +2,6 @@ import { Component, Input, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
 import { Classfield } from '../../../objects/classfield';
-import { ClassfieldState } from '../../../utils/animation/classfieldAnimation';
 import { AnimationService } from '../../../services/animation.service'
 
 const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
@@ -12,8 +11,7 @@ const SIZES = ["default", "maximise", "minimise"];
     selector: "listes-classfieds",
     templateUrl: './app/html/center/listeclassfield.html',
     styleUrls : ['./app/css/center/listeclassfield.css'],
-    providers : [ AnimationService ],
-    animations: [ ClassfieldState ]
+    providers : [ AnimationService ]
 })
 
 export class ListeClassfields implements AfterViewInit{
@@ -22,9 +20,10 @@ export class ListeClassfields implements AfterViewInit{
     private focusMouseOver : number;
 
     constructor(private animmationService : AnimationService){}
-
+    
     ngAfterViewInit(){
         this.elementClassfield = this.elementClassfield.toArray();
+        this.animmationService.initAffichage(this.elementClassfield);
     }
 
     mouseOver(classfield : Classfield, position : number, enter : boolean){
@@ -50,7 +49,6 @@ export class ListeClassfields implements AfterViewInit{
             }
         }
         this.focusMouseOver = posFocus;
-        console.log('focusMouseOver => ' + this.focusMouseOver);
     }
 
     manageStateOut(){

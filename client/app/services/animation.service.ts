@@ -63,6 +63,10 @@ export class AnimationService{
         this.maximiseNewFocus({element : elements[focus.new], position : focus.new }, !left);
     }
 
+    public initAffichage(elements : any[]){
+        elements.forEach((element, index) => this.stay({element : element, position : index}))
+    }
+
     private minimiseOldFocus(classfield : {element : any, position : number}, left : boolean){
         if (this.players[classfield.position]){
             this.players[classfield.position].destroy();
@@ -105,13 +109,16 @@ export class AnimationService{
         this.players[classfield.position].play();
     }
 
-    private stay(classfield : {element : any, position : number}, left : boolean){
+    private stay(classfield : {element : any, position : number}, left? : boolean){
         if (this.players[classfield.position]){
             this.players[classfield.position].destroy();
         }
 
         let scale = this.animationData.defaultSize;
-        let translate = this.animationData.translate(left);
+        let translate = 0;
+        if (left !== undefined){
+            translate = this.animationData.translate(left);
+        }
 
         const factory = this.builder.build([
             style({ 
