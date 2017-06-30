@@ -50,14 +50,13 @@ export module Database{
                     if(err){
                         console.log(err);
                     }
+
                     let col = db.collection("porscheclassifieds");
                     col.insert(properties).then((obj: any) => {
-                        resolve(obj)
-
-
-                    }).catch((err: any) => {
-                        console.log(err)});
-                        reject();
+                        resolve()
+                    }).catch( (err: any) => {
+                        reject()
+                    })
                 });
             });
     }
@@ -68,12 +67,15 @@ export module Database{
                     if(err){
                         console.log(err);
                     }
-                    let col = db.collection("porscheImages");
+                    let col = db.collection("porscheimages");
                     col.insert(properties).then((obj: any) => {
-                        resolve(obj)
+                        console.log("on resolve addPorscheImage")
+                        resolve()
                     }).catch((err: any) => {
-                        console.log(err)});
+                        console.log(err)
                         reject();
+                    });
+
                 });
             });
     }
@@ -142,3 +144,4 @@ export module Database{
         return query;
     }
 
+}

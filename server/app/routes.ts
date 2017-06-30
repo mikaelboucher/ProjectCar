@@ -28,20 +28,29 @@ router.get('/porsches', (req, res) =>{
 
 router.post('/porsches', (req: any, res: any, next: any) => {
     console.log(req.body);
-    Database.addCar(req.body);
+    Database.addCar(req.body).catch((err) => {
+        console.log(err)
+    });
     res.end();
 });
 
 router.get('/classified', (req, res) => {
     Database.findClassified(req).then( classfields => {
         res.json(classfields)
-    });
+        res.end()
+    }).catch((err) => {
+        console.log(err);
+    })
 });
 
 router.post('/classified', (req, res) =>{
-    Database.addClassified(req.body).then( () =>{
+    Database.addClassified(req.body).then( (obj) =>{
         res.end();
-    })
+    }).catch((err) => {
+        console.log("catch de la route classified")
+        console.log(err)
+        res.end()
+    });
 });
 
 router.get('/porscheimages/:classifiedId', (req, res) => {
@@ -50,19 +59,33 @@ router.get('/porscheimages/:classifiedId', (req, res) => {
         console.log("lololololohahahahaha esti");
         //console.log(images);
         res.json(images);
-    })
+    }).catch((err) => {
+        console.log(err)
+    });
 });
 
 router.get('/porschethumbnail/:classfiedId', (req, res) => {
     Database.findPorscheThumbnail(req.params.classifiedId).then( thumbnail => {
         res.json(thumbnail)
+    }).catch((err) => {
+        console.log(err)
     });
 })
 
 
 router.post('/porscheimages', (req, res) => {
-    Database.addPorscheImage(req.body);
-    res.end();
+    console.log("zero")
+    Database.addPorscheImage(req.body).then( (obj) => {
+
+        console.log("quattre")
+        console.log(obj)
+        res.end();
+    }).catch((err) => {
+        console.log("catch de la route porscheimages")
+        console.log(err)
+        res.end();
+    });
+
 });
 
 
