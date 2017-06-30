@@ -8,17 +8,11 @@ const TEST_IMAGE = "http://www.larevueautomobile.com/images/Bugatti/Veyron-Cente
 
 export class Classfield {
     imageList: string[];
-    private state : string;
-    private size : string;
-    private focus : boolean;
 
     constructor(private title: string, private description: string, private price: number,
     private thumbnail : string, private currency?: Currency) {
         this.imageList = [];
         this.imageList.push(this.thumbnail);
-        this.state = DEFAULT_STATE;
-        this.size = DEFAULT_SIZE;
-        this.focus = false;
     }
 
     getTitle() {
@@ -35,29 +29,5 @@ export class Classfield {
 
     getCurrency(){
         return this.currency;
-    }
-
-    getState(){
-        return this.state;
-    }
-
-    setState(state : string){
-        this.state = state;
-    }
-
-    getSize(){
-        return this.size;
-    }
-
-    setSize(size : string){
-        this.size = size;
-    }
-
-    getFocus() : boolean{
-        return this.focus;
-    }
-
-    toggleFocus(){
-        this.focus = !this.focus;
     }
 }

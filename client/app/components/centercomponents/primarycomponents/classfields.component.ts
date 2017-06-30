@@ -30,5 +30,9 @@ export class Classfields {
             this.groupClassfields[nbGroups - 1][cpt % NB_ALIGN_BUTTON] = classfied;
         });
     }
+
+    onResize(event : any){
+        
+    }
     
 }

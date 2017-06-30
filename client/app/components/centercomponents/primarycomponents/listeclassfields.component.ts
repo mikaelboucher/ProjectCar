@@ -23,49 +23,15 @@ export class ListeClassfields implements AfterViewInit{
     
     ngAfterViewInit(){
         this.elementClassfield = this.elementClassfield.toArray();
-        this.animmationService.initAffichage(this.elementClassfield);
+        this.animmationService.init(this.elementClassfield);
     }
 
-    mouseOver(classfield : Classfield, position : number, enter : boolean){
+    mouseOver(position : number, enter : boolean){
         if (enter){
-            this.manageStateIn(classfield, position);
+            this.animmationService.mouseover(position);
         }else{
-            this.manageStateOut();
+            this.animmationService.mouseleave(position);
         }
-    }
-
-    manageStateIn(classfiedCible : Classfield, posFocus : number){
-        if (posFocus !== this.focusMouseOver){
-            if (this.focusMouseOver || this.focusMouseOver === 0){
-                let focus = {new : posFocus, old : this.focusMouseOver};
-                this.animmationService.changeFocus(this.elementClassfield, focus);
-            }else{
-                this.classfields.forEach((classfield, nbClassfield)=> {
-                    let focus = nbClassfield === posFocus;
-                    let left = nbClassfield < posFocus;
-                    this.animmationService.transform({element : this.elementClassfield[nbClassfield],
-                        position : nbClassfield}, focus , true , left);
-                });
-            }
-        }
-        this.focusMouseOver = posFocus;
-    }
-
-    manageStateOut(){
-        this.classfields.forEach( (classfield, nbClassfield) => {
-            let focus = nbClassfield === this.focusMouseOver;
-            let left = nbClassfield < this.focusMouseOver && !focus;
-            this.animmationService.transform({element : this.elementClassfield[nbClassfield],
-                position : nbClassfield }, focus , false , left);
-        });
-        let oldFocus = this.focusMouseOver;
-        setTimeout( () => this.focusMouseOver =
-        (this.focusMouseOver === oldFocus ? undefined : this.focusMouseOver),
-            500);
-    }
-
-    onResize(event : any){
-        
     }
     
  }
