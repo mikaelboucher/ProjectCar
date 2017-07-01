@@ -18,12 +18,15 @@ export class ListeClassfields implements AfterViewInit{
     @Input() classfields : Classfield[];
     @ViewChildren('oneclassfield') elementClassfield : any;
     private focusMouseOver : number;
+    private descriptionEnable : boolean[] = [];
+    private subAnimation : any;
 
     constructor(private animmationService : AnimationService){}
     
     ngAfterViewInit(){
         this.elementClassfield = this.elementClassfield.toArray();
         this.animmationService.init(this.elementClassfield);
+        this.showDescription();
     }
 
     mouseOver(position : number, enter : boolean){
@@ -34,4 +37,9 @@ export class ListeClassfields implements AfterViewInit{
         }
     }
     
+    private showDescription(){
+        this.subAnimation = this.animmationService.onDone.subscribe( (status : any) => {
+            this.descriptionEnable[status.index] = status.mouseOver;
+        });
+    }
  }

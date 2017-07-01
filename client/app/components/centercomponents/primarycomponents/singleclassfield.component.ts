@@ -12,6 +12,7 @@ const DOTDOTDOT = 3;
 
 export class SingleClassfield implements OnChanges{
    @Input() classfield: Classfield;
+   @Input() showDescription : boolean;
    @Output() mouseOver = new EventEmitter();
    isMouseOver : boolean;
    shortDescription : string;

@@ -4,6 +4,9 @@ import { trigger, state, style,
     animateChild, query } from '@angular/animations';
 import { AnimationData } from '../utils/animationdata';
 import { Extra } from '../utils/extra';
+
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
 const ANIMATION = 500;
@@ -22,18 +25,18 @@ const OK = true;
 export class AnimationService{
     private players: AnimationPlayer[];;
     private elements : any[];
-    private status : Date[];
     private animationData : AnimationData;
     private positionFocus : number;
     private firstFocus : boolean;
     private animationDelay : any[];
+    private animationDone : Subject<{index : number, mouseOver : boolean}>;
 
     constructor(private builder: AnimationBuilder) {
         this.animationData = new AnimationData();
         this.players = [];
-        this.status = [];
         this.animationDelay = new Array(2);
         this.firstFocus = true;
+        this.animationDone = new Subject<{index : number, mouseOver : boolean}>();
     }
 
     public init(elements : any[]){
@@ -57,6 +60,10 @@ export class AnimationService{
                         this.transform(nbClassfield, focus, OK, left);
                     });
                 }
+                let first = {index : posFocus, mouseOver : true};
+                let second = (this.positionFocus !== undefined
+                ? {index : this.positionFocus, mouseOver : false} : undefined );
+                this.setupPlayer(first, second);
                 this.positionFocus = posFocus;
                 this.firstFocus = false;
             }, DELAY);
@@ -74,6 +81,8 @@ export class AnimationService{
                     let left = nbClassfield < this.positionFocus && !focus;
                     this.transform(nbClassfield, focus, false, left);
                 });
+                let first = {index : position, mouseOver : false};
+                this.setupPlayer(first);
                 let oldFocus = this.positionFocus;
                 this.positionFocus = undefined;
                 setTimeout( () => this.firstFocus = !this.positionFocus, REBOUND_EFFECT);
@@ -88,6 +97,10 @@ export class AnimationService{
                 delayID = undefined;
             }
         })
+    }
+
+    public get onDone() : Observable<{index : number, mouseOver : boolean}>{
+        return this.animationDone.asObservable();
     }
 
     private initAffichage(elements : any[]){
@@ -207,16 +220,21 @@ export class AnimationService{
         }
         
         this.players[position] = factory.create(element.nativeElement, {});
-        this.setupPlayer(this.players[position], position);
         this.players[position].play();
     }
 
-    private setupPlayer(player : AnimationPlayer, position : number){
-        player.onStart(() => this.changeStatus(position, true));
-        player.onDone(() => this.changeStatus(position, false));
+    private setupPlayer(...classfields : {index : number, mouseOver : boolean}[]){
+        classfields.forEach((classfield) => {
+            if (classfield){
+                this.players[classfield.index].onDone(() => {
+                    this.animationDone.next(classfield);
+                    this.unSetupPlayer(classfield.index);
+                });
+            }
+        });
     }
 
-    private changeStatus(position : number, start : boolean){
-        this.status[position] = (start ? new Date() : undefined);
+    private unSetupPlayer(position : number){
+        this.players[position].onDone(() => { return; });
     }
 }
