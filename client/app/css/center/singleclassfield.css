@@ -25,13 +25,16 @@
 .title{
     font-weight: bold;
     float : left;
+    font-size: 100%;
 }
 
 .price{
     position : fixed;
     right: 0; 
+    font-size: 90%;
 }
 
 .description{
     float : left;
+    font-size: 75%;
 }

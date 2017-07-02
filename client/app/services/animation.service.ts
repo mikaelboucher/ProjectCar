@@ -23,16 +23,18 @@ const OK = true;
 
 @Injectable()
 export class AnimationService{
-    private players: AnimationPlayer[];;
+    static animationData : AnimationData;
+    private players: AnimationPlayer[];
     private elements : any[];
-    private animationData : AnimationData;
     private positionFocus : number;
     private firstFocus : boolean;
     private animationDelay : any[];
     private animationDone : Subject<{index : number, mouseOver : boolean}>;
 
     constructor(private builder: AnimationBuilder) {
-        this.animationData = new AnimationData();
+        if (!AnimationService.animationData){
+            AnimationService.animationData = new AnimationData();
+        }
         this.players = [];
         this.animationDelay = new Array(2);
         this.firstFocus = true;
@@ -99,8 +101,19 @@ export class AnimationService{
         })
     }
 
+    public changeDimension(width : number, test? : boolean) : number{
+        if (test){
+            console.log(width);
+        }
+        return AnimationService.animationData.changeDimensison(width);
+    }
+
     public get onDone() : Observable<{index : number, mouseOver : boolean}>{
         return this.animationDone.asObservable();
+    }
+
+    public get width(){
+        return AnimationService.animationData.width;
     }
 
     private initAffichage(elements : any[]){
@@ -169,12 +182,12 @@ export class AnimationService{
     private generateFactory(propreties : any){
         let nbState = propreties.single ? 1 : 2;
 
-        let scale = [this.animationData.defaultSize, this.animationData.defaultSize];
-        scale[AFTER] = (propreties.focus ? this.animationData.focusSize : scale[AFTER]);
+        let scale = [AnimationService.animationData.defaultSize, AnimationService.animationData.defaultSize];
+        scale[AFTER] = (propreties.focus ? AnimationService.animationData.focusSize : scale[AFTER]);
 
         let translate = [0, 0];
         if (propreties.left !== undefined){
-            translate[AFTER] = this.animationData.translate(propreties.left);
+            translate[AFTER] = AnimationService.animationData.translate(propreties.left);
         }
 
         if (propreties.inverseScale || propreties.inverseAll){
@@ -187,8 +200,8 @@ export class AnimationService{
 
         if (propreties.leftToRight !== undefined || propreties.rightToLeft !== undefined){
             let left = propreties.leftToRight !== undefined;
-            translate[BEFORE] = this.animationData.translate(left);
-            translate[AFTER] = this.animationData.translate(!left);
+            translate[BEFORE] = AnimationService.animationData.translate(left);
+            translate[AFTER] = AnimationService.animationData.translate(!left);
         }
 
         let time = ANIMATION;

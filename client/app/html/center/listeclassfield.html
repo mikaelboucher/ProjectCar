@@ -1,6 +1,6 @@
 <div class="border">
     <div *ngFor="let classfield of classfields; let index = index">
-        <div class="classfield" #oneclassfield>
+        <div class="classfield" [style.width.%]="animmationService.width" #oneclassfield>
             <single-classfield [classfield]="classfield" [showDescription]="descriptionEnable[index]" (mouseOver)="mouseOver(index, $event)"></single-classfield>
         </div>
     </div>
