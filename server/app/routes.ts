@@ -34,8 +34,12 @@ router.post('/porsches', (req: any, res: any, next: any) => {
     res.end();
 });
 
-router.get('/classified', (req, res) => {
-    Database.findClassified(req).then( classfields => {
+
+
+
+router.get('/classified/:queryJson', (req, res) => {
+    let query = JSON.parse(req.params.queryJson);
+    Database.findClassified(query).then( (classfields: any) => {
         res.json(classfields)
         res.end()
     }).catch((err) => {
