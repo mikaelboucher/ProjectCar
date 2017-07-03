@@ -15,9 +15,12 @@ import { CenterComponent } from './components/center.component';
 import { CenterOptions } from './components/centercomponents/centeroptions.component';
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
+
+import { OptionService } from './services/optionservice';
 import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classifieds.component';
 import { SingleClassified } from './components/centercomponents/primarycomponents/singleclassified.component';
 import { ListeClassified } from './components/centercomponents/primarycomponents/listeclassifieds.component';
+
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
@@ -39,6 +42,6 @@ import { ListeClassified } from './components/centercomponents/primarycomponents
     ],
 
     bootstrap: [ AppComponent ],
-    providers: []
+    providers: [OptionService]
 })
 export class AppModule { }
