@@ -1,47 +1,47 @@
-const DEFAULT_SIZE = [25, 100/3, 50];
-const MAXIMISE_SIZE = [34, 37];
-const MINIMISE_SIZE = [22, 30];
+const DEFAULT_SCALE = 1;
+const FOCUS_SCALE = [1.4, 1.4, 1.2]
+const TRANSLATE = [22, 22, 11];
 
-const WIDTHS = [
-    {width : 650, division : 3},
-    {width : 900, division : 4},
-    {width : 1500, division : 5}
+const DIMENSION_DATA = [
+    {width : 880, division : 3},
+    {width : 1200, division : 4}
 ]
+
+const WITDHS = [25, 100/3, 50];
 
 const OFFSET = 4;
 
 export class AnimationData{
-    private selectionNumber : number;
-
+    private actualState : number;
 
     constructor(){
-        this.selectionNumber = 0;
+        this.actualState = 0;
     }
 
-    changeWidthSelection(width : number){
-        let division = 2;
-        WIDTHS.forEach( data => {
-            if (width - 100 >= data.width){
-                division = data.division;
+    get focusSize() : number{
+        return FOCUS_SCALE[this.actualState];
+    }
+
+    get defaultSize() : number{
+        return DEFAULT_SCALE;
+    }
+
+    get width() : number{
+        return WITDHS[this.actualState];
+    }
+
+    public translate(left : boolean) : number{
+        return (left ? -1 : 1) * TRANSLATE[this.actualState];
+    }
+
+    public changeDimensison(width : number) : number{
+        let dimension = 2;
+        DIMENSION_DATA.forEach((data) => {
+            if (width > data.width){
+                dimension = data.division;
             }
         });
-        console.log(width +' ' + division);
-        this.selectionNumber = OFFSET - division;
-    }
-
-    getWidth(state : string) : string{
-        let width : string;
-        switch(state){
-            case 'default':
-                width = DEFAULT_SIZE[this.selectionNumber] + '%';
-                break;
-            case 'maximise':
-                width = MAXIMISE_SIZE[this.selectionNumber] + '%';
-                break;
-            case 'minimise':
-                width = MINIMISE_SIZE[this.selectionNumber] + '%';
-                break;
-        }
-        return width;
+        this.actualState = OFFSET - dimension;
+        return dimension;
     }
 }

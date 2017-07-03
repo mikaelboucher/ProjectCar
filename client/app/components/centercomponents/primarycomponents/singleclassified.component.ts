@@ -1,17 +1,18 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
-import { Classfield } from '../../../objects/classfield'
+import { Classified } from '../../../objects/classified'
 
 const MAX_CHARACTER = 120;
 const DOTDOTDOT = 3;
 
 @Component({
-    selector: "single-classfield",
-    templateUrl: './app/html/center/singleclassfield.html',
-    styleUrls : ['./app/css/center/singleclassfield.css']
+    selector: "single-classified",
+    templateUrl: './app/html/center/singleclassified.html',
+    styleUrls : ['./app/css/center/singleclassified.css']
 })
 
-export class SingleClassfield implements OnChanges{
-   @Input() classfield: Classfield;
+export class SingleClassified implements OnChanges{
+   @Input() classified: Classified;
+   @Input() showDescription : boolean;
    @Output() mouseOver = new EventEmitter();
    isMouseOver : boolean;
    shortDescription : string;
@@ -27,13 +28,13 @@ export class SingleClassfield implements OnChanges{
    }
 
    ngOnChanges(){
-       if (this.classfield){
-           this.shrinkClassfield();
+       if (this.classified){
+           this.shrinkClassified();
        }
    }
 
-   shrinkClassfield(){
-       let text = this.classfield.getDescription();
+   shrinkClassified(){
+       let text = this.classified.getDescription();
        if (text.length > MAX_CHARACTER + DOTDOTDOT){
            text = text.slice(0, MAX_CHARACTER);
            text += '...';

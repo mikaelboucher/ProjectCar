@@ -9,10 +9,11 @@
     "build": "tsc",
     "build:all": "npm run build && (cd ../server && npm run build)",
     "lint": "tslint app/**/*.ts app/*.ts --force -t verbose",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\""
   },
   "dependencies": {
     "@angular/animations": "^4.2.3",
+
     "@angular/common": "^4.2.3",
     "@angular/compiler": "^4.2.3",
     "@angular/compiler-cli": "^4.2.3",
@@ -23,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^4.2.3",
     "@angular/platform-server": "^4.2.3",
     "@angular/router": "^4.2.3",
+
     "core-js": "^2.4.1",
     "ng2-modal": "0.0.25",
     "ngx-bootstrap": "^1.6.6",
@@ -46,6 +48,7 @@
     "http-server": "^0.9.0",
     "istanbul": "^0.4.5",
     "karma": "^1.3.0",
+	"ts-node": "^3.0.4",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "^1.0.1",
