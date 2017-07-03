@@ -56,10 +56,10 @@ export class AnimationService{
                     let focus = {new : posFocus, old : this.positionFocus};
                     this.changeFocus(focus);
                 }else{
-                    this.elements.forEach((classfield, nbClassfield)=> {
-                        let focus = nbClassfield === posFocus;
-                        let left = nbClassfield < posFocus;
-                        this.transform(nbClassfield, focus, OK, left);
+                    this.elements.forEach((classified, nbClassified)=> {
+                        let focus = nbClassified === posFocus;
+                        let left = nbClassified < posFocus;
+                        this.transform(nbClassified, focus, OK, left);
                     });
                 }
                 let first = {index : posFocus, mouseOver : true};
@@ -78,10 +78,10 @@ export class AnimationService{
 
         if (!this.firstFocus){
             this.animationDelay[OUT] = setTimeout( () => {
-                this.elements.forEach( (classfield, nbClassfield) => {
-                    let focus = nbClassfield === this.positionFocus;
-                    let left = nbClassfield < this.positionFocus && !focus;
-                    this.transform(nbClassfield, focus, false, left);
+                this.elements.forEach( (classified, nbClassified) => {
+                    let focus = nbClassified === this.positionFocus;
+                    let left = nbClassified < this.positionFocus && !focus;
+                    this.transform(nbClassified, focus, false, left);
                 });
                 let first = {index : position, mouseOver : false};
                 this.setupPlayer(first);
@@ -236,12 +236,12 @@ export class AnimationService{
         this.players[position].play();
     }
 
-    private setupPlayer(...classfields : {index : number, mouseOver : boolean}[]){
-        classfields.forEach((classfield) => {
-            if (classfield){
-                this.players[classfield.index].onDone(() => {
-                    this.animationDone.next(classfield);
-                    this.unSetupPlayer(classfield.index);
+    private setupPlayer(...classifieds : {index : number, mouseOver : boolean}[]){
+        classifieds.forEach((classified) => {
+            if (classified){
+                this.players[classified.index].onDone(() => {
+                    this.animationDone.next(classified);
+                    this.unSetupPlayer(classified.index);
                 });
             }
         });

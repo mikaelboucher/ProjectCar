@@ -1,17 +1,17 @@
-import { Classfield } from '../objects/classfield';
+import { Classified } from '../objects/classified';
 
 export module Converter{
 
-    export function convertClassfield(rawClassfield : any[]) : Classfield[]{
-        let classfields : Classfield[] = [];
-        rawClassfield.forEach(rawClasfield => {
+    export function convertClassifiled(rawClassified : any[]) : Classified[]{
+        let classifieds : Classified[] = [];
+        rawClassified.forEach(rawClasfield => {
             let title = rawClasfield.title;
             let thumbnail = rawClasfield.thumbnail;
             let price = rawClasfield.price;
             let description = rawClasfield.description;
-            let classfield = new Classfield(title, description, price, thumbnail);
-            classfields.push(classfield);
+            let classified = new Classified(title, description, price, thumbnail);
+            classifieds.push(classified);
         });
-        return classfields;
+        return classifieds;
     }
 }

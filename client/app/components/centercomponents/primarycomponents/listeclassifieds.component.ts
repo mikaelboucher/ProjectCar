@@ -1,31 +1,27 @@
 import { Component, Input, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
-import { Classfield } from '../../../objects/classfield';
-import { AnimationService } from '../../../services/animation.service'
-
-const STATES = ["normal", "mouseOver", "leftMove", "rightMove"];
-const SIZES = ["default", "maximise", "minimise"];
+import { Classified } from '../../../objects/classified';
+import { AnimationService } from '../../../services/animation.service';
 
 @Component({
-    selector: "listes-classfieds",
-    templateUrl: './app/html/center/listeclassfield.html',
-    styleUrls : ['./app/css/center/listeclassfield.css'],
+    selector: "listes-classifieds",
+    templateUrl: './app/html/center/listeclassified.html',
+    styleUrls : ['./app/css/center/listeclassified.css'],
     providers : [ AnimationService ]
 })
 
-export class ListeClassfields implements AfterViewInit{
-    @Input() classfields : Classfield[];
-    @ViewChildren('oneclassfield') elementClassfield : any;
-    private focusMouseOver : number;
+export class ListeClassified implements AfterViewInit{
+    @Input() classifieds : Classified[];
+    @ViewChildren('oneclassified') elementClassified : any;
     private descriptionEnable : boolean[] = [];
     private subAnimation : any;
 
     constructor(private animmationService : AnimationService){}
     
     ngAfterViewInit(){
-        this.elementClassfield = this.elementClassfield.toArray();
-        this.animmationService.init(this.elementClassfield);
+        this.elementClassified = this.elementClassified.toArray();
+        this.animmationService.init(this.elementClassified);
         this.showDescription();
     }
 
