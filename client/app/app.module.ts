@@ -15,10 +15,12 @@ import { CenterComponent } from './components/center.component';
 import { CenterOptions } from './components/centercomponents/centeroptions.component';
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
-import { Classfields } from './components/centercomponents/primarycomponents/classfields.component';
-import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
-import { ListeClassfields } from './components/centercomponents/primarycomponents/listeclassfields.component';
+
 import { OptionService } from './services/optionservice';
+import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classifieds.component';
+import { SingleClassified } from './components/centercomponents/primarycomponents/singleclassified.component';
+import { ListeClassified } from './components/centercomponents/primarycomponents/listeclassifieds.component';
+
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
@@ -34,9 +36,9 @@ import { OptionService } from './services/optionservice';
         CenterOptions,
         CenterPrimary,
         CenterSecondary,
-        Classfields,
-        SingleClassfield,
-        ListeClassfields
+        ClassifiedComponent,
+        SingleClassified,
+        ListeClassified
     ],
 
     bootstrap: [ AppComponent ],

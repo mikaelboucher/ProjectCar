@@ -1,0 +1,7 @@
+<div class="border">
+    <div *ngFor="let classified of classifieds; let index = index">
+        <div class="classified" [style.width.%]="animmationService.width" #oneclassified>
+            <single-classified [classified]="classified" [showDescription]="descriptionEnable[index]" (mouseOver)="mouseOver(index, $event)"></single-classified>
+        </div>
+    </div>
+</div>
