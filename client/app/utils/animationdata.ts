@@ -1,15 +1,16 @@
 const DEFAULT_SCALE = 1;
-const FOCUS_SCALE = [1.4, 1.4, 1.2]
-const TRANSLATE = [22, 22, 11];
+const FOCUS_SCALE = [1.4, 1.4, 1.4, 1.2]
+const TRANSLATE = [22 ,22, 22, 11];
 
 const DIMENSION_DATA = [
-    {width : 880, division : 3},
-    {width : 1200, division : 4}
+    {width : 800, division : 3},
+    {width : 1300, division : 4},
+    {width : 1900, division : 5}
 ]
 
-const WITDHS = [25, 100/3, 50];
+const WITDHS = [20, 25, 100/3, 50];
 
-const OFFSET = 4;
+const OFFSET = 5;
 
 export class AnimationData{
     private actualState : number;
