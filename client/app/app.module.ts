@@ -18,6 +18,7 @@ import { CenterSecondary } from './components/centercomponents/centersecondary.c
 import { Classfields } from './components/centercomponents/primarycomponents/classfields.component';
 import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
 import { ListeClassfields } from './components/centercomponents/primarycomponents/listeclassfields.component';
+import { OptionService } from './services/optionservice';
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
@@ -39,6 +40,6 @@ import { ListeClassfields } from './components/centercomponents/primarycomponent
     ],
 
     bootstrap: [ AppComponent ],
-    providers: []
+    providers: [OptionService]
 })
 export class AppModule { }
