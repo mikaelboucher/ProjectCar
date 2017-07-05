@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { QueryService } from '../../../services/query.service';
-import { AnimationService } from '../../../services/animation.service';
+import { MouseOverService } from '../../../services/animation/mouseover.service';
 import { Classified } from '../../../objects/classified'
 
 const DEFAULT_CLASSIFIELD_ROW = 4;
@@ -9,16 +9,16 @@ const DEFAULT_CLASSIFIELD_ROW = 4;
     selector: "classifieds-component",
     templateUrl: './app/html/center/classifieds.html',
     styleUrls : ['./app/css/center/classifieds.css'],
-    providers : [QueryService, AnimationService]
+    providers : [QueryService, MouseOverService]
 })
 
 export class ClassifiedComponent implements AfterViewInit{
     groupClassifieds : Classified[][] = [];
     classifieds : Classified[];
-    nbClassifiedRow : number;
+    nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
 
     constructor(private queryService : QueryService,
-    private animationService : AnimationService){
+    private mouseOverService : MouseOverService){
         this.queryService.getCars().then( classifieds => {
             this.classifieds = classifieds;
             this.initGroups(classifieds);
@@ -26,7 +26,7 @@ export class ClassifiedComponent implements AfterViewInit{
     }
 
     ngAfterViewInit() {
-        this.nbClassifiedRow = this.animationService.changeDimension(+window.innerWidth, true);
+        this.nbClassifiedRow = this.mouseOverService.changeDimension(+window.innerWidth, true);
         setTimeout(() => this.initGroups(this.classifieds), 100);
     }
     
@@ -43,7 +43,7 @@ export class ClassifiedComponent implements AfterViewInit{
 
     onResize(event : any){
         let width = event.target.innerWidth;
-        let dimension = this.animationService.changeDimension(width);
+        let dimension = this.mouseOverService.changeDimension(width);
         if (this.nbClassifiedRow !== dimension){
             this.nbClassifiedRow = dimension;
             this.initGroups(this.classifieds);
