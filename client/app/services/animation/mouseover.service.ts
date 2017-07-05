@@ -2,8 +2,8 @@ import { AnimationBuilder, AnimationPlayer } from "@angular/animations";
 import { trigger, state, style,
     animate, transition, animation,
     animateChild, query } from '@angular/animations';
-import { AnimationData } from '../utils/animationdata';
-import { Extra } from '../utils/extra';
+import { AnimationData } from './animationdata';
+import { Extra } from '../../utils/extra';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -22,7 +22,7 @@ const OUT = 1;
 const OK = true;
 
 @Injectable()
-export class AnimationService{
+export class MouseOverService{
     static animationData : AnimationData;
     private players: AnimationPlayer[];
     private elements : any[];
@@ -32,8 +32,8 @@ export class AnimationService{
     private animationDone : Subject<{index : number, mouseOver : boolean}>;
 
     constructor(private builder: AnimationBuilder) {
-        if (!AnimationService.animationData){
-            AnimationService.animationData = new AnimationData();
+        if (!MouseOverService.animationData){
+            MouseOverService.animationData = new AnimationData();
         }
         this.players = [];
         this.animationDelay = new Array(2);
@@ -105,7 +105,7 @@ export class AnimationService{
         if (test){
             console.log(width);
         }
-        return AnimationService.animationData.changeDimensison(width);
+        return MouseOverService.animationData.changeDimensison(width);
     }
 
     public get onDone() : Observable<{index : number, mouseOver : boolean}>{
@@ -113,7 +113,7 @@ export class AnimationService{
     }
 
     public get width(){
-        return AnimationService.animationData.width;
+        return MouseOverService.animationData.width;
     }
 
     private initAffichage(elements : any[]){
@@ -182,26 +182,31 @@ export class AnimationService{
     private generateFactory(propreties : any){
         let nbState = propreties.single ? 1 : 2;
 
-        let scale = [AnimationService.animationData.defaultSize, AnimationService.animationData.defaultSize];
-        scale[AFTER] = (propreties.focus ? AnimationService.animationData.focusSize : scale[AFTER]);
+        let scale = [MouseOverService.animationData.defaultSize, MouseOverService.animationData.defaultSize];
+        let translateY = [0, 0];
+        if (propreties.focus){
+            scale[AFTER] = MouseOverService.animationData.focusSize;
+            translateY[AFTER] = MouseOverService.animationData.translateY;
+        }
 
-        let translate = [0, 0];
+        let translateX = [0, 0];
         if (propreties.left !== undefined){
-            translate[AFTER] = AnimationService.animationData.translate(propreties.left);
+            translateX[AFTER] = MouseOverService.animationData.translateX(propreties.left);
         }
 
         if (propreties.inverseScale || propreties.inverseAll){
             scale = Extra.swap(scale)
+            translateY = Extra.swap(translateY);
         }
 
         if (propreties.inverseTranslate || propreties.inverseAll){
-            translate = Extra.swap(translate);
+            translateX = Extra.swap(translateX);
         }
 
         if (propreties.leftToRight !== undefined || propreties.rightToLeft !== undefined){
             let left = propreties.leftToRight !== undefined;
-            translate[BEFORE] = AnimationService.animationData.translate(left);
-            translate[AFTER] = AnimationService.animationData.translate(!left);
+            translateX[BEFORE] = MouseOverService.animationData.translateX(left);
+            translateX[AFTER] = MouseOverService.animationData.translateX(!left);
         }
 
         let time = ANIMATION;
@@ -209,14 +214,17 @@ export class AnimationService{
         let builder = [];
         for (let i = 0 ; i < nbState ; i++){
             switch(i){
+                
                 case BEFORE:
                     builder.push(style({ 
-                        transform : 'scale(' + scale[BEFORE] + ') translate(' + translate[BEFORE]+ '%)'
+                        transform : 'translate(' + translateX[BEFORE]+ '%, ' + translateY[BEFORE] + '%) '
+                        + 'scale(' + scale[BEFORE] + ')'
                         }));
                     break;
                 case AFTER:
                     builder.push(animate(time, style({
-                        transform : 'scale(' + scale[AFTER] + ') translate(' + translate[AFTER] + '%)'
+                        transform : 'translate(' + translateX[AFTER] + '%, ' + translateY[AFTER] + '%) '
+                        + ' scale(' + scale[AFTER] + ')'
                         })));
                     break;
             }
