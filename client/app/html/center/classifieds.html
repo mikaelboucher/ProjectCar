@@ -1,5 +1,5 @@
 <div (window:resize)="onResize($event)">
     <div *ngFor="let classifieds of groupClassifieds; let i = index">
-        <listes-classifieds [classifieds]="classifieds"> </listes-classifieds>
+        <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow"> </listes-classifieds>
     </div>
 </div>

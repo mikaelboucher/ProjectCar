@@ -44,6 +44,7 @@ export class MouseOverService{
     public init(elements : any[]){
         this.elements = elements;
         this.initAffichage(elements);
+        console.log('init');
     }
 
     public mouseover(posFocus : number){
@@ -90,6 +91,10 @@ export class MouseOverService{
                 setTimeout( () => this.firstFocus = !this.positionFocus, REBOUND_EFFECT);
             }, REBOUND_EFFECT);
         }
+    }
+
+    public cancel(){
+        this.delay();
     }
     
     private delay(){

@@ -17,6 +17,7 @@ import { CenterPrimary } from './components/centercomponents/centerprimary.compo
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
 
 import { OptionService } from './services/optionservice';
+import { MouseClickService } from './services/animation/mouseclick.service';
 import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classifieds.component';
 import { SingleClassified } from './components/centercomponents/primarycomponents/singleclassified.component';
 import { ListeClassified } from './components/centercomponents/primarycomponents/listeclassifieds.component';
@@ -42,6 +43,9 @@ import { ListeClassified } from './components/centercomponents/primarycomponents
     ],
 
     bootstrap: [ AppComponent ],
-    providers: [OptionService]
+    providers: [
+        OptionService,
+        MouseClickService
+    ]
 })
 export class AppModule { }
