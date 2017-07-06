@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
 const ANIMATION = 500;
-const DELAY = 500;
+const DELAY = 250;
 const REBOUND_EFFECT = 100;
 
 const BEFORE = 0;
