@@ -16,6 +16,7 @@ export class ClassifiedComponent implements AfterViewInit{
     groupClassifieds : Classified[][] = [];
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
+    selectClassified : Classified;
 
     constructor(private queryService : QueryService,
     private mouseOverService : MouseOverService){
@@ -48,6 +49,11 @@ export class ClassifiedComponent implements AfterViewInit{
             this.nbClassifiedRow = dimension;
             this.initGroups(this.classifieds);
         }
+    }
+
+    click(selectClassified : Classified){
+        console.log('hey')
+        this.selectClassified = selectClassified;
     }
     
 }

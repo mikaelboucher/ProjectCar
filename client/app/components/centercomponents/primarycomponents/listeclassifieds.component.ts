@@ -1,4 +1,4 @@
-import { Component, Input, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
 import { Classified } from '../../../objects/classified';
@@ -16,6 +16,7 @@ import { MouseClickService } from '../../../services/animation/mouseclick.servic
 export class ListeClassified implements AfterViewInit{
     @Input() id : number;
     @Input() classifieds : Classified[];
+    @Output() onClick = new EventEmitter<Classified>(); 
     @ViewChildren('oneclassified') elementClassified : any;
     private descriptionEnable : boolean[] = [];
     private subAnimation : any;
@@ -33,7 +34,7 @@ export class ListeClassified implements AfterViewInit{
     click(position : number){
         console.log('click');
         this.mouseOverService.cancel();
-        this.mouseClickService.click(this.id + position);
+        this.onClick.emit(this.classifieds[position]);
     }
 
     mouseOver(position : number, enter : boolean){
