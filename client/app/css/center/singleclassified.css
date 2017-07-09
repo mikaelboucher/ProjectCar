@@ -1,37 +1,37 @@
-.classified {
+.singleclassified{
       background-repeat: no-repeat;
       background-position: 50%;
       min-height : 180px;
-      margin : 0px;
-      background-size: contain;
+      background-size: 100% 100%;
+      padding:0 auto; margin:0 auto;
 }
 
 .basic{
     color : #e5e5e5;
-    font-family: "Times New Roman", Times, serif;
+    font-family: "Calibri", Times, sans-serif;
     text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
 }
 
 .bottom-info{
     position: fixed;
-    bottom: 20%;
 }
 
 .mouseOver{
     position: fixed;
-    bottom: 20%;
 }
 
 .title{
     font-weight: bold;
     float : left;
-    font-size: 100%;
+    width : 100%;
+    font-size: 1.2em;
 }
 
 .price{
+    line-height: 340px;
     position : fixed;
     right: 0; 
-    font-size: 90%;
+    font-size: 1.2em;
 }
 
 .description{
