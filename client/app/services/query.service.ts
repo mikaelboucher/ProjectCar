@@ -28,6 +28,7 @@ export class QueryService {
         })
         .catch(err => {
             console.log(err);
+            return [];
         });
     }
 }
