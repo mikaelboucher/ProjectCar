@@ -1,4 +1,7 @@
-export function routes(io : any, ioCommService: any) {
+
+import * as twitter from './twitter'
+
+export function routes(io : any,stream : boolean, ioCommService: any) {
     io.on('connection', (socket : any) => {
 
         //éventuellement, requireTweets sera pour tous les tweets pour le membre
@@ -7,6 +10,11 @@ export function routes(io : any, ioCommService: any) {
             socket.emit("tweet", "@Macron : let's meet in Paris for a covfefe")
         });
 
+        if (stream)
+            twitter.twitterStream(socket);
+
+
         ioCommService.setSocket(socket);
+
     });
 }

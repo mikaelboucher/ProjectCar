@@ -135,8 +135,10 @@ server.on("listening", () => {
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
 
+
 let io = socketIo(server);
-routeSocket.routes(io, ioCommService);
+routeSocket.routes(io,twitterStreamOn, ioCommService);
+
 
 if (twitterStreamOn){
     twitter.launchTwitterStream(io);
