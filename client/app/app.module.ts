@@ -18,6 +18,7 @@ import { CenterSecondary } from './components/centercomponents/centersecondary.c
 import { Classfields } from './components/centercomponents/primarycomponents/classfields.component';
 import { SingleClassfield } from './components/centercomponents/primarycomponents/singleclassfield.component';
 import { ListeClassfields } from './components/centercomponents/primarycomponents/listeclassfields.component';
+import { TwitterComponent } from './components/twitter.component';
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
@@ -35,7 +36,8 @@ import { ListeClassfields } from './components/centercomponents/primarycomponent
         CenterSecondary,
         Classfields,
         SingleClassfield,
-        ListeClassfields
+        ListeClassfields,
+        TwitterComponent
     ],
 
     bootstrap: [ AppComponent ],

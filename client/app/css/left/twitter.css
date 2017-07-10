@@ -1,0 +1,62 @@
+/*
+.twitterPicture{
+    position: fixed;
+    bottom: 20%;
+}
+
+.twitterName{
+    position: fixed;
+    bottom: 20%;
+}
+
+.twitterHashtag{
+    position: fixed;
+    bottom: 20%;
+}
+
+.tweetTime{
+    position: fixed;
+    bottom: 20%;
+}
+
+.tweetText{
+    position: fixed;
+    bottom: 20%;
+}
+
+.tweetMedia{
+    position: fixed;
+    bottom: 20%;
+}
+
+.twitterIcon{
+    background-image: url('../../../../assets/twitter_icon.gif');
+}
+*/
+.tweet{
+    background-color: black;
+}
+
+.tweetText{
+    font-size: small;
+    color: white;
+}
+
+.twitterName{
+    font-size: small;
+    color: white;
+    
+}
+
+.twitterHashtag{
+    font-size: small;
+    color: white;
+}
+
+.tweetPicture{
+    min-height: 100px;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}

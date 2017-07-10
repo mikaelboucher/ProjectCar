@@ -32,6 +32,8 @@ trackedTwitterHashtags.push(TEST_HASHTAG);        //temporaire... pour tests
   A AMELIORER 
 */
 
+let stream : any;
+
 export function getTwitterID(twitterAccountName : string) : string {
   let twitterUserId : string = "";
   client.get('users/show', {screen_name :twitterAccountName}, function(error : any, tweets : any, response : any) {
@@ -114,20 +116,14 @@ export function launchTwitterStream(io : any){
   /* dans des arrays pour acceder a d'autres comptes */
   /* track : Keywords to track */
   /* follow : User_ID */
+  console.log('Twitter stream launched');
+  stream = client.stream('statuses/filter', {follow : MIKAEL_TWITTER_ID}); 
+}
 
-  
-  let stream = client.stream('statuses/filter', {follow : MIKAEL_TWITTER_ID}); 
-  
+export function twitterStream(socket : any){
   stream.on('data', function(event : any) {   // surement string... modifier plus tard
-    console.log(event && event.text);         //event.extended_entities.media pour photos
     let tweet : string;
     tweet = (event && event.text);
-    io.on('connection', (socket : any) => {
-      socket.emit("streamTweet", tweet)
-    });
-  });
-  
-  stream.on('error', function(error : any) { // surement string... modifier plus tard
-    throw error;
+    socket.emit("streamTweet", tweet)
   });
 }
