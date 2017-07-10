@@ -3,7 +3,8 @@ import { OptionService } from './../../services/optionservice';
 
 @Component({
     selector: "center-options",
-    templateUrl: './app/html/center/centeroptions.html'
+    templateUrl: './app/html/center/centeroptions.html',
+    styleUrls : ['./app/css/center/centeroption.css']
 })
 export class CenterOptions {
 
