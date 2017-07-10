@@ -3,8 +3,10 @@
         <classified-page [classified]="selectClassified"> </classified-page>
     </div>
     <div *ngIf="!selectClassified">
-        <div *ngFor="let classifieds of groupClassifieds; let i = index">
-            <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow" (onClick)="click($event)"> </listes-classifieds>
+        <div class="padding">
+            <div *ngFor="let classifieds of groupClassifieds; let i = index">
+                <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow" (onClick)="click($event)"> </listes-classifieds>
+            </div>
         </div>
     </div>
 </div>
