@@ -5,6 +5,7 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as socketIo from 'socket.io';
+let cors = require('cors');
 
 import * as twitter from './twitter';
 
@@ -52,6 +53,8 @@ class Application {
     private routes() {
         let router = routes.getRoute();
         let optionRouter = optionRoutes.getRoute(ioCommService);
+
+        this._app.use(cors());
 
         this._app.use(express.static(path.join(__dirname, "../../client")));
         this._app.use('/classified', optionRouter)
