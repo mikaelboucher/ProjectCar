@@ -1,0 +1,27 @@
+<div class="singleclassified" [ngStyle]="{'background-image': 'url(' + classified.imageList[0] + ')'}">
+    <div class="basic">
+        <div *ngIf="showDescription">
+            <div class="mouseOver">
+                <div class="title">
+                    {{classified.getTitle()}}
+                </div>
+                <div class="price">
+                    {{classified.getPrice()}} $
+                </div>
+                <div class="description">
+                    {{shortDescription}}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!showDescription">
+            <div class="bottom-info">
+                <div class="title">
+                    {{classified.getTitle()}}
+                </div>
+                <div class="price">
+                    {{classified.getPrice()}} $
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
