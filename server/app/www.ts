@@ -54,11 +54,12 @@ class Application {
         let router = routes.getRoute();
         let optionRouter = optionRoutes.getRoute(ioCommService);
 
+
         this._app.use(cors());
 
-        this._app.use(express.static(path.join(__dirname, "../../client")));
         this._app.use('/classified', optionRouter) //ayy
-        this._app.use('/api',router);
+        this._app.use(express.static(path.join(__dirname, "../../client")));
+        this._app.use('/api', router);
 
         // Gestion des erreurs
         this._app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
