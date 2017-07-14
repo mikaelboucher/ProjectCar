@@ -16,10 +16,13 @@ import { CenterOptions } from './components/centercomponents/centeroptions.compo
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
 import { OptionService } from './services/optionservice';
+import { MouseClickService } from './services/animation/mouseclick.service';
 import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classifieds.component';
 import { SingleClassified } from './components/centercomponents/primarycomponents/singleclassified.component';
 import { ListeClassified } from './components/centercomponents/primarycomponents/listeclassifieds.component';
+import { ClassifiedPageComponent } from './components/centercomponents/primarycomponents/classifiedpage.component';
 import { TwitterComponent } from './components/twitter.component';
+
 
 
 @NgModule({
@@ -39,10 +42,14 @@ import { TwitterComponent } from './components/twitter.component';
         TwitterComponent,
         ClassifiedComponent,
         SingleClassified,
-        ListeClassified
+        ListeClassified,
+        ClassifiedPageComponent
     ],
 
     bootstrap: [ AppComponent ],
-    providers: [OptionService]
+    providers: [
+        OptionService,
+        MouseClickService
+    ]
 })
 export class AppModule { }

@@ -1,5 +1,14 @@
-<div (window:resize)="onResize($event)">
-    <div *ngFor="let classifieds of groupClassifieds; let i = index">
-        <listes-classifieds [classifieds]="classifieds"> </listes-classifieds>
+<div class= "col-sm-12">
+    <div (window:resize)="onResize($event)">
+        <div *ngIf="selectClassified">
+            <classified-page [classified]="selectClassified"> </classified-page>
+        </div>
+        <div *ngIf="!selectClassified">
+            <div class="padding">
+                <div *ngFor="let classifieds of groupClassifieds; let i = index">
+                    <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow" (onClick)="click($event)"> </listes-classifieds>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

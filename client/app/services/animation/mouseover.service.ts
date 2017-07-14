@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
 const ANIMATION = 500;
-const DELAY = 500;
+const DELAY = 250;
 const REBOUND_EFFECT = 100;
 
 const BEFORE = 0;
@@ -44,6 +44,7 @@ export class MouseOverService{
     public init(elements : any[]){
         this.elements = elements;
         this.initAffichage(elements);
+        console.log('init');
     }
 
     public mouseover(posFocus : number){
@@ -90,6 +91,10 @@ export class MouseOverService{
                 setTimeout( () => this.firstFocus = !this.positionFocus, REBOUND_EFFECT);
             }, REBOUND_EFFECT);
         }
+    }
+
+    public cancel(){
+        this.delay();
     }
     
     private delay(){
