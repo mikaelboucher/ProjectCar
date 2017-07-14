@@ -5,15 +5,20 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as socketIo from 'socket.io';
+let cors = require('cors');
 
 import * as twitter from './twitter';
 
 import * as routes from './routes';
+import * as optionRoutes from './optionroutes';
 import * as routeSocket from './indexSocket';
 import { Database } from './database';
+import { IoCommService } from './ioCommService';
+
 
 const APP_PORT = 3002;
 
+let ioCommService = new IoCommService();
 let twitterStreamOn: boolean = false;   //protection pour ne pas se connecter au stream inutilememt
 
 class Application {
@@ -42,12 +47,17 @@ class Application {
         this._app.use(bodyParser.urlencoded({ extended: true }));
         this._app.use(cookieParser());
         this._app.use('/data', express.static('data'));
+
     }
 
     private routes() {
         let router = routes.getRoute();
+        let optionRouter = optionRoutes.getRoute(ioCommService);
+
+        this._app.use(cors());
 
         this._app.use(express.static(path.join(__dirname, "../../client")));
+        this._app.use('/classified', optionRouter)
         this._app.use('/api',router);
 
         // Gestion des erreurs
@@ -125,8 +135,10 @@ server.on("listening", () => {
 // twitter.getTwitterID("Porsche"); //temporaire... pour tests (décommenter au besoin)
 // twitter.getTenTweets("172915358");  //id de Kevin, temporaire... pour tests (décommenter au besoin)
 
-let io = socketIo(server); 
-routeSocket.routes(io);
+
+let io = socketIo(server);
+routeSocket.routes(io,twitterStreamOn, ioCommService);
+
 
 if (twitterStreamOn){
     twitter.launchTwitterStream(io);

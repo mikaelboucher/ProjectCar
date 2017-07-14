@@ -9,7 +9,7 @@ import { Converter } from '../utils/converter';
 export class QueryService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private porscheClassified = 'http://localhost:3002/api/porsches';
- 
+
 
   constructor(private http: Http) { }
 
@@ -21,12 +21,14 @@ export class QueryService {
             let rawClassified = res.json();
             if (rawClassified){
                 return Converter.convertClassifiled(rawClassified);
-            }else{
+            }
+            else{
                 return [];
             }
         })
         .catch(err => {
             console.log(err);
+            return [];
         });
     }
 }

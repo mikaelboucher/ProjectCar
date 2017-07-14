@@ -1,0 +1,35 @@
+<div class="row"> 
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{tweets[0].getTwitterPicture()}}">
+        </div>
+        <div class="col-md-8">
+            <div class="row"> 
+                <div class = "twitterName">
+                    {{tweets[0].getTwitterName()}}
+                </div>
+            </div>
+            <div class="row"> 
+                <div class = "twitterHashtag">
+                    {{tweets[0].getTwitterHashtag()}}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="tweetText">
+            {{tweets[0].getTweetText()}}
+        </div>
+    </div>
+    <div *ngIf="tweets[0].hasMedia()">
+        <div class="row tweetPicture" [ngStyle]="{'background-image': 'url(http://www.larevueautomobile.com/images/Bugatti/Veyron-Centenaire/Exterieur/Bugatti_Veyron_Centenaire_002.jpg)'}">
+            
+        </div>
+    </div>
+</div>
+
+
+<!--a class="twitter-timeline" data-width="500" data-height="300" data-theme="dark" href="https://twitter.com/Julfo_">A Twitter List by TwitterDev</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script-->

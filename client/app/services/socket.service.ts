@@ -1,12 +1,13 @@
 import * as io from 'socket.io-client';
 import { Injectable } from '@angular/core';
+import { OptionService } from './optionservice';
 
 let socket = io('http://localhost:3002');
 
 @Injectable()
 export class SocketService{
 
-    constructor(){
+    constructor(public optionService: OptionService){
         socket = io.connect('http://localhost:3002');
     }
 
@@ -16,11 +17,14 @@ export class SocketService{
 
     launchTweetListener(){
         console.log("Tweet listener is ON");
-        socket.on("tweet", function(tweet : any) { 
+        socket.on("tweet", function(tweet : any) {
             console.log("Tweets received : " + tweet);
         });
-        socket.on("streamTweet", function(tweet : string) { 
+        socket.on("streamTweet", function(tweet : string) {
             console.log("Stream tweet received : " + tweet);
+        });
+        socket.on("displayClassified", (classfiedId : any ) => {
+           console.log("TOPKEK");
         });
     }
 
