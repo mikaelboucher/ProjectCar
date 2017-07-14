@@ -22,11 +22,9 @@
 }
 
 .center{
-    background-color: darkgoldenrod;
-    /*background-image: url('../../../../assets/background2.jpg');*/
+    background-image: url('../../../../assets/background2.jpg');
     text-align: center;
     height: 100%;
-    padding : 0;
 }
 
 .right{
@@ -35,8 +33,7 @@
 }
 
 .fill{
-    /*background-image: url('../../../../assets/background1.jpg');*/
-    background-color : darkred;
+    background-image: url('../../../../assets/background1.jpg');
 }
 
 .info{

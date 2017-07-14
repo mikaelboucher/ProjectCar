@@ -1,4 +1,4 @@
-<div class="border">
+<div class="border clearfix">
     <div *ngFor="let classified of classifieds; let index = index">
         <div class="classified" [style.width.%]="mouseOverService.width" (click)="click(index)" #oneclassified>
             <single-classified [classified]="classified" [showDescription]="descriptionEnable[index]" (mouseOver)="mouseOver(index, $event)"></single-classified>
