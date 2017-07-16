@@ -252,10 +252,14 @@ export class MouseOverService{
     private setupPlayer(...classifieds : {index : number, mouseOver : boolean}[]){
         classifieds.forEach((classified) => {
             if (classified){
-                this.players[classified.index].onDone(() => {
+                if (classified.mouseOver){
+                    this.players[classified.index].onDone(() => {
+                        this.animationDone.next(classified);
+                        this.unSetupPlayer(classified.index);
+                    });
+                }else{
                     this.animationDone.next(classified);
-                    this.unSetupPlayer(classified.index);
-                });
+                }
             }
         });
     }

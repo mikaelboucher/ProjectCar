@@ -68,5 +68,4 @@ export class ClassifiedComponent implements AfterViewInit{
         this.start = start ? "start" : "end";
         setTimeout(() => this.start = "", 1000);
     }
-    
 }
