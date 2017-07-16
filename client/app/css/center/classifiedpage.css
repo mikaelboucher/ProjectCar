@@ -1,6 +1,10 @@
 .header{
     background-color : black;
+    background-size : contain;
+    background-position-x: center;
+    background-repeat: no-repeat;
     padding : 0;
+    min-height: 450px;
 }
 
 .exit{
@@ -12,4 +16,35 @@
     width : 25px;
     height : 25px;
     cursor: pointer;
+}
+
+.backgroundData{
+    background-color: white;
+    padding-top: 1%;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.priceData{
+    font-weight: bold;
+    color : red;
+}
+
+.principalData{
+    vertical-align: middle;
+    font-size: 1.8em;
+}
+
+.description{
+    text-align: justify;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.info{
+    padding-top: 2%;
 }

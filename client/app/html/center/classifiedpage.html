@@ -1,14 +1,40 @@
 <div class="col-md-12">
     <div class="row">
-        <div class="header">
+        <div class="header" [ngStyle]="{'background-image': 'url(' + classified.imageList[0] + ')'}">
              <div class="exit" (click)="goBack()">
                 X
             </div>
-            <img src="{{classified.imageList[0]}}">
         </div>
     </div>
 
-    <div class="row">
-        Under construction
+    <div class="row backgroundData">
+        <div class="row principalData">
+            <div class="col-sm-6 title">
+                {{classified.getTitle()}}
+            </div>
+            <div class="col-sm-6">
+                <span>
+                    price : 
+                </span>
+                <span class="priceData">
+                    {{classified.getPrice()}} $
+                </span>
+            </div>
+        </div>
+        <div class="row info">
+            <div class="col-sm-6">
+                <div class="description">
+                    <span class="bold">
+                        Description : 
+                    </span>
+                    <span>
+                        {{classified.getDescription()}}
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-success"> BUY IT </button>
+            </div>
+        </div>
     </div>
 </div>
