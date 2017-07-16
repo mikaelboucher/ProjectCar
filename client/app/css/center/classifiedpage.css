@@ -2,3 +2,14 @@
     background-color : black;
     padding : 0;
 }
+
+.exit{
+    background-color: white;
+    color : black;
+    text-align: center;
+    float : right;
+    top : 0;
+    width : 25px;
+    height : 25px;
+    cursor: pointer;
+}

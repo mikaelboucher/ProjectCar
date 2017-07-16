@@ -1,7 +1,7 @@
 <div class= "col-sm-12">
     <div (window:resize)="onResize($event)">
         <div *ngIf="selectClassified">
-            <classified-page [classified]="selectClassified"> </classified-page>
+            <classified-page [classified]="selectClassified" (exit)="goBack()"> </classified-page>
         </div>
         <div *ngIf="!selectClassified">
             <div class="padding">

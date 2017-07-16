@@ -55,5 +55,9 @@ export class ClassifiedComponent implements AfterViewInit{
         console.log('hey')
         this.selectClassified = selectClassified;
     }
+
+    goBack(){
+        this.selectClassified = undefined;
+    }
     
 }
