@@ -1,9 +1,9 @@
 <div class= "col-sm-12">
-    <div (window:resize)="onResize($event)">
-        <div *ngIf="selectClassified">
+    <div (window:resize)="onResize($event)" class="{{start}}">
+        <div *ngIf="selectClassified" @single>
             <classified-page [classified]="selectClassified" (exit)="goBack()"> </classified-page>
         </div>
-        <div *ngIf="!selectClassified">
+        <div *ngIf="!selectClassified" @default>
             <div class="padding">
                 <div *ngFor="let classifieds of groupClassifieds; let i = index">
                     <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow" (onClick)="click($event)"> </listes-classifieds>

@@ -1,7 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { QueryService } from '../../../services/query.service';
 import { MouseOverService } from '../../../services/animation/mouseover.service';
-import { Classified } from '../../../objects/classified'
+import { Classified } from '../../../objects/classified';
+import { defaultAnimation, singleAnimation } from '../../../utils/classifiedAnimation'
 
 const DEFAULT_CLASSIFIELD_ROW = 4;
 
@@ -9,7 +10,8 @@ const DEFAULT_CLASSIFIELD_ROW = 4;
     selector: "classifieds-component",
     templateUrl: './app/html/center/classifieds.html',
     styleUrls : ['./app/css/center/classifieds.css'],
-    providers : [QueryService, MouseOverService]
+    providers : [QueryService, MouseOverService],
+    animations : [defaultAnimation, singleAnimation]
 })
 
 export class ClassifiedComponent implements AfterViewInit{
@@ -17,6 +19,7 @@ export class ClassifiedComponent implements AfterViewInit{
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
     selectClassified : Classified;
+    start = "";
 
     constructor(private queryService : QueryService,
     private mouseOverService : MouseOverService){
@@ -52,12 +55,18 @@ export class ClassifiedComponent implements AfterViewInit{
     }
 
     click(selectClassified : Classified){
-        console.log('hey')
         this.selectClassified = selectClassified;
+        this.generateBlackColor(true);
     }
 
     goBack(){
         this.selectClassified = undefined;
+        this.generateBlackColor(false);
+    }
+
+    generateBlackColor(start : boolean){
+        this.start = start ? "start" : "end";
+        setTimeout(() => this.start = "", 1000);
     }
     
 }

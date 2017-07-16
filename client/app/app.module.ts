@@ -16,7 +16,6 @@ import { CenterOptions } from './components/centercomponents/centeroptions.compo
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
 import { OptionService } from './services/optionservice';
-import { MouseClickService } from './services/animation/mouseclick.service';
 import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classifieds.component';
 import { SingleClassified } from './components/centercomponents/primarycomponents/singleclassified.component';
 import { ListeClassified } from './components/centercomponents/primarycomponents/listeclassifieds.component';
@@ -48,8 +47,7 @@ import { TwitterComponent } from './components/twitter.component';
 
     bootstrap: [ AppComponent ],
     providers: [
-        OptionService,
-        MouseClickService
+        OptionService
     ]
 })
 export class AppModule { }
