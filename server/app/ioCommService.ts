@@ -8,6 +8,7 @@ export class IoCommService{
     }
 
     public callClassifiedSocket(data : any){
+        console.log("socket called");
         this.socket.emit('displayClassified', data);
     }
 

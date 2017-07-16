@@ -25,6 +25,7 @@ export class SocketService{
         });
         socket.on("displayClassified", (classfiedId : any ) => {
            console.log("TOPKEK");
+           this.optionService.currentOption = "news";
         });
     }
 
