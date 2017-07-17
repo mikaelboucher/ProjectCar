@@ -14,12 +14,13 @@ const DEFAULT_CLASSIFIELD_ROW = 4;
     animations : [defaultAnimation, singleAnimation]
 })
 
-export class ClassifiedComponent implements AfterViewInit{
+export class ClassifiedComponent implements AfterViewInit {
     groupClassifieds : Classified[][] = [];
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
     selectClassified : Classified;
     start = "";
+    scrollbarPosition : number;
 
     constructor(private queryService : QueryService,
     private mouseOverService : MouseOverService){
@@ -33,7 +34,7 @@ export class ClassifiedComponent implements AfterViewInit{
         this.nbClassifiedRow = this.mouseOverService.changeDimension(+window.innerWidth, true);
         setTimeout(() => this.initGroups(this.classifieds), 100);
     }
-    
+
     initGroups(classifiedsList : Classified[]){
         let nbGroups = 0;
         this.groupClassifieds = [];
@@ -56,6 +57,8 @@ export class ClassifiedComponent implements AfterViewInit{
     }
 
     click(selectClassified : Classified){
+        this.scrollbarPosition = window.scrollY;
+        window.scrollTo(0, 0);
         this.selectClassified = selectClassified;
         this.generateBlackColor(true);
     }
@@ -63,6 +66,18 @@ export class ClassifiedComponent implements AfterViewInit{
     goBack(){
         this.selectClassified = undefined;
         this.generateBlackColor(false);
+        this.restoreScrollbar();
+    }
+
+    restoreScrollbar(){
+        setTimeout( () => {
+            if (this.scrollbarPosition && !this.selectClassified){
+                window.scrollBy(0, this.scrollbarPosition);
+                this.scrollbarPosition = undefined;
+            }else{
+                this.restoreScrollbar();
+            }
+        }, 600);
     }
 
     generateBlackColor(start : boolean){
