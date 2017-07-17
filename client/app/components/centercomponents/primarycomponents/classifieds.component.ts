@@ -36,6 +36,7 @@ export class ClassifiedComponent implements AfterViewInit{
     
     initGroups(classifiedsList : Classified[]){
         let nbGroups = 0;
+        this.groupClassifieds = [];
         classifiedsList.forEach( (classified, cpt) => {
             if (cpt % this.nbClassifiedRow === 0){
                 this.groupClassifieds[nbGroups] = [];
