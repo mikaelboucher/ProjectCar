@@ -9,7 +9,7 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 
-const ANIMATION = 500;
+const ANIMATION = 200;
 const DELAY = 250;
 const REBOUND_EFFECT = 100;
 
@@ -84,7 +84,7 @@ export class MouseOverService{
                     let left = nbClassified < this.positionFocus && !focus;
                     this.transform(nbClassified, focus, false, left);
                 });
-                let first = {index : position, mouseOver : false};
+                let first = {index : this.positionFocus, mouseOver : false};
                 this.setupPlayer(first);
                 let oldFocus = this.positionFocus;
                 this.positionFocus = undefined;
@@ -252,14 +252,16 @@ export class MouseOverService{
     private setupPlayer(...classifieds : {index : number, mouseOver : boolean}[]){
         classifieds.forEach((classified) => {
             if (classified){
-                if (classified.mouseOver){
-                    this.players[classified.index].onDone(() => {
-                        this.animationDone.next(classified);
-                        this.unSetupPlayer(classified.index);
-                    });
-                }else{
-                    this.animationDone.next(classified);
+                if (!classified.mouseOver){
+                    setTimeout(() => this.animationDone.next(classified), 100);
                 }
+                this.players[classified.index].onDone(() => {
+                    this.animationDone.next(classified);
+                    this.unSetupPlayer(classified.index);
+                    if (!classified.mouseOver){
+                        setTimeout(() => this.animationDone.next(classified), 100);
+                    }
+                });
             }
         });
     }

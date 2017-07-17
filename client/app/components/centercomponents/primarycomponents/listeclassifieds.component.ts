@@ -40,10 +40,25 @@ export class ListeClassified implements AfterViewInit{
             this.mouseOverService.mouseleave(position);
         }
     }
-    
+
+    private clear(){
+        let cptEnable = 0;
+        this.descriptionEnable.forEach((enable) => {
+            if (enable){
+                cptEnable++;
+            }
+        })
+        if (cptEnable > 1){
+            this.descriptionEnable = [];
+        }
+    }
+
     private showDescription(){
         this.subAnimation = this.mouseOverService.onDone.subscribe( (status : any) => {
             this.descriptionEnable[status.index] = status.mouseOver;
+            if (!status.mouseOver){
+                this.clear();
+            }
         });
     }
  }
