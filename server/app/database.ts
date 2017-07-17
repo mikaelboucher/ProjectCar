@@ -5,6 +5,24 @@ const MONGO_INFO = {
 export module Database{
     let mongoClient = require('mongodb').MongoClient;
 
+    export function findUser(properties: any) : Promise<any> {
+        return new Promise<any> ((resolve, reject) => {
+            mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
+                let query = createQuery(properties);
+                let col = db.collection("user");
+                col.find(query).toArray((err: any, items: any) => {
+                    if (err) {
+                        console.log(err);
+                        reject();
+                    }
+                    else {
+                        resolve(items);
+                    }
+                })
+            });
+        });
+    }
+
     export function findCars(properties: any) : Promise<any> {
         return mongoClient.connect(MONGO_INFO.MONGO_URI, (err: any, db: any) => {
         //console.log(err);

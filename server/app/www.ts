@@ -2,6 +2,8 @@ import * as express from 'express';
 import * as path from 'path';
 import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
+var mongoStore = require('connect-mongo')(express);
+import * as session from 'express-session';
 import * as bodyParser from 'body-parser';
 import * as http from 'http';
 import * as socketIo from 'socket.io';
@@ -46,6 +48,12 @@ class Application {
         this._app.use(bodyParser.json());
         this._app.use(bodyParser.urlencoded({ extended: true }));
         this._app.use(cookieParser());
+        this._app.use(session({
+            store: new mongoStore({
+                url: 'mongodb://NirnrootTestUser:testuserpassword@ds157971.mlab.com:57971/nirnrootdb'
+            }),
+            secret: 'This is secret'
+        }));
         this._app.use('/data', express.static('data'));
 
     }

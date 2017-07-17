@@ -5,6 +5,10 @@ let router = express.Router();
 let prop = TemporaryList.getList();
 
 
+router.post('/create', (req, res) => {
+    let user = Database.findUser({login: req.body.login});
+
+});
 
 router.get('/findcar', (req, res) => {
     Database.findCars({title: "Porsche 959", price: 100000}).then(cars => {
