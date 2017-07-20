@@ -16,10 +16,11 @@ export let singleAnimation = trigger('single', [
 
 export let defaultAnimation = trigger('default', [
     transition(':enter', [
-        style({opacity : 1})
+        style({ transform : 'translate(0, 1000px)'}),
+        animate(500 , style({ transform : 'translate(0, 0)', background : '*'}))
     ]),
     transition(':leave', [
-        style({opacity : 1}),
-        animate(1000 , style({opacity : 0}))
+        style({ transform : 'translate(0, 0)'}),
+        animate(500 , style({ transform : 'translate(0, 1000px)'}))
     ])
 ]);
