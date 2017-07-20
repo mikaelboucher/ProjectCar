@@ -75,9 +75,9 @@ export class ClassifiedComponent implements AfterViewInit {
                 window.scrollBy(0, this.scrollbarPosition);
                 this.scrollbarPosition = undefined;
             }else{
-                this.restoreScrollbar();
+                console.log('error');
             }
-        }, 600);
+        }, 700);
     }
 
     generateBlackColor(start : boolean){

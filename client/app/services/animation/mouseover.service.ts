@@ -73,7 +73,7 @@ export class MouseOverService{
         }
     }
 
-    public mouseleave(position : number){
+    public mouseleave(){
         
         this.delay();
 

@@ -37,7 +37,7 @@ export class ListeClassified implements AfterViewInit{
         if (enter){
             this.mouseOverService.mouseover(position);
         }else{
-            this.mouseOverService.mouseleave(position);
+            this.mouseOverService.mouseleave();
         }
     }
 
