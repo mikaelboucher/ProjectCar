@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { QueryService } from '../../../services/query.service';
 import { MouseOverService } from '../../../services/animation/mouseover.service';
+import { OptionService } from '../../../services/optionservice';
 import { Classified } from '../../../objects/classified';
 import { defaultAnimation, singleAnimation } from '../../../utils/classifiedAnimation'
 
@@ -10,7 +11,7 @@ const DEFAULT_CLASSIFIELD_ROW = 4;
     selector: "classifieds-component",
     templateUrl: './app/html/center/classifieds.html',
     styleUrls : ['./app/css/center/classifieds.css'],
-    providers : [QueryService, MouseOverService],
+    providers : [QueryService, MouseOverService, OptionService],
     animations : [defaultAnimation, singleAnimation]
 })
 
@@ -18,12 +19,12 @@ export class ClassifiedComponent implements AfterViewInit {
     groupClassifieds : Classified[][] = [];
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
-    selectClassified : Classified;
     start = "";
     scrollbarPosition : number;
 
     constructor(private queryService : QueryService,
-    private mouseOverService : MouseOverService){
+    private mouseOverService : MouseOverService,
+    private optionService : OptionService){
         this.queryService.getCars().then( classifieds => {
             this.classifieds = classifieds;
             this.initGroups(classifieds);
@@ -59,23 +60,21 @@ export class ClassifiedComponent implements AfterViewInit {
     click(selectClassified : Classified){
         this.scrollbarPosition = window.scrollY;
         window.scrollTo(0, 0);
-        this.selectClassified = selectClassified;
+        this.optionService.selectClassified(selectClassified);
         this.generateBlackColor(true);
     }
 
     goBack(){
-        this.selectClassified = undefined;
+        this.optionService.selectClassified(undefined);
         this.generateBlackColor(false);
         this.restoreScrollbar();
     }
 
     restoreScrollbar(){
         setTimeout( () => {
-            if (this.scrollbarPosition && !this.selectClassified){
+            if (this.scrollbarPosition && !this.optionService.showClassified){
                 window.scrollBy(0, this.scrollbarPosition);
                 this.scrollbarPosition = undefined;
-            }else{
-                console.log('error');
             }
         }, 700);
     }
