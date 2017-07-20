@@ -6,6 +6,8 @@ import { Classified } from '../../../objects/classified';
 import { defaultAnimation, singleAnimation } from '../../../utils/classifiedAnimation'
 
 const DEFAULT_CLASSIFIELD_ROW = 4;
+const DELAY_TRANSITION = 700;
+const TIME_FADE_TO_BLACK = 1000;
 
 @Component({
     selector: "classifieds-component",
@@ -76,11 +78,11 @@ export class ClassifiedComponent implements AfterViewInit {
                 window.scrollBy(0, this.scrollbarPosition);
                 this.scrollbarPosition = undefined;
             }
-        }, 700);
+        }, DELAY_TRANSITION);
     }
 
     generateBlackColor(start : boolean){
         this.start = start ? "start" : "end";
-        setTimeout(() => this.start = "", 1000);
+        setTimeout(() => this.start = "", TIME_FADE_TO_BLACK);
     }
 }
