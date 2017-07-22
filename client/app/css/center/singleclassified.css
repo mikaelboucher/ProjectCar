@@ -7,6 +7,14 @@
       cursor: pointer;
 }
 
+.classified :hover{
+      filter : brightness(100%);
+}
+
+.classified :hover{
+      filter : brightness(110%);
+}
+
 .basic{
     color : #e5e5e5;
     font-family: "Calibri", Times, sans-serif;
