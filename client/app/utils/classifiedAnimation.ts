@@ -7,7 +7,7 @@ const TIME = 500;
 
 export let singleAnimation = trigger('single', [
     transition(':enter', [
-        style({ transform : 'translate(0, 1000px)'}),
+        style({ transform : 'translate(0, 1500px)'}),
         animate(TIME , style({ transform : 'translate(0, 0)', background : '*'}))
     ]),
     transition(':leave', [
@@ -18,7 +18,7 @@ export let singleAnimation = trigger('single', [
 
 export let defaultAnimation = trigger('default', [
     transition(':enter', [
-        style({ transform : 'translate(0, 1000px)'}),
+        style({ transform : 'translate(0, 1500px)'}),
         animate(TIME , style({ transform : 'translate(0, 0)', background : '*'}))
     ]),
     transition(':leave', [
