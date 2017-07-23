@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 
@@ -21,11 +22,11 @@ import { SingleClassified } from './components/centercomponents/primarycomponent
 import { ListeClassified } from './components/centercomponents/primarycomponents/classified/listeclassifieds.component';
 import { ClassifiedPageComponent } from './components/centercomponents/primarycomponents/classified/classifiedpage.component';
 import { TwitterComponent } from './components/twitter.component';
-
-
+import { PostAdComponent } from './components/centercomponents/primarycomponents/postad.component';
+import { ImgCropperComponent } from './components/centercomponents/primarycomponents/imgcropper.component';
 
 @NgModule({
-    imports: [ BrowserModule, HttpModule, ModalModule.forRoot(), BrowserAnimationsModule],
+    imports: [ BrowserModule, HttpModule, FormsModule, ModalModule.forRoot(), BrowserAnimationsModule],
 
     declarations: [
         AppComponent,
@@ -42,7 +43,9 @@ import { TwitterComponent } from './components/twitter.component';
         ClassifiedComponent,
         SingleClassified,
         ListeClassified,
-        ClassifiedPageComponent
+        ClassifiedPageComponent,
+        PostAdComponent,
+        ImgCropperComponent
     ],
 
     bootstrap: [ AppComponent ],

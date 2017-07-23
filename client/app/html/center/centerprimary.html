@@ -1,6 +1,13 @@
-<div class="row padding">
-    <button class="btn btn-primary"> Post Ad </button>
-</div>
-<div class="row">
-    <classifieds-component *ngIf="isOption('news')" ></classifieds-component>
+<div class="col-sm-12">
+    <div class="row padding">
+        <button class="btn btn-primary" (click)="postAd()"> Post Ad </button>
+    </div>
+    <div class="row">
+        <div *ngIf="postingAd">
+            <post-ad></post-ad>
+        </div>
+        <div *ngIf="!postingAd">
+            <classifieds-component *ngIf="isOption('news')" ></classifieds-component>
+        </div>
+    </div>
 </div>

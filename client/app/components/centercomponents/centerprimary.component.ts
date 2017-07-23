@@ -7,8 +7,7 @@ import { OptionService } from './../../services/optionservice';
     styleUrls : ['./app/css/center/centerprimary.css']
 })
 export class CenterPrimary {
-
-
+    private postingAd : boolean;
 
     constructor(public optionService: OptionService){
 
@@ -19,6 +18,8 @@ export class CenterPrimary {
         return this.optionService.currentOption === option;
     }
 
-
+    postAd(){
+        this.postingAd = true;
+    }
 
 }

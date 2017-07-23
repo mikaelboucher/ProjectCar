@@ -1,0 +1,13 @@
+.background{
+    background-color: lightgray;
+    width : 100%;
+    min-height: 500px;
+
+}
+
+.cropper{
+    background-color: black;
+    opacity: 0.25;
+    position : absolute;
+    cursor: pointer;
+}
