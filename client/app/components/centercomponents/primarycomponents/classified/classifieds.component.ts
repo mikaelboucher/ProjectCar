@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { QueryService } from '../../../services/query.service';
-import { MouseOverService } from '../../../services/animation/mouseover.service';
-import { OptionService } from '../../../services/optionservice';
-import { Classified } from '../../../objects/classified';
-import { defaultAnimation, singleAnimation } from '../../../utils/classifiedAnimation'
+import { QueryService } from '../../../../services/query.service';
+import { MouseOverService } from '../../../../services/animation/mouseover.service';
+import { OptionService } from '../../../../services/optionservice';
+import { Classified } from '../../../../objects/classified';
+import { defaultAnimation, singleAnimation } from '../../../../utils/classifiedAnimation'
 
 const DEFAULT_CLASSIFIELD_ROW = 4;
 const DELAY_TRANSITION = 700;

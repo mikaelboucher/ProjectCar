@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Classified } from '../../../objects/classified';
+import { Classified } from '../../../../objects/classified';
 
 @Component({
     selector: "classified-page",
