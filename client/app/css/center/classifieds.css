@@ -1,3 +1,22 @@
 .padding{
     padding-top: 5%;
 }
+
+.start{
+    animation : fadeIn 1s;
+}
+
+.end{
+    animation : fadeOut 1s;
+}
+
+@keyframes fadeOut{
+    0% {background-color: black;}
+    20% {background-color: black;}
+    35% {background-color: '*';}
+}
+
+@keyframes fadeIn{
+    0% {background-color: '*';}
+    50% {background-color: black;}
+}

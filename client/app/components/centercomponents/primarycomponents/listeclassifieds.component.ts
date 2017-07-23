@@ -4,7 +4,6 @@ import { trigger, state, style,
 import { Classified } from '../../../objects/classified';
 
 import { MouseOverService } from '../../../services/animation/mouseover.service';
-import { MouseClickService } from '../../../services/animation/mouseclick.service';
 
 @Component({
     selector: "listes-classifieds",
@@ -21,18 +20,15 @@ export class ListeClassified implements AfterViewInit{
     private descriptionEnable : boolean[] = [];
     private subAnimation : any;
 
-    constructor(private mouseOverService : MouseOverService,
-    private mouseClickService : MouseClickService){}
+    constructor(private mouseOverService : MouseOverService){}
     
     ngAfterViewInit(){
         this.elementClassified = this.elementClassified.toArray();
         this.mouseOverService.init(this.elementClassified);
-        this.mouseClickService.addElement(this.elementClassified, this.id);
         this.showDescription();
     }
 
     click(position : number){
-        console.log('click');
         this.mouseOverService.cancel();
         this.onClick.emit(this.classifieds[position]);
     }
@@ -41,10 +37,10 @@ export class ListeClassified implements AfterViewInit{
         if (enter){
             this.mouseOverService.mouseover(position);
         }else{
-            this.mouseOverService.mouseleave(position);
+            this.mouseOverService.mouseleave();
         }
     }
-    
+
     private showDescription(){
         this.subAnimation = this.mouseOverService.onDone.subscribe( (status : any) => {
             this.descriptionEnable[status.index] = status.mouseOver;

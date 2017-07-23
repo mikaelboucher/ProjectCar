@@ -10,5 +10,8 @@ import { Classified } from '../../../objects/classified';
 export class ClassifiedPageComponent{
     @Input() classified : Classified;
     @Output() exit = new EventEmitter();
-}
 
+    goBack(){
+        this.exit.emit();
+    }
+}
