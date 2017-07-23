@@ -21,7 +21,7 @@ export class ClassifiedComponent implements AfterViewInit {
     groupClassifieds : Classified[][] = [];
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
-    start = "";
+    blackState = "";
     savePointScrollbar : number;
 
     constructor(private queryService : QueryService,
@@ -80,7 +80,7 @@ export class ClassifiedComponent implements AfterViewInit {
     }
 
     generateBlackColor(start : boolean){
-        this.start = start ? "start" : "end";
-        setTimeout(() => this.start = "", TIME_FADE_TO_BLACK);
+        this.blackState = start ? "start" : "end";
+        setTimeout(() => this.blackState = "", TIME_FADE_TO_BLACK);
     }
 }
