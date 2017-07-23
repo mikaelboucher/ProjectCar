@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter, ViewChildren, AfterViewInit } from '@angular/core';
 import { trigger, state, style,
     animate, transition } from '@angular/animations';
-import { Classified } from '../../../objects/classified';
+import { Classified } from '../../../../objects/classified';
 
-import { MouseOverService } from '../../../services/animation/mouseover.service';
+import { MouseOverService } from '../../../../services/animation/mouseover.service';
 
 @Component({
     selector: "listes-classifieds",

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, HostListener, OnChanges } from '@angular/core';
-import { Classified } from '../../../objects/classified'
+import { Classified } from '../../../../objects/classified'
 
 const MAX_CHARACTER = 120;
 const DOTDOTDOT = 3;

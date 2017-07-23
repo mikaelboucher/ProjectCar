@@ -18,18 +18,18 @@
 
 .left{
     /*background-color: darkred;*/
-    min-height : 90vh;
+    min-height : 88vh;
 }
 
 .center{
     background-image: url('../../../../assets/background2.jpg');
     text-align: center;
-    min-height : 90vh;
+    min-height : 88vh;
 }
 
 .right{
     /*background-color: darkred;*/
-    min-height : 90vh;
+    min-height : 88vh;
 }
 
 .fill{
@@ -41,7 +41,7 @@
     width : 100%;
     text-align: center;
     height : 60px;
-    margin-bottom: 10px;
+    margin-bottom: 0.5%;
 }
 
 .space{
