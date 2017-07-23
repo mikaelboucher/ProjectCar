@@ -22,7 +22,7 @@ export class ClassifiedComponent implements AfterViewInit {
     classifieds : Classified[];
     nbClassifiedRow = DEFAULT_CLASSIFIELD_ROW;
     start = "";
-    scrollbarPosition : number;
+    savePointScrollbar : number;
 
     constructor(private queryService : QueryService,
     private mouseOverService : MouseOverService,
@@ -60,7 +60,7 @@ export class ClassifiedComponent implements AfterViewInit {
     }
 
     click(selectClassified : Classified){
-        this.scrollbarPosition = window.scrollY;
+        this.savePointScrollbar = window.scrollY;
         window.scrollTo(0, 0);
         this.optionService.selectClassified(selectClassified);
         this.generateBlackColor(true);
@@ -74,10 +74,8 @@ export class ClassifiedComponent implements AfterViewInit {
 
     restoreScrollbar(){
         setTimeout( () => {
-            if (this.scrollbarPosition && !this.optionService.showClassified){
-                window.scrollBy(0, this.scrollbarPosition);
-                this.scrollbarPosition = undefined;
-            }
+            window.scrollBy(0, this.savePointScrollbar);
+            this.savePointScrollbar = undefined;
         }, DELAY_TRANSITION);
     }
 
