@@ -3,8 +3,8 @@
         <div *ngIf="optionService.showClassified" @single>
             <classified-page [classified]="optionService.showClassified" (exit)="goBack()"> </classified-page>
         </div>
-        <div *ngIf="!optionService.showClassified" @default>
-            <div class="padding">
+        <div *ngIf="!optionService.showClassified">
+            <div class="padding" @default>
                 <div *ngFor="let classifieds of groupClassifieds; let i = index">
                     <listes-classifieds [classifieds]="classifieds" [id]="i * nbClassifiedRow" (onClick)="click($event)"> </listes-classifieds>
                 </div>

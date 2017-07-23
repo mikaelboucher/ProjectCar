@@ -15,4 +15,3 @@ export class ClassifiedPageComponent{
         this.exit.emit();
     }
 }
-
