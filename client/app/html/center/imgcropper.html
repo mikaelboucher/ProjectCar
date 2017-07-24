@@ -1,4 +1,7 @@
-<div class="background" id="bound">
+<div class="background" id="bound" [ngStyle]="{'background-image': 'url(' + defaultURL + ')'}">
     <div id="cropper" class="cropper" [style.height.px]="height" [style.width.px]="width" [style.left.px]="x" [style.top.px]="y">
+    </div>
+    <div class="slider">
+        <input type="range" name="ratio" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
     </div>
 </div>

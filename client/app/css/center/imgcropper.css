@@ -2,12 +2,22 @@
     background-color: lightgray;
     width : 100%;
     min-height: 500px;
-
+    overflow: hidden;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
 }
 
 .cropper{
-    background-color: black;
+    background-color: cyan;
     opacity: 0.25;
     position : absolute;
     cursor: pointer;
+}
+
+.slider{
+    position : absolute;
+    bottom: 0;
+    left : 35%;
 }
