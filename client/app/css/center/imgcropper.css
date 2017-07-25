@@ -1,5 +1,4 @@
-.background{
-    background-color: lightgray;
+.bound{
     width : 100%;
     min-height: 500px;
     overflow: hidden;
@@ -16,8 +15,6 @@
     cursor: pointer;
 }
 
-.slider{
-    position : absolute;
-    bottom: 0;
-    left : 35%;
+.background{
+    background-color: lightgray;
 }

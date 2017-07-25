@@ -1,8 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
 
 const RATIO = 4/3;
-const DEFAULT_WIDTH = 400;
-const DEFAULT_HEIGHT = 300;
+const MIN = 50;
+const MAX = 100;
+const DEFAULT_VALUE = 75;
+const LIMIT_LOOP = 10;
 const DEFAULT_URL = "../../../../assets/test.png";
 
 @Component({
@@ -11,25 +13,28 @@ const DEFAULT_URL = "../../../../assets/test.png";
     styleUrls : ['./app/css/center/imgcropper.css']
 })
 
-export class ImgCropperComponent{
-    private min = 50;
-    private max = 200;
-    private x: number;
-    private y : number;
+export class ImgCropperComponent implements AfterViewInit{
+    private min = MIN;
+    private max = MAX;
+    private x = 0;
+    private y = 0;
+    private highestWidth : number;
+    private highestHeight : number;
     private dragData : {x : number, y : number}[];
-    private width : number;
-    private height : number;
+    private width = 0;
+    private height = 0;
     private dragMode : boolean;
-    private factor : number;
-    private blockSlider = false;
+    private factor = DEFAULT_VALUE;
     private imagePreviewUrl = DEFAULT_URL;
 
     constructor(){
-        this.x = this.y = 0;
-        this.factor = ((this.max - this.min)/2 + this.min);
-        this.width = DEFAULT_WIDTH * this.factor/100;
-        this.height = DEFAULT_HEIGHT * this.factor/100;
         this.dragData = [];
+    }
+
+    ngAfterViewInit(){
+        this.newCropperDimension();
+        //timeout MANDATORY, otherwise cannot change DOM attribut
+        setTimeout( () => this.changeCropperView(), 10);
     }
 
     @HostListener('document:mousedown', ['$event'])
@@ -43,7 +48,6 @@ export class ImgCropperComponent{
     @HostListener('document:mouseup')
     onmouseleave(event : any) {
         if (this.dragMode){
-            console.log('finish');
             this.dragMode = false;
             this.dragData = [];
         }
@@ -58,30 +62,50 @@ export class ImgCropperComponent{
             this.dragData.shift();
             this.x += dx;
             this.y += dy;
-            console.log(this.x);
             if (!this.area(document.getElementById('bound').getBoundingClientRect())){
                 this.x -= dx;
                 this.y -= dy;
-            }else{
-                if (this.blockSlider){
-                    this.unlockSlider();
-                }
             }
         }
     }
 
+    private newCropperDimension(){
+        this.highestWidth = document.getElementById('bound').getBoundingClientRect().width;
+        let newHeight = this.highestWidth/RATIO;
+        while(document.getElementById('bound').getBoundingClientRect().height < newHeight){
+            this.highestWidth -= 50;
+            newHeight = this.highestWidth/RATIO;
+        }
+        this.highestHeight = newHeight;
+    }
+
+    private changeCropperView(){
+        this.x = this.y = 0;
+        this.factor = DEFAULT_VALUE;
+        this.width = this.highestWidth * this.factor/100;
+        this.height = this.highestHeight * this.factor/100;
+    }
+
     private change(factor : number){
-        let oldWidth = this.width;
-        let oldHeight = this.height;
-        let oldFactor = this.factor;
+        let speed = factor - this.factor;
         this.factor = factor;
-        this.width = DEFAULT_WIDTH * this.factor/100;
-        this.height = DEFAULT_HEIGHT * this.factor/100;
-        if (!this.area(document.getElementById('bound').getBoundingClientRect())){
-            this.width = oldWidth;
-            this.height = oldHeight;
-            this.factor = oldFactor;
-            this.blockSlider = true;
+        this.width = this.highestWidth * this.factor/100;
+        this.height = this.highestHeight * this.factor/100;
+        if (speed > 0){
+            let cycle = 0;
+            while (!this.area(document.getElementById('bound').getBoundingClientRect())){
+                let norme = Math.sqrt((this.x + this.x) + (this.y + this.y));
+                let reverseX = this.x / norme;
+                let reverseY = this.y / norme;
+                this.x -= reverseX;
+                this.y -= reverseY;
+                cycle++;
+                if (cycle > LIMIT_LOOP){
+                    this.x = 0;
+                    this.y = 0;
+                    break;
+                }
+            }
         }
     }
 
@@ -90,15 +114,17 @@ export class ImgCropperComponent{
             && (this.y >= 0 && this.y + this.height <= bound.height)
     }
 
-    private unlockSlider(){
-        if (this.area(document.getElementById('bound').getBoundingClientRect())){
-            this.blockSlider = false;
-        }
-    }
-
     private fileEvent(fileInput: any){
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
     }
 
+    private crop(){
+        console.log('CROP TIME!!');
+    }
+
+    private onResize(){
+        this.newCropperDimension();
+        this.changeCropperView();
+    }
 }
