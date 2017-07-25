@@ -21,6 +21,7 @@ export class ImgCropperComponent{
     private dragMode : boolean;
     private defaultURL = "../../../../assets/test.png";
     private factor : number;
+    private blockSlider = false;
 
     constructor(){
         this.x = this.y = 0;
@@ -60,6 +61,10 @@ export class ImgCropperComponent{
             if (!this.area(document.getElementById('bound').getBoundingClientRect())){
                 this.x -= dx;
                 this.y -= dy;
+            }else{
+                if (this.blockSlider){
+                    this.unlockSlider();
+                }
             }
         }
     }
@@ -75,12 +80,19 @@ export class ImgCropperComponent{
             this.width = oldWidth;
             this.height = oldHeight;
             this.factor = oldFactor;
+            this.blockSlider = true;
         }
     }
 
     private area(bound : ClientRect) : boolean{
         return (this.x >= 0 && this.x + this.width <= bound.width)
             && (this.y >= 0 && this.y + this.height <= bound.height)
+    }
+
+    private unlockSlider(){
+        if (this.area(document.getElementById('bound').getBoundingClientRect())){
+            this.blockSlider = false;
+        }
     }
 
 }
