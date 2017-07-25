@@ -1,7 +1,16 @@
-<div class="background" id="bound" [ngStyle]="{'background-image': 'url(' + defaultURL + ')'}">
-    <div id="cropper" class="cropper" [style.height.px]="height" [style.width.px]="width" [style.left.px]="x" [style.top.px]="y">
+<div class="col-sm-12">
+    <div class="row">
+        <div class="background" id="bound" [ngStyle]="{'background-image': 'url(' + this.imagePreviewUrl + ')'}">
+            <div id="cropper" class="cropper" [style.height.px]="height" [style.width.px]="width" [style.left.px]="x" [style.top.px]="y">
+            </div>
+        </div>
     </div>
-    <div class="slider">
-        <input type="range" [disabled]="blockSlider" name="ratio" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="file" (change)="fileEvent($event)" />
+        </div>
+        <div class="col-sm-6">
+            <input type="range" [disabled]="blockSlider" name="ratio" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
+        </div>
     </div>
 </div>

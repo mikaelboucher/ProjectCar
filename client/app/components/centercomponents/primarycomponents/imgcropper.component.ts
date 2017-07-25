@@ -3,6 +3,7 @@ import { Component, HostListener } from '@angular/core';
 const RATIO = 4/3;
 const DEFAULT_WIDTH = 400;
 const DEFAULT_HEIGHT = 300;
+const DEFAULT_URL = "../../../../assets/test.png";
 
 @Component({
     selector: "img-cropper",
@@ -19,9 +20,9 @@ export class ImgCropperComponent{
     private width : number;
     private height : number;
     private dragMode : boolean;
-    private defaultURL = "../../../../assets/test.png";
     private factor : number;
     private blockSlider = false;
+    private imagePreviewUrl = DEFAULT_URL;
 
     constructor(){
         this.x = this.y = 0;
@@ -93,6 +94,11 @@ export class ImgCropperComponent{
         if (this.area(document.getElementById('bound').getBoundingClientRect())){
             this.blockSlider = false;
         }
+    }
+
+    private fileEvent(fileInput: any){
+        let file = fileInput.target.files[0];
+        this.imagePreviewUrl =  window.URL.createObjectURL(file);
     }
 
 }
