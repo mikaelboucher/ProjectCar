@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <input type="file" (change)="fileEvent($event)" />
+            <input type="file" accept="image/*" (change)="fileEvent($event)" />
         </div>
         <div class="col-sm-6">
             <input type="range" [disabled]="blockSlider" name="ratio" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
