@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports" : true,
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "lib": [ "es2015", "dom" ],
     "outDir": "out",
     "sourceRoot": "app",

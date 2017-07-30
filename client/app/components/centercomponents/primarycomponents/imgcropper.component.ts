@@ -1,5 +1,7 @@
 import { Component, HostListener, AfterViewInit } from '@angular/core';
 
+import { CropService } from '../../../services/image/crop.service';
+
 const RATIO = 4/3;
 const MIN = 50;
 const MAX = 100;
@@ -10,7 +12,8 @@ const DEFAULT_URL = "../../../../assets/test.png";
 @Component({
     selector: "img-cropper",
     templateUrl: './app/html/center/imgcropper.html',
-    styleUrls : ['./app/css/center/imgcropper.css']
+    styleUrls : ['./app/css/center/imgcropper.css'],
+    providers : [ CropService ]
 })
 
 export class ImgCropperComponent implements AfterViewInit{
@@ -26,8 +29,10 @@ export class ImgCropperComponent implements AfterViewInit{
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
     private imagePreviewUrl = DEFAULT_URL;
+    private imageData = {width : 0, height : 0};
+    private boundRatio : number;
 
-    constructor(){
+    constructor(private cropService : CropService){
         this.dragData = [];
     }
 
@@ -77,6 +82,7 @@ export class ImgCropperComponent implements AfterViewInit{
             newHeight = this.highestWidth/RATIO;
         }
         this.highestHeight = newHeight;
+        this.cropService.changeBound(document);
     }
 
     private changeCropperView(){
@@ -108,7 +114,6 @@ export class ImgCropperComponent implements AfterViewInit{
             }
         }
     }
-
     private area(bound : ClientRect) : boolean{
         return (this.x >= 0 && this.x + this.width <= bound.width)
             && (this.y >= 0 && this.y + this.height <= bound.height)
@@ -117,10 +122,17 @@ export class ImgCropperComponent implements AfterViewInit{
     private fileEvent(fileInput: any){
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
+        this.cropService.changeImage(this.imagePreviewUrl);
     }
 
     private crop(){
-        console.log('CROP TIME!!');
+        let propreties = {
+            x : this.x,
+            y : this.y,
+            width : this.width,
+            height : this.height
+        }
+        this.cropService.start(propreties, document);
     }
 
     private onResize(){

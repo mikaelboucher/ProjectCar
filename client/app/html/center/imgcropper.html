@@ -13,7 +13,7 @@
             <input type="range" [disabled]="blockSlider" name="ratio" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
         </div>
         <div class="col-sm-2">
-             <button class="btn btn-success" (click)="crop()"> CROP </button>
+             <button class="btn btn-success" [disabled]="!cropService.isReady" (click)="crop()"> CROP </button>
         </div>
     </div>
 </div>

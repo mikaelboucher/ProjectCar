@@ -12,6 +12,12 @@
     "noImplicitThis": true,
     "noEmitOnError": true,
     "removeComments": false,
+	"typeRoots": [
+		"node_modules/@types"
+	],
+	"types": [
+		"node"
+	],
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [

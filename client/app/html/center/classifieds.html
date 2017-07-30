@@ -1,5 +1,5 @@
 <div class= "col-sm-12">
-    <div (window:resize)="onResize()" class="{{blackState}}">
+    <div (window:resize)="onResize($event)" class="{{blackState}}">
         <div *ngIf="optionService.showClassified" @single>
             <classified-page [classified]="optionService.showClassified" (exit)="goBack()"> </classified-page>
         </div>

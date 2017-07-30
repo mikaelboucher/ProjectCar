@@ -15,7 +15,6 @@ import * as routeSocket from './indexSocket';
 import { Database } from './database';
 import { IoCommService } from './ioCommService';
 
-
 const APP_PORT = 3002;
 
 let ioCommService = new IoCommService();
@@ -94,7 +93,6 @@ const app = Application.instance;
 
 app.expressApp.set("port", APP_PORT);
 let server = http.createServer(app.expressApp).listen(APP_PORT);
-
 
 server.on("error", (err: NodeJS.ErrnoException) => {
     if (err.syscall !== "listen") { throw err; }
