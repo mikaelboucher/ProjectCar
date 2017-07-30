@@ -1,7 +1,7 @@
 <div class="col-sm-12 background" (window:resize)="onResize($event)">
     <div class="row">
         <div class="bound" id="bound" [ngStyle]="{'background-image': 'url(' + this.imagePreviewUrl + ')'}">
-            <div id="cropper" class="cropper" [style.height.px]="height" [style.width.px]="width" [style.left.px]="x" [style.top.px]="y">
+            <div id="cropper" class="cropper" [ngStyle]="{'background-color': cropColor}" [style.height.px]="height" [style.width.px]="width" [style.left.px]="x" [style.top.px]="y">
             </div>
         </div>
     </div>

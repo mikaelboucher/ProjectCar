@@ -29,8 +29,7 @@ export class ImgCropperComponent implements AfterViewInit{
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
     private imagePreviewUrl = DEFAULT_URL;
-    private imageData = {width : 0, height : 0};
-    private boundRatio : number;
+    private cropColor = "#FFFFFF";
 
     constructor(private cropService : CropService){
         this.dragData = [];
@@ -72,6 +71,63 @@ export class ImgCropperComponent implements AfterViewInit{
                 this.y -= dy;
             }
         }
+    }
+
+    private generateColorCrop(){
+        let canvas = document.createElement('canvas');
+        let img = new Image();
+        img.onload = () => {
+            let data = canvas.getContext('2d').getImageData(0, 0, img.width, img.height);
+            this.iterateColor(data);
+        }
+        img.src = this.imagePreviewUrl;
+    }
+
+    private iterateColor(data : ImageData){
+        let averageRGB : {r : number, g : number, b : number}[] = [];
+        const MAX_RESULT = 8;
+        let pixels = data.data;
+        let iterateX = data.width/MAX_RESULT;
+        let iterateY = data.height/MAX_RESULT;
+        for (let i =0; i < data.width; i += iterateX){
+            for(let j =0; j < data.height; j += iterateY){
+                let index = (j * data.width + i) * 4;
+                let rgb = {
+                    r : 0,
+                    g : 0,
+                    b : 0
+                }
+
+                rgb.r = pixels[index];
+                rgb.g = pixels[index + 1];
+                rgb.b = pixels[index + 2];
+            }
+        }
+        let result = {
+            r : 0,
+            g : 0,
+            b : 0
+        };
+        averageRGB.forEach(rgb => {
+            result.r += rgb.r;
+            result.g += rgb.g;
+            result.b += rgb.b;
+        })
+        result.r = result.r/averageRGB.length;
+        result.g = result.g/averageRGB.length;
+        result.b = result.b/averageRGB.length;
+        this.convertToHex(result);
+    }
+
+    private convertToHex(result : {r : number, g : number, b : number}){
+        let hex = "#";
+        let num = result.r.toString();
+        hex += parseInt(num, 16) ^ 1;
+        num = result.g.toString();
+        hex += parseInt(num, 16) ^ 1;
+        num = result.b.toString();
+        hex += parseInt(num, 16) ^ 1;
+        this.cropColor = hex;
     }
 
     private newCropperDimension(){
@@ -123,6 +179,7 @@ export class ImgCropperComponent implements AfterViewInit{
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
         this.cropService.changeImage(this.imagePreviewUrl);
+        this.generateColorCrop();
     }
 
     private crop(){
