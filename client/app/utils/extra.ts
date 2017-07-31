@@ -13,4 +13,12 @@ export module Extra{
         return newArray;
     }
 
+    export function doubleZero(str : string) : string{
+        let newStr = '0' + str;
+        if (newStr.length > 2){
+            newStr = newStr.slice(1);
+        }
+        return newStr;
+    }
+
 }

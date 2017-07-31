@@ -2,12 +2,14 @@ import { Component, HostListener, AfterViewInit } from '@angular/core';
 
 import { CropService } from '../../../services/image/crop.service';
 
+import { Extra } from '../../../utils/extra'
+
 const RATIO = 4/3;
 const MIN = 50;
 const MAX = 100;
 const DEFAULT_VALUE = 75;
 const LIMIT_LOOP = 10;
-const DEFAULT_URL = "../../../../assets/test.png";
+const DEFAULT_URL = "";
 
 @Component({
     selector: "img-cropper",
@@ -77,6 +79,7 @@ export class ImgCropperComponent implements AfterViewInit{
         let canvas = document.createElement('canvas');
         let img = new Image();
         img.onload = () => {
+            canvas.getContext('2d').drawImage(img, 0, 0);
             let data = canvas.getContext('2d').getImageData(0, 0, img.width, img.height);
             this.iterateColor(data);
         }
@@ -85,23 +88,23 @@ export class ImgCropperComponent implements AfterViewInit{
 
     private iterateColor(data : ImageData){
         let averageRGB : {r : number, g : number, b : number}[] = [];
-        const MAX_RESULT = 8;
+        const MAX_RESULT = 64;
         let pixels = data.data;
-        let iterateX = data.width/MAX_RESULT;
-        let iterateY = data.height/MAX_RESULT;
-        for (let i =0; i < data.width; i += iterateX){
-            for(let j =0; j < data.height; j += iterateY){
-                let index = (j * data.width + i) * 4;
-                let rgb = {
-                    r : 0,
-                    g : 0,
-                    b : 0
-                }
-
-                rgb.r = pixels[index];
-                rgb.g = pixels[index + 1];
-                rgb.b = pixels[index + 2];
+        let iterate = 4;
+        for (let i = 0; i < pixels.length; i += iterate){
+            let index = i;
+            let r = pixels[index];
+            let g = pixels[index + 1];
+            let b = pixels[index + 2];
+            if (!(r == 0 && g == 0 && b == 0)
+            || !(!r || !g || !b)) {
+                averageRGB.push({
+                    r : r,
+                    g : g,
+                    b : b
+                });
             }
+            iterate *= 2;
         }
         let result = {
             r : 0,
@@ -112,21 +115,20 @@ export class ImgCropperComponent implements AfterViewInit{
             result.r += rgb.r;
             result.g += rgb.g;
             result.b += rgb.b;
-        })
+        });
         result.r = result.r/averageRGB.length;
         result.g = result.g/averageRGB.length;
         result.b = result.b/averageRGB.length;
+        console.log(result);
         this.convertToHex(result);
     }
 
     private convertToHex(result : {r : number, g : number, b : number}){
-        let hex = "#";
-        let num = result.r.toString();
-        hex += parseInt(num, 16) ^ 1;
-        num = result.g.toString();
-        hex += parseInt(num, 16) ^ 1;
-        num = result.b.toString();
-        hex += parseInt(num, 16) ^ 1;
+        let rHEX = (parseInt(result.r.toString()) ^ 0xff).toString(16);
+        let gHEX = (parseInt(result.g.toString()) ^ 0xff).toString(16);
+        let bHEX = (parseInt(result.b.toString()) ^ 0xff).toString(16);
+        let hex = "#" + Extra.doubleZero(rHEX) + Extra.doubleZero(gHEX) + Extra.doubleZero(bHEX);
+        console.log(hex);
         this.cropColor = hex;
     }
 

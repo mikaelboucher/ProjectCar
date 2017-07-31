@@ -9,8 +9,8 @@
 }
 
 .cropper{
-    background-color: cyan;
-    opacity: 0.25;
+    border-style: solid;
+    opacity: 0.5;
     position : absolute;
     cursor: pointer;
 }
