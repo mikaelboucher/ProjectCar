@@ -6,13 +6,17 @@
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
+    opacity: 0.1;
 }
 
 .cropper{
+    background-repeat: no-repeat scroll;
     border-style: solid;
-    opacity: 0.5;
     position : absolute;
     cursor: pointer;
+    z-index: 1000;
+    overflow: hidden;
+    opacity: 1;
 }
 
 .background{

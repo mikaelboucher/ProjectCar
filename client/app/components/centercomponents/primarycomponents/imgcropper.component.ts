@@ -23,6 +23,10 @@ export class ImgCropperComponent implements AfterViewInit{
     private max = MAX;
     private x = 0;
     private y = 0;
+    private offsetX = 0;
+    private offsetY = 0;
+    private imgPreviewSizeX = 1;
+    private imagePreviewSizeY = 1;
     private highestWidth : number;
     private highestHeight : number;
     private dragData : {x : number, y : number}[];
@@ -31,10 +35,20 @@ export class ImgCropperComponent implements AfterViewInit{
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
     private imagePreviewUrl = DEFAULT_URL;
-    private cropColor = "#FFFFFF";
 
     constructor(private cropService : CropService){
         this.dragData = [];
+    }
+
+    private getStyle(){
+        let imgX = -1 * (this.x - this.offsetX);
+        let imgY = -1 * (this.y - this.offsetY);
+        return {
+            'background-image' : 'url(' + this.imagePreviewUrl + ')',
+            'background-size' : (this.imgPreviewSizeX)+ 'px ' + (this.imagePreviewSizeY) + 'px',
+            'background-repeat' : 'no-repeat' ,
+            'background-position' : imgX + 'px ' + imgY + 'px '
+        }
     }
 
     ngAfterViewInit(){
@@ -73,63 +87,6 @@ export class ImgCropperComponent implements AfterViewInit{
                 this.y -= dy;
             }
         }
-    }
-
-    private generateColorCrop(){
-        let canvas = document.createElement('canvas');
-        let img = new Image();
-        img.onload = () => {
-            canvas.getContext('2d').drawImage(img, 0, 0);
-            let data = canvas.getContext('2d').getImageData(0, 0, img.width, img.height);
-            this.iterateColor(data);
-        }
-        img.src = this.imagePreviewUrl;
-    }
-
-    private iterateColor(data : ImageData){
-        let averageRGB : {r : number, g : number, b : number}[] = [];
-        const MAX_RESULT = 64;
-        let pixels = data.data;
-        let iterate = 4;
-        for (let i = 0; i < pixels.length; i += iterate){
-            let index = i;
-            let r = pixels[index];
-            let g = pixels[index + 1];
-            let b = pixels[index + 2];
-            if (!(r == 0 && g == 0 && b == 0)
-            || !(!r || !g || !b)) {
-                averageRGB.push({
-                    r : r,
-                    g : g,
-                    b : b
-                });
-            }
-            iterate *= 2;
-        }
-        let result = {
-            r : 0,
-            g : 0,
-            b : 0
-        };
-        averageRGB.forEach(rgb => {
-            result.r += rgb.r;
-            result.g += rgb.g;
-            result.b += rgb.b;
-        });
-        result.r = result.r/averageRGB.length;
-        result.g = result.g/averageRGB.length;
-        result.b = result.b/averageRGB.length;
-        console.log(result);
-        this.convertToHex(result);
-    }
-
-    private convertToHex(result : {r : number, g : number, b : number}){
-        let rHEX = (parseInt(result.r.toString()) ^ 0xff).toString(16);
-        let gHEX = (parseInt(result.g.toString()) ^ 0xff).toString(16);
-        let bHEX = (parseInt(result.b.toString()) ^ 0xff).toString(16);
-        let hex = "#" + Extra.doubleZero(rHEX) + Extra.doubleZero(gHEX) + Extra.doubleZero(bHEX);
-        console.log(hex);
-        this.cropColor = hex;
     }
 
     private newCropperDimension(){
@@ -180,8 +137,12 @@ export class ImgCropperComponent implements AfterViewInit{
     private fileEvent(fileInput: any){
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
-        this.cropService.changeImage(this.imagePreviewUrl);
-        this.generateColorCrop();
+        this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any) => {
+            this.imgPreviewSizeX = imgSize.width;
+            this.imagePreviewSizeY = imgSize.height;
+            this.offsetX = this.cropService.offsets.x;
+            this.offsetY = this.cropService.offsets.y;
+        });
     }
 
     private crop(){

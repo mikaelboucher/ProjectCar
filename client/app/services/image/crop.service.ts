@@ -5,15 +5,21 @@ import 'rxjs/add/operator/toPromise';
 export class CropService {
     private imageSize : {width : number, height : number, ratio : number};
     private bound : {width : number, height : number, ratio : number};
+    private offset : {x : number, y : number};
     private imageURL : string;
 
     constructor() {
         this.imageSize = {width : 0, height : 0, ratio : 0};
         this.bound = {width : 0, height : 0, ratio : 0};
+        this.offset = {x : 0, y : 0};
     }
 
     public get isReady() : boolean{
         return this.imageURL !== undefined;
+    }
+
+    public get offsets() {
+        return this.offset;
     }
 
     public changeBound(document : any){
@@ -22,13 +28,29 @@ export class CropService {
         this.bound.ratio = this.bound.width/this.bound.height;
     }
 
-    public changeImage(url : string){
+    public changeImage(url : string, fn? : Function){
         this.imageURL = url;
         let img = new Image()
         img.onload = () =>{
             this.imageSize.width = img.width;
             this.imageSize.height = img.height;
             this.imageSize.ratio = img.width/img.height;
+            let imgWidth, imgHeight;
+            this.offset = { x : 0, y : 0 };
+            if (this.imageSize.ratio >= this.bound.ratio){
+                imgWidth = this.bound.width;
+                imgHeight = imgWidth/this.imageSize.ratio;
+                this.offset.y = (this.bound.height - imgHeight)/2;
+                this.offset.y = this.offset.y <= 0 ? 0 : this.offset.y;
+            }else{
+                imgHeight = this.bound.height;
+                imgWidth = imgHeight * this.imageSize.ratio;
+                this.offset.x = (this.bound.width - imgWidth)/2;
+            }
+            fn({
+                width : imgWidth,
+                height : imgHeight,
+            });
         }
         img.src = url;
     }
@@ -41,8 +63,7 @@ export class CropService {
     }
 
     private generateConfig(propreties : {x : number, y : number, width : number, height : number}){
-        let imgWidth;
-        let imgHeight;
+        let imgWidth, imgHeight;
         let offsetX = 0;
         let offsetY = 0;
         if (this.imageSize.ratio >= this.bound.ratio){
