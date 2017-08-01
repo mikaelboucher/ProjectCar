@@ -30,7 +30,7 @@ export class ImgCropperComponent implements AfterViewInit{
     private offsetX = 0;
     private offsetY = 0;
     private imgPreviewWidth = 0;
-    private imagePreviewHeight = 0;
+    private imgPreviewHeight = 0;
     private dragData : {x : number, y : number}[];
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
@@ -45,7 +45,7 @@ export class ImgCropperComponent implements AfterViewInit{
         let imgY = -1 * (this.y - this.offsetY);
         return {
             'background-image' : 'url(' + this.imagePreviewUrl + ')',
-            'background-size' : (this.imgPreviewWidth)+ 'px ' + (this.imagePreviewHeight) + 'px',
+            'background-size' : (this.imgPreviewWidth)+ 'px ' + (this.imgPreviewHeight) + 'px',
             'background-repeat' : 'no-repeat' ,
             'background-position' : imgX + 'px ' + imgY + 'px '
         }
@@ -82,7 +82,7 @@ export class ImgCropperComponent implements AfterViewInit{
             this.dragData.shift();
             this.x += dx;
             this.y += dy;
-            if (!this.area(document.getElementById('bound').getBoundingClientRect())){
+            if (!this.area()){
                 this.x -= dx;
                 this.y -= dy;
             }
@@ -90,18 +90,49 @@ export class ImgCropperComponent implements AfterViewInit{
     }
 
     private newCropperDimension(){
+        if (this.imagePreviewUrl){
+            this.fitCropperToImage();
+        }else{
+            this.fitCropperToBound();
+        }
+    }
+
+    private fitCropperToBound(){
         this.highestWidth = document.getElementById('bound').getBoundingClientRect().width;
         let newHeight = this.highestWidth/RATIO;
-        while(document.getElementById('bound').getBoundingClientRect().height < newHeight){
+        while (document.getElementById('bound').getBoundingClientRect().height < newHeight){
             this.highestWidth -= 50;
             newHeight = this.highestWidth/RATIO;
         }
         this.highestHeight = newHeight;
         this.cropService.changeBound(document);
+        this.x = 0;
+        this.y = 0;
+    }
+
+    private fitCropperToImage(){
+        if (this.imgPreviewWidth > this.imgPreviewHeight){
+            this.highestWidth = this.imgPreviewWidth
+            let newHeight = this.highestWidth / RATIO;
+            while (this.imgPreviewHeight < newHeight){
+                this.highestWidth -= 50;
+                newHeight = this.highestWidth / RATIO;
+            }
+            this.highestHeight = newHeight;
+        }else{
+            this.highestHeight = this.imgPreviewHeight
+            let newWidth = this.highestHeight * RATIO;
+            while (this.imgPreviewWidth < newWidth){
+                this.highestHeight -= 50;
+                newWidth = this.highestHeight * RATIO;
+            }
+            this.highestWidth = newWidth;
+        }
+        this.x = this.offsetX;
+        this.y = this.offsetY;
     }
 
     private changeCropperView(){
-        this.x = this.y = 0;
         this.factor = DEFAULT_VALUE;
         this.width = this.highestWidth * this.factor/100;
         this.height = this.highestHeight * this.factor/100;
@@ -114,7 +145,7 @@ export class ImgCropperComponent implements AfterViewInit{
         this.height = this.highestHeight * this.factor/100;
         if (speed > 0){
             let cycle = 0;
-            while (!this.area(document.getElementById('bound').getBoundingClientRect())){
+            while (!this.area()){
                 let norme = Math.sqrt((this.x + this.x) + (this.y + this.y));
                 let reverseX = this.x / norme;
                 let reverseY = this.y / norme;
@@ -122,16 +153,23 @@ export class ImgCropperComponent implements AfterViewInit{
                 this.y -= reverseY;
                 cycle++;
                 if (cycle > LIMIT_LOOP){
-                    this.x = 0;
-                    this.y = 0;
+                    this.x = this.offsetX;
+                    this.y = this.offsetY;
                     break;
                 }
             }
         }
     }
-    private area(bound : ClientRect) : boolean{
-        return (this.x >= 0 && this.x + this.width <= bound.width)
+
+    private area() : boolean{
+        let bound = document.getElementById('bound').getBoundingClientRect();
+        if (this.imagePreviewUrl){
+            return (this.x >= this.offsetX && this.x + this.width <= this.offsetX + this.imgPreviewWidth)
+            && (this.y >= this.offsetY && this.y + this.height <= this.offsetY + this.imgPreviewHeight)
+        }else{
+            return (this.x >= 0 && this.x + this.width <= bound.width)
             && (this.y >= 0 && this.y + this.height <= bound.height)
+        }
     }
 
     private fileEvent(fileInput: any){
@@ -143,9 +181,11 @@ export class ImgCropperComponent implements AfterViewInit{
     private changeImage(){
         this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any, offset : any) => {
             this.imgPreviewWidth = imgSize.width;
-            this.imagePreviewHeight = imgSize.height;
+            this.imgPreviewHeight = imgSize.height;
             this.offsetX = offset.x;
             this.offsetY = offset.y;
+            this.newCropperDimension();
+            this.changeCropperView();
         });
     }
 
@@ -160,10 +200,11 @@ export class ImgCropperComponent implements AfterViewInit{
     }
 
     private onResize(){
-        this.newCropperDimension();
-        this.changeCropperView();
         if (this.imagePreviewUrl){
             this.changeImage();
+        }else{
+            this.newCropperDimension();
+            this.changeCropperView();
         }
     }
 }
