@@ -29,8 +29,8 @@ export class ImgCropperComponent implements AfterViewInit{
     private height = 0;
     private offsetX = 0;
     private offsetY = 0;
-    private imgPreviewSizeX = 1;
-    private imagePreviewSizeY = 1;
+    private imgPreviewSizeX = 0;
+    private imagePreviewSizeY = 0;
     private dragData : {x : number, y : number}[];
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
