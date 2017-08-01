@@ -29,8 +29,8 @@ export class ImgCropperComponent implements AfterViewInit{
     private height = 0;
     private offsetX = 0;
     private offsetY = 0;
-    private imgPreviewSizeX = 0;
-    private imagePreviewSizeY = 0;
+    private imgPreviewWidth = 0;
+    private imagePreviewHeight = 0;
     private dragData : {x : number, y : number}[];
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
@@ -45,7 +45,7 @@ export class ImgCropperComponent implements AfterViewInit{
         let imgY = -1 * (this.y - this.offsetY);
         return {
             'background-image' : 'url(' + this.imagePreviewUrl + ')',
-            'background-size' : (this.imgPreviewSizeX)+ 'px ' + (this.imagePreviewSizeY) + 'px',
+            'background-size' : (this.imgPreviewWidth)+ 'px ' + (this.imagePreviewHeight) + 'px',
             'background-repeat' : 'no-repeat' ,
             'background-position' : imgX + 'px ' + imgY + 'px '
         }
@@ -137,9 +137,13 @@ export class ImgCropperComponent implements AfterViewInit{
     private fileEvent(fileInput: any){
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
+        this.changeImage();
+    }
+
+    private changeImage(){
         this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any, offset : any) => {
-            this.imgPreviewSizeX = imgSize.width;
-            this.imagePreviewSizeY = imgSize.height;
+            this.imgPreviewWidth = imgSize.width;
+            this.imagePreviewHeight = imgSize.height;
             this.offsetX = offset.x;
             this.offsetY = offset.y;
         });
@@ -158,5 +162,8 @@ export class ImgCropperComponent implements AfterViewInit{
     private onResize(){
         this.newCropperDimension();
         this.changeCropperView();
+        if (this.imagePreviewUrl){
+            this.changeImage();
+        }
     }
 }
