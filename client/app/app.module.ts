@@ -16,14 +16,17 @@ import { CenterComponent } from './components/center.component';
 import { CenterOptions } from './components/centercomponents/centeroptions.component';
 import { CenterPrimary } from './components/centercomponents/centerprimary.component';
 import { CenterSecondary } from './components/centercomponents/centersecondary.component';
-import { OptionService } from './services/optionservice';
 import { ClassifiedComponent } from './components/centercomponents/primarycomponents/classified/classifieds.component';
 import { SingleClassified } from './components/centercomponents/primarycomponents/classified/singleclassified.component';
 import { ListeClassified } from './components/centercomponents/primarycomponents/classified/listeclassifieds.component';
 import { ClassifiedPageComponent } from './components/centercomponents/primarycomponents/classified/classifiedpage.component';
 import { TwitterComponent } from './components/twitter.component';
 import { PostAdComponent } from './components/centercomponents/primarycomponents/postad.component';
-import { ImgCropperComponent } from './components/centercomponents/primarycomponents/imgcropper.component';
+import { ImgCropperComponent } from './components/objectcomponents/imgcropper.component';
+import { ProfilMakerComponent } from './components/objectcomponents/profilmaker.component';
+
+import { OptionService } from './services/optionservice';
+import { InstanceCropService } from './services/instancecrop.service';
 
 @NgModule({
     imports: [ BrowserModule, HttpModule, FormsModule, ModalModule.forRoot(), BrowserAnimationsModule],
@@ -45,12 +48,14 @@ import { ImgCropperComponent } from './components/centercomponents/primarycompon
         ListeClassified,
         ClassifiedPageComponent,
         PostAdComponent,
-        ImgCropperComponent
+        ImgCropperComponent,
+        ProfilMakerComponent
     ],
 
     bootstrap: [ AppComponent ],
     providers: [
-        OptionService
+        OptionService,
+        InstanceCropService
     ]
 })
 export class AppModule { }

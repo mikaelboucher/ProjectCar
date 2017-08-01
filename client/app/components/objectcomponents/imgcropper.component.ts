@@ -1,8 +1,9 @@
-import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { Component, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
 
-import { CropService } from '../../../services/image/crop.service';
+import { CropService } from '../../services/image/crop.service';
+import { InstanceCropService } from '../../services/instancecrop.service';
 
-import { Extra } from '../../../utils/extra'
+import { Extra } from '../../utils/extra'
 
 const RATIO = 4/3;
 const MIN = 50;
@@ -13,12 +14,12 @@ const DEFAULT_URL = "";
 
 @Component({
     selector: "img-cropper",
-    templateUrl: './app/html/center/imgcropper.html',
-    styleUrls : ['./app/css/center/imgcropper.css'],
+    templateUrl: './app/html/object/imgcropper.html',
+    styleUrls : ['./app/css/object/imgcropper.css'],
     providers : [ CropService ]
 })
 
-export class ImgCropperComponent implements AfterViewInit{
+export class ImgCropperComponent implements AfterViewInit, OnDestroy{
     private min = MIN;
     private max = MAX;
     private highestWidth : number;
@@ -35,9 +36,21 @@ export class ImgCropperComponent implements AfterViewInit{
     private dragMode : boolean;
     private factor = DEFAULT_VALUE;
     private imagePreviewUrl = DEFAULT_URL;
+    private alertSub : any;
 
-    constructor(private cropService : CropService){
+    constructor(private cropService : CropService,
+    private instanceCropService : InstanceCropService){
         this.dragData = [];
+        this.alertSub = this.instanceCropService.observable().subscribe( (value : any) => {
+            if (value){
+                this.imagePreviewUrl = value;
+            }
+            this.onResize();
+        });
+    }
+
+    ngOnDestroy() {
+        this.alertSub.unsubscribe();
     }
 
     private getStyle(){
