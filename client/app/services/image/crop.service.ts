@@ -3,23 +3,21 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CropService {
-    private imageSize : {width : number, height : number, ratio : number};
+    private realImgSize : {width : number, height : number, ratio : number};
     private bound : {width : number, height : number, ratio : number};
     private offset : {x : number, y : number};
+    private imgSize : {width : number, height : number};
     private imageURL : string;
 
     constructor() {
-        this.imageSize = {width : 0, height : 0, ratio : 0};
+        this.realImgSize = {width : 0, height : 0, ratio : 0};
         this.bound = {width : 0, height : 0, ratio : 0};
         this.offset = {x : 0, y : 0};
+        this.imgSize = {width : 0, height : 0};
     }
 
     public get isReady() : boolean{
         return this.imageURL !== undefined;
-    }
-
-    public get offsets() {
-        return this.offset;
     }
 
     public changeBound(document : any){
@@ -32,25 +30,23 @@ export class CropService {
         this.imageURL = url;
         let img = new Image()
         img.onload = () =>{
-            this.imageSize.width = img.width;
-            this.imageSize.height = img.height;
-            this.imageSize.ratio = img.width/img.height;
+            this.realImgSize.width = img.width;
+            this.realImgSize.height = img.height;
+            this.realImgSize.ratio = img.width/img.height;
             let imgWidth, imgHeight;
             this.offset = { x : 0, y : 0 };
-            if (this.imageSize.ratio >= this.bound.ratio){
+            if (this.realImgSize.ratio >= this.bound.ratio){
                 imgWidth = this.bound.width;
-                imgHeight = imgWidth/this.imageSize.ratio;
+                imgHeight = imgWidth/this.realImgSize.ratio;
                 this.offset.y = (this.bound.height - imgHeight)/2;
                 this.offset.y = this.offset.y <= 0 ? 0 : this.offset.y;
             }else{
                 imgHeight = this.bound.height;
-                imgWidth = imgHeight * this.imageSize.ratio;
+                imgWidth = imgHeight * this.realImgSize.ratio;
                 this.offset.x = (this.bound.width - imgWidth)/2;
             }
-            fn({
-                width : imgWidth,
-                height : imgHeight,
-            });
+            this.imgSize = {width : imgWidth, height : imgHeight}
+            fn(this.imgSize, this.offset);
         }
         img.src = url;
     }
@@ -66,21 +62,11 @@ export class CropService {
         let imgWidth, imgHeight;
         let offsetX = 0;
         let offsetY = 0;
-        if (this.imageSize.ratio >= this.bound.ratio){
-            imgWidth = this.bound.width;
-            imgHeight = imgWidth/this.imageSize.ratio;
-            offsetY = (this.bound.height - imgHeight)/2;
-            offsetY = offsetY <= 0 ? 0 : offsetY;
-        }else{
-            imgHeight = this.bound.height;
-            imgWidth = imgHeight * this.imageSize.ratio;
-            offsetX = (this.bound.width - imgWidth)/2;
-        }
-        let scaleImgX = this.imageSize.width / imgWidth;
-        let scaleImgY = this.imageSize.height / imgHeight;
+        let scaleImgX = this.realImgSize.width / this.imgSize.width;
+        let scaleImgY = this.realImgSize.height / this.imgSize.height;
         return  {
-            x : (propreties.x - offsetX) * scaleImgX,
-            y : (propreties.y - offsetY) * scaleImgY,
+            x : (propreties.x - this.offset.x) * scaleImgX,
+            y : (propreties.y - this.offset.y) * scaleImgY,
             width : propreties.width * scaleImgX,
             height : propreties.height * scaleImgY,
         };

@@ -137,11 +137,11 @@ export class ImgCropperComponent implements AfterViewInit{
     private fileEvent(fileInput: any){
         let file = fileInput.target.files[0];
         this.imagePreviewUrl =  window.URL.createObjectURL(file);
-        this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any) => {
+        this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any, offset : any) => {
             this.imgPreviewSizeX = imgSize.width;
             this.imagePreviewSizeY = imgSize.height;
-            this.offsetX = this.cropService.offsets.x;
-            this.offsetY = this.cropService.offsets.y;
+            this.offsetX = offset.x;
+            this.offsetY = offset.y;
         });
     }
 
