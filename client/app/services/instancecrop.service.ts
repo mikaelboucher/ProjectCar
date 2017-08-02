@@ -16,7 +16,6 @@ export class InstanceCropService {
     }
     
     public wakeUp(){
-        console.log('send');
         this.listener.next();
     }
 

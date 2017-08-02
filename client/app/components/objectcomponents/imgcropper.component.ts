@@ -211,6 +211,7 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
             height : this.height
         }
         this.cropService.start(propreties, document, (resultBase64 : string) => {
+            this.imagePreviewUrl = DEFAULT_URL;
             this.result.emit(resultBase64);
         });
     }
