@@ -11,9 +11,7 @@ import { InstanceCropService } from '../../services/instancecrop.service';
 export class ProfilMakerComponent{
     private imgUrl : string;
 
-    constructor(private imgCropper : InstanceCropService){
-        
-    }
+    constructor(private imgCropper : InstanceCropService){}
 
     private cancel(){
         this.imgUrl = undefined;

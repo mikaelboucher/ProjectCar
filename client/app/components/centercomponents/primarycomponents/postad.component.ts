@@ -11,4 +11,9 @@ import { InstanceCropService } from '../../../services/instancecrop.service';
 export class PostAdComponent{
     private title : string;
     private price : number;
+    private description : string;
+
+    changeDescription(event : any){
+        this.description = event.target.value;
+    }
 }
