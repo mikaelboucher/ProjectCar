@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, Output, EventEmitter, AfterViewInit, OnDestroy } from '@angular/core';
 
 import { CropService } from '../../services/image/crop.service';
 import { InstanceCropService } from '../../services/instancecrop.service';
@@ -20,6 +20,7 @@ const DEFAULT_URL = "";
 })
 
 export class ImgCropperComponent implements AfterViewInit, OnDestroy{
+    @Output() result = new EventEmitter<string>();
     private min = MIN;
     private max = MAX;
     private highestWidth : number;
@@ -209,7 +210,9 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
             width : this.width,
             height : this.height
         }
-        this.cropService.start(propreties, document);
+        this.cropService.start(propreties, document, (resultBase64 : string) => {
+            this.result.emit(resultBase64);
+        });
     }
 
     private onResize(){

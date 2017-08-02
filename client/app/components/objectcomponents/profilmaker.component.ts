@@ -30,4 +30,9 @@ export class ProfilMakerComponent{
         this.imgUrl = url;
     }
 
+    private save(url : string){
+        this.imgUrl = url;
+        window.open(this.imgUrl);
+    }
+
 }

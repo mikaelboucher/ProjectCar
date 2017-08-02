@@ -51,10 +51,10 @@ export class CropService {
         img.src = url;
     }
 
-    public start(propreties : {x : number, y : number, width : number, height : number}, document : any){
+    public start(propreties : {x : number, y : number, width : number, height : number}, document : any, fn : Function){
         let config = this.generateConfig(propreties);
         this.crop(config, document, (data : any) => {
-            window.open(data);
+            fn(data);
         })
     }
 

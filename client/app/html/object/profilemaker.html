@@ -12,7 +12,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img-cropper></img-cropper>
+                <img-cropper (result)="save($event); cropper.hide();"></img-cropper>
                 Crop your picture
             </div>
         </div>
