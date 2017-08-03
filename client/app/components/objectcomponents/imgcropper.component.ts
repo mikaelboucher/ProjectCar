@@ -11,6 +11,7 @@ const MAX = 100;
 const DEFAULT_VALUE = 75;
 const LIMIT_LOOP = 10;
 const DEFAULT_URL = "";
+const DECREMENT = 10;
 
 @Component({
     selector: "img-cropper",
@@ -119,7 +120,7 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
         this.highestWidth = document.getElementById('bound').getBoundingClientRect().width;
         let newHeight = this.highestWidth/RATIO;
         while (document.getElementById('bound').getBoundingClientRect().height < newHeight){
-            this.highestWidth -= 50;
+            this.highestWidth -= DECREMENT;
             newHeight = this.highestWidth/RATIO;
         }
         this.highestHeight = newHeight;
@@ -133,7 +134,7 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
             this.highestWidth = this.imgPreviewWidth
             let newHeight = this.highestWidth / RATIO;
             while (this.imgPreviewHeight < newHeight){
-                this.highestWidth -= 50;
+                this.highestWidth -= DECREMENT;
                 newHeight = this.highestWidth / RATIO;
             }
             this.highestHeight = newHeight;
@@ -141,7 +142,7 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
             this.highestHeight = this.imgPreviewHeight
             let newWidth = this.highestHeight * RATIO;
             while (this.imgPreviewWidth < newWidth){
-                this.highestHeight -= 50;
+                this.highestHeight -= DECREMENT;
                 newWidth = this.highestHeight * RATIO;
             }
             this.highestWidth = newWidth;
