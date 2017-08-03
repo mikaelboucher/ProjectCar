@@ -7,15 +7,12 @@
             </div>
     </div>
     <div class="row option">
-        <div class="col-sm-10 sliderComp">
+        <div class="col-sm-12 sliderComp">
             <span class="glyphicon glyphicon-picture small"></span>
             <div class="slider">
                 <input type="range" class="bar" min="{{min}}" max="{{max}}" [ngModel]="factor" (ngModelChange)="change($event)">
             </div>
             <span class="glyphicon glyphicon-picture big"></span>
-        </div>
-        <div class="col-sm-2">
-             <button class="btn btn-danger" [disabled]="!cropService.isReady" (click)="crop()"> CROP </button>
         </div>
     </div>
 </div>

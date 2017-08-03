@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
+const CROP_TIME = 1;
+
 @Injectable()
 export class InstanceCropService {
     private listener : Subject<any>;
@@ -13,6 +15,10 @@ export class InstanceCropService {
 
     public observable() : Observable<any>{
         return this.listener.asObservable();
+    }
+
+    public crop() {
+        this.listener.next(CROP_TIME);
     }
     
     public wakeUp(){

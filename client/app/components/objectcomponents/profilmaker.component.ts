@@ -30,6 +30,10 @@ export class ProfilMakerComponent{
         this.imgUrl = url;
     }
 
+    private apply(){
+        this.imgCropper.crop();
+    }
+
     private save(url : string){
         this.imgUrl = url;
         window.open(this.imgUrl);

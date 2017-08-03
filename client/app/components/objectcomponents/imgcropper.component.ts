@@ -44,7 +44,11 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
         this.dragData = [];
         this.alertSub = this.instanceCropService.observable().subscribe( (value : any) => {
             if (value){
-                this.imagePreviewUrl = value;
+                if (typeof value === 'string'){
+                     this.imagePreviewUrl = value;
+                }else{
+                    this.crop();
+                }
             }
             this.onResize();
         });

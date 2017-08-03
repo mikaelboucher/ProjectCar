@@ -13,7 +13,10 @@
             </div>
             <div class="modal-body">
                 <img-cropper (result)="save($event); cropper.hide();"></img-cropper>
-                Crop your picture
+            </div>
+            <div class="modal-footer">
+                <button class="btn option" (click)="cropper.hide(); cancel();"> Cancel </button>
+                <button class="btn btn-primary save option" (click)="apply()"> Apply </button>
             </div>
         </div>
     </div>
