@@ -10,6 +10,7 @@ import { InstanceCropService } from '../../services/instancecrop.service';
 
 export class ProfilMakerComponent{
     private imgUrl : string;
+    private resultURL : string;
 
     constructor(private imgCropper : InstanceCropService){}
 
@@ -25,9 +26,14 @@ export class ProfilMakerComponent{
     }
 
     private fileEvent(fileInput: any){
-        let file = fileInput.target.files[0];
+        let file;
+        let i = 0;
+        while(!file){
+            file = fileInput.target.files[i];
+        }
         let url =  window.URL.createObjectURL(file);
         this.imgUrl = url;
+        fileInput.target.value = null;
     }
 
     private apply(){
@@ -35,8 +41,9 @@ export class ProfilMakerComponent{
     }
 
     private save(url : string){
-        this.imgUrl = url;
-        window.open(this.imgUrl);
+        this.resultURL = url;
+        window.open(this.resultURL);
+        this.imgUrl = undefined;
     }
 
 }

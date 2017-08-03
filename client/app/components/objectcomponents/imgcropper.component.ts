@@ -190,12 +190,6 @@ export class ImgCropperComponent implements AfterViewInit, OnDestroy{
         }
     }
 
-    private fileEvent(fileInput: any){
-        let file = fileInput.target.files[0];
-        this.imagePreviewUrl =  window.URL.createObjectURL(file);
-        this.changeImage();
-    }
-
     private changeImage(){
         this.cropService.changeImage(this.imagePreviewUrl, (imgSize : any, offset : any) => {
             this.imgPreviewWidth = imgSize.width;
