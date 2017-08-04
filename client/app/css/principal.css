@@ -1,3 +1,5 @@
+
+
 .chat{
     position: fixed;
     bottom: 0;
@@ -10,30 +12,28 @@
     width: 100%;
 }
 
-.top{
-    background-color: white;
-    text-align: center;
-    height: 5%;
-}
+
 
 .left{
     /*background-color: darkred;*/
+    *background-image: url('../../../../assets/background1.jpg');
     min-height : 88vh;
 }
 
 .center{
-    background-image: url('../../../../assets/background2.jpg');
+    /*background-image: url('../../../../assets/background2.jpg');*/
     text-align: center;
     min-height : 88vh;
 }
 
 .right{
     /*background-color: darkred;*/
+    *background-image: url('../../../../assets/background1.jpg');
     min-height : 88vh;
 }
 
 .fill{
-    background-image: url('../../../../assets/background1.jpg');
+    /*background-image: url('../../../../assets/background1.jpg');*/
 }
 
 .info{
