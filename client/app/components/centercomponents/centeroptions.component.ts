@@ -28,5 +28,17 @@ export class CenterOptions {
         console.log(this.optionService.currentOption);
     }
 
+    isNews(){
+        return this.optionService.currentOption === "news";
+    }
+
+    isClassifieds(){
+        return this.optionService.currentOption === "classifieds";
+    }
+
+    isShop(){
+        return this.optionService.currentOption === "shop";
+    }
+
 
 }
