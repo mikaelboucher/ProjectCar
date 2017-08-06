@@ -9,6 +9,7 @@
     align-items: center; 
     justify-content: center;
     flex-direction: row;
+    background-color : darkgray;
 }
 
 .background{
@@ -16,13 +17,17 @@
     align-items: center; 
     justify-content: center;
     flex-direction: row;
-    background-color : darkgray;
     cursor : pointer;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
-    height: 180px;
-    width : 25%;
+    min-height: 180px;
+    width : 100%;
+}
+
+.profilemaker :hover{
+    /*-webkit-filter: blur(15px);
+    filter : blur(15px);*/
 }
 
 .default{

@@ -13,6 +13,10 @@
     height:100%
 }
 
+label{
+    text-align: left;
+}
+
 .form-row{
     margin-top : 2%;
 }

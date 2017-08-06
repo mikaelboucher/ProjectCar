@@ -1,12 +1,13 @@
 <input type="file" accept="image/*" class="hidden" (change)="fileEvent($event); cropper.show(); callCropper();" #file>
-<!-- <button type="button" class="btn btn-primary" (click)="file.click();">Profil</button> -->
 
-<div class="profilemaker">
+<div class="row">
+<div class="col-sm-offset-4 col-sm-4 profilemaker">
     <div class="background" (click)="file.click()" [ngStyle]="{'background-image': 'url(' + this.resultURL + ')'}">
         <div *ngIf="!resultURL">
             <span class="glyphicon glyphicon-picture default"></span>
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal fade" bsModal #cropper="bs-modal" [config]="{backdrop: 'static'}"

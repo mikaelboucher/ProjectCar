@@ -5,20 +5,23 @@
     margin-top : 5px;
     border-radius: 50%;
     background-color: white;
+    opacity: 1;
 }
 
 .active{
-    background-color : green;
+    background-color : #82b74b;
     display: block;
     cursor: pointer;
     min-height: 30px;
     height: 100%;
     width : 50px;
     border-radius: 35%;
+    opacity: 1;
 }
 
 .inactive{
-    background-color : #e60000;
+    opacity: 0.75;
+    background-color : indianred;
     cursor: pointer;
     min-height: 30px;
     height: 100%;
