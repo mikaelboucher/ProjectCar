@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 import { InstanceCropService } from '../../services/instancecrop.service';
 
@@ -9,6 +9,7 @@ import { InstanceCropService } from '../../services/instancecrop.service';
 })
 
 export class ProfilMakerComponent{
+    @Output() result = new EventEmitter<string>();
     private imgUrl : string;
     private resultURL : string;
 
@@ -42,8 +43,8 @@ export class ProfilMakerComponent{
 
     private save(url : string){
         this.resultURL = url;
-        window.open(this.resultURL);
         this.imgUrl = undefined;
+        this.result.emit(this.resultURL);
     }
 
 }

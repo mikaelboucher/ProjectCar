@@ -1,0 +1,27 @@
+.circle{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin-top : 5px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.active{
+    background-color : green;
+    display: block;
+    cursor: pointer;
+    min-height: 30px;
+    height: 100%;
+    width : 50px;
+    border-radius: 35%;
+}
+
+.inactive{
+    background-color : #e60000;
+    cursor: pointer;
+    min-height: 30px;
+    height: 100%;
+    width : 50px;
+    border-radius: 35%;
+}

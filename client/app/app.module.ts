@@ -24,6 +24,7 @@ import { TwitterComponent } from './components/twitter.component';
 import { PostAdComponent } from './components/centercomponents/primarycomponents/postad.component';
 import { ImgCropperComponent } from './components/objectcomponents/imgcropper.component';
 import { ProfilMakerComponent } from './components/objectcomponents/profilmaker.component';
+import { CheckboxComponent } from './components/objectcomponents/checkbox.component';
 
 import { OptionService } from './services/optionservice';
 import { InstanceCropService } from './services/instancecrop.service';
@@ -49,7 +50,8 @@ import { InstanceCropService } from './services/instancecrop.service';
         ClassifiedPageComponent,
         PostAdComponent,
         ImgCropperComponent,
-        ProfilMakerComponent
+        ProfilMakerComponent,
+        CheckboxComponent
     ],
 
     bootstrap: [ AppComponent ],

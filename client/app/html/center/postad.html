@@ -1,21 +1,101 @@
 <div class="col-sm-12 padding">
     <div class="row">
-        <div class="col-sm-4">
-                <div class="form-group">
-                    <label>Title:</label>
-                    <input [(ngModel)]="title">
-                </div>
-                <div class="form-group">
-                    <label>Price: </label>
-                    <input [(ngModel)]="price">
-                </div>
-                <div class="form-group">
-                    <label>Description: </label>
-                    <textarea (change)="changeDescription($event)"></textarea>
-                </div>
+        <div *ngIf="!profileURL">
+            <h1> First add a default image </h1>
         </div>
-        <div class="col-sm-8 nopadding">
-            <profil-maker></profil-maker>
+        <profil-maker (result)="changeProfil($event)"></profil-maker>
+    </div>
+    <div *ngIf="profileURL">
+        <div class="row form-row">
+            <div class="col-sm-offset-1 col-sm-4">
+                <label> Generation : </label>
+                <select class="form-control" id="sel1">
+                    <option>991</option>
+                    <option>964</option>
+                    <option>993</option>
+                    <option>996</option>
+                </select>
+            </div>
+            <div class="col-sm-offset-2 col-sm-4">
+                <label> Trim : </label>
+                <select class="form-control" id="sel2">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-row">
+            <div class="col-sm-offset-1 col-sm-4">
+                <label> Price : </label>
+                <input type="number" class="form-control"/>
+            </div>
+            <div class="col-sm-offset-2 col-sm-4">
+                <label> VIN : </label>
+                <input type="text" class="form-control"/>
+            </div>
+        </div>
+        <fieldset class="fieldset">
+            <legend>Colors</legend>
+            <div class="row-fluid form-row">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <label> Exterior : </label>
+                    <select class="form-control" id="sel1">
+                        <option>RED</option>
+                        <option>BLUE</option>
+                        <option>YELLOW</option>
+                        <option>PINK</option>
+                    </select>
+                </div>
+                <div class="col-sm-offset-2 col-sm-4">
+                    <label> Interior : </label>
+                    <select class="form-control" id="sel2">
+                        <option>RED</option>
+                        <option>BLACK</option>
+                        <option>WHITE</option>
+                        <option>BLUE</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row form-row">
+            <div class="col-sm-offset-1 col-sm-4">
+                <label> Year : </label>
+                <select class="form-control" id="sel1">
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                </select>
+            </div>
+            <div class="col-sm-offset-2 col-sm-4">
+                <label> km/Miles : </label>
+                <input type="number" class="form-control"/>
+            </div>
+        </div>
+        <div class="row form-row flex-row">
+            <div class="col-sm-2">
+                <label> Modified : </label>
+            </div>
+            <div class="col-sm-2">
+                <checkbox></checkbox>
+            </div>
+            <div class="col-sm-2">
+                <label> Matching numbers : </label>
+            </div>
+            <div class="col-sm-2">
+                <checkbox></checkbox>
+            </div>
+            <div class="col-sm-2">
+                <label> Porsche certificate : </label>
+            </div>
+            <div class="col-sm-2">
+                <checkbox></checkbox>
+            </div>
+        </div>
+        <div class="row form-row">
+            <button class="btn btn-primary btn-success"> Next </button>
         </div>
     </div>
 </div>

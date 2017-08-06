@@ -13,6 +13,37 @@
     height:100%
 }
 
-.nopadding{
-    padding : 0;
+.form-row{
+    margin-top : 2%;
+}
+
+.flex-row{
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    flex-direction: row;
+}
+
+fieldset {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+fieldset legend {
+    width : 90px;
+    border : none;
+}
+
+.label{
+    max-width : 20%;
+    color : black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.colorIsolate{
+    border : solid;
+    border-color: black;
+    padding-bottom: 1%;
+    padding-top: 1%;
 }
