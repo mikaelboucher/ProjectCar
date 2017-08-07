@@ -1,0 +1,10 @@
+body{
+    height: 100%;
+    background-color : #060107;
+    background: -webkit-linear-gradient(left right,#060107, #9f7d61);
+    background: -o-linear-gradient(right left,#060107, #9f7d61);
+    background: -moz-linear-gradient(right left,#060107, #9f7d61);
+    background: linear-gradient(to right left,#060107, #9f7d61);
+    filter : brightness(110%);
+    font-family: 'Cantora One';
+}

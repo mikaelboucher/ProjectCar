@@ -10,6 +10,8 @@
     justify-content: center;
     flex-direction: row;
     background-color : darkgray;
+    border-style: dashed;
+    border-color : #08266e; 
 }
 
 .background{
@@ -25,10 +27,10 @@
     width : 100%;
 }
 
-.profilemaker :hover{
-    /*-webkit-filter: blur(15px);
-    filter : blur(15px);*/
-}
+/*.profilemaker :hover{
+    -webkit-filter: blur(15px);
+    filter : blur(15px); blank until i figured it out
+}*/
 
 .default{
     padding : 0;

@@ -25,6 +25,7 @@ import { PostAdComponent } from './components/centercomponents/primarycomponents
 import { ImgCropperComponent } from './components/objectcomponents/imgcropper.component';
 import { ProfilMakerComponent } from './components/objectcomponents/profilmaker.component';
 import { CheckboxComponent } from './components/objectcomponents/checkbox.component';
+import { ImgSelectorComponent } from './components/objectcomponents/imgselector.component';
 
 import { OptionService } from './services/optionservice';
 import { InstanceCropService } from './services/instancecrop.service';
@@ -51,7 +52,8 @@ import { InstanceCropService } from './services/instancecrop.service';
         PostAdComponent,
         ImgCropperComponent,
         ProfilMakerComponent,
-        CheckboxComponent
+        CheckboxComponent,
+        ImgSelectorComponent
     ],
 
     bootstrap: [ AppComponent ],

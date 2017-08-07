@@ -1,0 +1,17 @@
+<input type="file" accept="image/*" class="hidden" (change)="fileEvent($event)" #file>
+<h3> add more photos (MAX 10 PICTURES) </h3>
+<div class="selector">
+    <div class="flex-container">
+        <div *ngFor="let img of images; let i = index">
+            <div *ngIf="i < count + 1">
+                <div class="img-box" (click)="begin(i); file.click();">
+                    <div class="result" *ngIf="img" [style.background-image]="getSafeImg(i)">
+                    </div>
+                    <div *ngIf="!img">
+                        <span class="glyphicon glyphicon-picture void-img"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

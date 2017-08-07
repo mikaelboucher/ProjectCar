@@ -5,7 +5,7 @@
 }
 
 .bottom{
-    background-color: black;
+    background-color: #08266e;
     text-align: center;
     width: 100%;
 }
@@ -22,7 +22,12 @@
 }
 
 .center{
-    background-image: url('../../../../assets/background2.jpg');
+    /*background-image: url('../../../../assets/background2.jpg');*/
+    background: #890b0f;
+    background: -webkit-linear-gradient(/*#890b0f,*/ #dd1f11, #b65e18, #9f7d61);
+    background: -o-linear-gradient(/*#890b0f,*/ #dd1f11, #b65e18, #9f7d61);
+    background: -moz-linear-gradient(/*#890b0f,*/ #dd1f11, #b65e18, #9f7d61);
+    background: linear-gradient(/*#890b0f,*/ #dd1f11, #b65e18, #9f7d61);
     text-align: center;
     min-height : 88vh;
 }
@@ -33,12 +38,11 @@
 }
 
 .fill{
-    background-image: url('../../../../assets/background1.jpg');
+    /*background-image: url('../../../../assets/background1.jpg');*/
 }
 
 .info{
     background-color: white;
-    width : 100%;
     text-align: center;
     height : 60px;
     margin-bottom: 0.5%;
